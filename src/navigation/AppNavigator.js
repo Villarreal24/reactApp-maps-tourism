@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { createAppContainer, createStackNavigator, createSwitchNavigator } from 'react-navigation';
 import { UnauthenticatedRoutes } from './UnauthenticatedRoutes';
 import { authenticatedRoutes } from './authenticatedRoutes';
@@ -12,7 +13,6 @@ export default createAppContainer(createSwitchNavigator({
   App: authenticatedRoutes,
 },
 {
-
-  initialRouteName: 'AuthLoading'
+  initialRouteName: 'Auth',
 }
 ));

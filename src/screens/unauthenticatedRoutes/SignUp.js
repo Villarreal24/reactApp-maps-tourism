@@ -5,6 +5,7 @@ import { View, StyleSheet, Text, TouchableOpacity, KeyboardAvoidingView, StatusB
 import Logo from '../../components/common/Logo';
 import { connect } from 'react-redux';
 import SignUpForm from './Forms/SignUpForm';
+import { actionRegistry } from '../../../store/ACTIONS';
 
 // create a component
 class SignUp extends Component {

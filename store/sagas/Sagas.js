@@ -40,14 +40,14 @@ function* sagaLogin(values) {
     }
 }
 
-function* sagaSesion(user) {
-    console.log( yield put(NavigationActions.navigate({ routeName: 'App' })));
-    console.log(user);
-}
+// function* sagaSesion(user) {
+//     console.log( yield put(NavigationActions.navigate({ routeName: 'App' })));
+//     console.log(user);
+// }
 
 export default function* functionPrimary() {
     yield takeEvery(CONSTANTS.REGISTRY, sagaRegistry);
     yield takeEvery(CONSTANTS.LOGIN, sagaLogin);
-    yield takeEvery(CONSTANTS.SET_SESSION, sagaSesion);
+    // yield takeEvery(CONSTANTS.SET_SESSION, sagaSesion);
     console.log('Desde nuestra funcion generadora');
 }

@@ -1,6 +1,8 @@
+/* eslint-disable prettier/prettier */
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import { Field, reduxForm } from 'redux-form';
+import Activities from '../../../screens/interest/Activities';
 
 const fieldName = (props) => (
   <View style={styles.containerInput}>

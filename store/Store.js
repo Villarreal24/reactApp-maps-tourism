@@ -13,21 +13,21 @@ const reducerPrueba = (state = [0], action) => {
     }
 };
 
-// const reducerSession = (state = null, action) => {
-//     switch (action.type) {
-//       case CONSTANTS.SET_SESSION:
-//         return action.user;
-//       case CONSTANTS.LOGOUT:
-//         return null;
-//       default:
-//         return state;
-//     }
-//   };
+const reducerSession = (state = null, action) => {
+    switch (action.type) {
+      case CONSTANTS.SET_SESSION:
+        return action.user;
+      case CONSTANTS.LOGOUT:
+        return null;
+      default:
+        return state;
+    }
+  };
 
 const sagaMiddleware = createSagaMiddleware();
 
 const reducers = combineReducers({
-    // reducerSession,
+    reducerSession,
     reducerPrueba,
     form,
 });
