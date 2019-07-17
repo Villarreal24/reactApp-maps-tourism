@@ -1,14 +1,40 @@
 /* eslint-disable prettier/prettier */
-import { takeEvery, call, put } from 'redux-saga/effects';
+import React, { Component } from 'react';
+import { takeEvery, call } from 'redux-saga/effects';
 import { authentication, db} from '../Services/Firebase';
 import CONSTANTS from '../CONSTANTS';
-import { NavigationActions } from 'react-navigation';
+import AwesomeAlert from 'react-native-awesome-alerts';
+
+this.state = { showAlert: false };
+
+const hideAlert = () => {
+    this.setState({
+      showAlert: false,
+    });
+  };
 
 const registryUserNew = (values) =>
     authentication
         .createUserWithEmailAndPassword(values.email, values.password)
-        .then(success => success);
-        
+        .then(showAlert => {
+            return (
+                <AwesomeAlert
+                    show={showAlert}
+                    showProgress={false}
+                    title="Inicio de Sesion"
+                    message="Has iniciado Sesion correctamente"
+                    closeOnTouchOutside={true}
+                    closeOnHardwareBackPress={false}
+                    showConfirmButton={true}
+                    confirmText="Okay !"
+                    confirmButtonColor="#DD6B55"
+                    onConfirmPressed={() => {
+                    hideAlert();
+                    }}
+                />
+            );
+        });
+        // .then(success => success);
 const registryInDataBase = ({ uid, email, name }) => 
     db.collection('users').doc(uid).set({
         user: name,
@@ -21,6 +47,7 @@ function* sagaRegistry(values) {
         const { user: { email, uid }} = registry
         const { datos: { name } } = values;
         yield call(registryInDataBase, { uid, email, name });
+
     } catch (error) {
         console.log(error);
     }

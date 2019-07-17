@@ -4,7 +4,6 @@ import { View, StyleSheet, ActivityIndicator } from 'react-native';
 import { actionSetSession, actionLogout } from '../../store/ACTIONS';
 import { connect } from 'react-redux';
 import { authentication } from '../../store/Services/Firebase';
-import { NavigationActions } from 'react-navigation';
 
 class Selection extends Component {
 
@@ -19,11 +18,22 @@ class Selection extends Component {
         this.props.authenticationUser();
     }
 
-    navAction = () => NavigationActions.navigate({ routeName: 'App' });
+    componentDidUpdate() {
+        this.updateRoute();
+    }
+
+    updateRoute = () => {
+        const { navigation, isLoggedIn } = this.props;
+        console.log(isLoggedIn);
+        if (isLoggedIn === true) {
+            navigation.navigate('App');
+        }  else  {
+            navigation.navigate('Auth');
+        }
+    }
 
     render() {
-        const { navigation } = this.props;
-        const state = this.props.user? navigation.navigate('App') : navigation.navigate('Auth');
+        
         return (
             <View style={styles.container}>
                 <ActivityIndicator size='large' />
@@ -40,17 +50,16 @@ const styles = StyleSheet.create({
     },
 });
 
-const mapStateToProps = state => ({
-    user: state.reducerSesion,
+const mapStateToProps = (state) => ({
+    isLoggedIn: state.reducerSession,
   });
-  
+
 const mapDispatchToProps = dispatch => ({
     authenticationUser: () => {
         authentication.onAuthStateChanged((user) => {
         if (user) {
-            this.navAction();
-            console.log(user.toJSON());
             dispatch(actionSetSession(user));
+            console.log(user.toJSON());
         } else {
             console.log('No existe sesión');
             dispatch(actionLogout());

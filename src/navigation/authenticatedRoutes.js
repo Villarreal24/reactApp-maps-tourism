@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React from 'react';
 import { Platform, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
@@ -7,16 +8,6 @@ import Profile from '../screens/authenticatedRoutes/Profile';
 import Camera from '../screens/authenticatedRoutes/Camera';
 
 const authenticatedRoutes = createBottomTabNavigator({
-  Camera: {
-    screen: Camera,
-
-    navigationOptions: {
-      tabBarLabel:"Camara",
-      tabBarIcon: ({ tintColor }) => (
-        <Icon name="camerao" size={30} color="black" />
-      )
-    },
-  },
   Home: {
     screen: Home,
 
@@ -24,7 +15,17 @@ const authenticatedRoutes = createBottomTabNavigator({
       tabBarLabel:"Inicio",
       tabBarIcon: ({ tintColor }) => (
         <Icon name="home" size={30} color="black" />
-      )
+      ),
+    },
+  },
+  Camera: {
+    screen: Camera,
+
+    navigationOptions: {
+      tabBarLabel:"Camara",
+      tabBarIcon: ({ tintColor }) => (
+        <Icon name="camerao" size={30} color="black" />
+      ),
     },
   },
   Profile: {
@@ -34,12 +35,12 @@ const authenticatedRoutes = createBottomTabNavigator({
       tabBarLabel:"Perfil",
       tabBarIcon: ({ tintColor }) => (
         <Icon name="profile" size={30} color="black" />
-      )
+      ),
     },
-  }
+  },
 },
   {
-  initialRouteName: 'Camera',
+  initialRouteName: 'Home',
     tabBarOptions: {
       activeTintColor: '#D4AF37',
       inactiveTintColor: 'gray',

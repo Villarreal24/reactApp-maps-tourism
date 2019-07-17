@@ -10,13 +10,6 @@ class Activities extends Component {
   };
 
   state = { showAlert: true };
-
-  // showAlert = () => {
-  //   this.setState({
-  //     showAlert: true
-  //   });
-  //   console.log('alerta');
-  // };
  
   hideAlert = () => {
     this.setState({
@@ -38,50 +31,42 @@ class Activities extends Component {
     ];
 
     return (
-      <View style={{flex: 1}}>
+      // eslint-disable-next-line react-native/no-inline-styles
+      <View style={{ flex: 1 }}>
         <Image style={styles.image}
-            resizeMode='cover'
-            source={require('../../../assets/images/Interest.png')}
+          resizeMode='cover'
+          source={require('../../../assets/images/Interest.png')}
         />
-        
         <SafeAreaView style={styles.container}>
           <Text style={styles.title}>
-              Selecciona las actividades
-              que te gustan realizar 
+            Selecciona las actividades que te gustan realizar
           </Text>
-          <Cards data = {activities} />
+          <Cards data={activities} />
           <View style={styles.containerButton}>
             <TouchableOpacity style={styles.ButtonContinue}
               onPress={() => {
                 navigation.navigate('Places');
               }}
               >
-              <Text style={styles.textButton}
-                >Continuar</Text>
+              <Text style={styles.textButton}>Continuar</Text>
             </TouchableOpacity>
           </View>
           <AwesomeAlert
-          show={showAlert}
-          showProgress={false}
-          title="Selecciona tus gustos"
-          message="Queremos conocer tus gustos e
-                  intereses para recomendarte lo mejor para ti !"
-          closeOnTouchOutside={true}
-          closeOnHardwareBackPress={false}
-          // showCancelButton={true}
-          showConfirmButton={true}
-          // cancelText="No, cancel"
-          confirmText="Okay !"
-          confirmButtonColor="#DD6B55"
-          // onCancelPressed={() => {
-          //   this.hideAlert();
-          // }}
-          onConfirmPressed={() => {
-            this.hideAlert();
-          }}
-        />
+            show={showAlert}
+            showProgress={false}
+            title="Selecciona tus gustos"
+            message="Queremos conocer tus gustos e
+                    intereses para recomendarte lo mejor para ti !"
+            closeOnTouchOutside={true}
+            closeOnHardwareBackPress={false}
+            showConfirmButton={true}
+            confirmText="Okay !"
+            confirmButtonColor="#DD6B55"
+            onConfirmPressed={() => {
+              this.hideAlert();
+            }}
+          />
         </SafeAreaView>
-        
       </View>
     );
   }
@@ -95,11 +80,11 @@ const styles = StyleSheet.create({
       backgroundColor: 'rgba(52, 52, 52, 0.2)'
     },
     title: {
-        color: '#FFFFFF',
-        fontSize: 20,
-        paddingTop: 15,
-        width: '80%',
-        marginBottom: 5,
+      color: '#FFFFFF',
+      fontSize: 20,
+      paddingTop: 15,
+      width: '80%',
+      marginBottom: 5,
     },
     textButton: {
       fontSize:16,

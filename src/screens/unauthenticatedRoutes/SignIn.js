@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   lineStyle: {
-    borderWidth: .4,
+    borderWidth: 0.4,
     borderColor: '#CECED2',
     margin: 10,
     width: '90%'
