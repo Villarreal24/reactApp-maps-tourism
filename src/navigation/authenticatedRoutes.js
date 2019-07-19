@@ -13,8 +13,8 @@ const authenticatedRoutes = createBottomTabNavigator({
 
     navigationOptions: {
       tabBarLabel:"Inicio",
-      tabBarIcon: ({ tintColor }) => (
-        <Icon name="home" size={30} color="black" />
+      tabBarIcon: ({ tintColor, focused }) => (
+        <Icon name="home" size={28} color="black" />
       ),
     },
   },
@@ -24,7 +24,8 @@ const authenticatedRoutes = createBottomTabNavigator({
     navigationOptions: {
       tabBarLabel:"Camara",
       tabBarIcon: ({ tintColor }) => (
-        <Icon name="camerao" size={30} color="black" />
+        <Icon
+           name= "camerao" size={28} color="black" />
       ),
     },
   },
@@ -34,7 +35,7 @@ const authenticatedRoutes = createBottomTabNavigator({
     navigationOptions: {
       tabBarLabel:"Perfil",
       tabBarIcon: ({ tintColor }) => (
-        <Icon name="profile" size={30} color="black" />
+        <Icon name="profile" size={28} color="black" />
       ),
     },
   },
@@ -42,10 +43,10 @@ const authenticatedRoutes = createBottomTabNavigator({
   {
   initialRouteName: 'Home',
     tabBarOptions: {
-      activeTintColor: '#D4AF37',
+      activeTintColor: 'red',
       inactiveTintColor: 'gray',
       showIcon: true,
-      showLabel: false,
+      showLabel: true,
       style: {
         backgroundColor: 'white',
       },

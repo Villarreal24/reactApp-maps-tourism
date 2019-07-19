@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image } from 'react-native';
-import { db } from '../../../store/Services/Firebase';
+import { db } from '../../store/Services/Firebase';
 
 class Cards extends Component {
   state = {
@@ -90,8 +90,8 @@ class Cards extends Component {
                   
                   <Image
                     style={styles.checkSelect}
-                    source={ this.state.itemSelected === index ? require('../../../assets/icons/success.png') :
-                    require('../../../assets/icons/error.png')} />
+                    source={ this.state.itemSelected === index ? require('../../assets/icons/success.png') :
+                    require('../../assets/icons/error.png')} />
                 </View>
                 <Image
                     style={{width: 70, height: 70}}

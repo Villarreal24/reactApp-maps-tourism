@@ -7,13 +7,6 @@ import { authentication } from '../../store/Services/Firebase';
 
 class Selection extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            nombre: 'VRTourism',
-        };
-      }
-
     componentDidMount() {
         this.props.authenticationUser();
     }
@@ -24,8 +17,8 @@ class Selection extends Component {
 
     updateRoute = () => {
         const { navigation, isLoggedIn } = this.props;
-        console.log(isLoggedIn);
-        if (isLoggedIn === true) {
+        console.log(isLoggedIn.state);
+        if (isLoggedIn.state === true) {
             navigation.navigate('App');
         }  else  {
             navigation.navigate('Auth');

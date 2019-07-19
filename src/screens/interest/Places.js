@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, SafeAreaView } from 'react-native';
-import Cards from '../../components/interest/Cards';
+import Cards from '../../components/Cards';
 
 class Places extends Component {
 
