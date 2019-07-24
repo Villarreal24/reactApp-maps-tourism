@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { View, StyleSheet, TextInput, StatusBar, Text, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 import ButtonBlue from '../../components/common/ButtonBlue';
 import Logo from '../../components/common/Logo';
+import BarStatus from '../../components/common/BarStatus';
 
 // create a component
 class ForgotPass extends React.Component {
@@ -20,8 +21,7 @@ class ForgotPass extends React.Component {
     
     return (
       <View style={styles.container}>
-        <StatusBar barStyle = "dark-content"
-          hidden = {false}/>
+        <BarStatus />
         <KeyboardAvoidingView style={styles.containerKeyboard} behavior='height'>
           <Logo/>
               <View style={styles.containerTexto}>

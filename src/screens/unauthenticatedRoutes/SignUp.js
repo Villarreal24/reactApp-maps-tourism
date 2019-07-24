@@ -6,6 +6,7 @@ import Logo from '../../components/common/Logo';
 import { connect } from 'react-redux';
 import SignUpForm from './Forms/SignUpForm';
 import { actionRegistry } from '../../../store/ACTIONS';
+import BarStatus from '../../components/common/BarStatus';
 
 // create a component
 class SignUp extends Component {
@@ -43,8 +44,7 @@ class SignUp extends Component {
 
     return (
       <View style={styles.container}>
-        <StatusBar barStyle = "dark-content"
-          hidden = {false}/>
+        <BarStatus />
           <KeyboardAvoidingView style={styles.containerKeyboard} behavior='padding'>
             <Logo/>
               <View style={styles.containerTexto}>

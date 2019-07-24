@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, PermissionsAndroid, Platform } from 'react-native';
+import { StyleSheet, PermissionsAndroid, Platform } from 'react-native';
 import MapView  from 'react-native-maps';
 
 class Map extends Component {
@@ -11,7 +11,7 @@ class Map extends Component {
 
   componentDidMount() {
     this.requestFineLocation();
-    // navigator.geolocation.watchPosition(
+    // this.locationWatchId = navigator.geolocation.watchPosition(
     //   pos => {
     //     this.setState({
     //       userLatitud: pos.coords.latitude,
@@ -22,8 +22,12 @@ class Map extends Component {
     //   {
     //     enableHighAccuracy: true
     //   }
-    // )
+    // );
   }
+
+  // componentWillUnmount() {
+  //   navigator.geolocation.clearWatch(this.locationWatchId);
+  // }
 
   async requestFineLocation() {
     try {
@@ -44,35 +48,26 @@ class Map extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <MapView
-          showsUserLocation
-          followsUserLocation
-          style={styles.map}
-          region={{
-            latitude: 20.868933,
-            longitude: -105.439972,
-            latitudeDelta: 0.015,
-            longitudeDelta: 0.0121
-          }}
-        />
-      </View>
+      <MapView
+        showsUserLocation={true}
+        showsMyLocationButton={true}
+        followsUserLocation={true}
+        style={styles.map}
+        region={{
+          latitude: 20.868933,
+          longitude: -105.439972,
+          latitudeDelta: 0.015,
+          longitudeDelta: 0.0121
+        }}
+      />
     );
   }
 }
 
 const styles = StyleSheet.create({
-    container: {
-      ...StyleSheet.absoluteFillObject,
-      flex: 1,
-      justifyContent: 'flex-end',
-      alignItems: 'center',
-      paddingHorizontal: 16,
-      backgroundColor: '#FFFFFF',
-    },
-    map: {
-      ...StyleSheet.absoluteFillObject,
-    },
-  });
+  map: {
+    ...StyleSheet.absoluteFillObject,
+  },
+});
 
 export default Map;

@@ -1,11 +1,12 @@
 /* eslint-disable prettier/prettier */
 // import liraries
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, Button, StatusBar, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
+import { View, StyleSheet, Text, Button, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 import Logo from '../../components/common/Logo';
 import { connect } from 'react-redux';
 import SignInForm from './Forms/SignInForm';
 import { actionLogin } from '../../../store/ACTIONS';
+import BarStatus from '../../components/common/BarStatus';
 
 
 // create a component
@@ -27,8 +28,7 @@ class SignIn extends Component {
 
     return (
       <View style={styles.container}>
-        <StatusBar barStyle = "dark-content"
-          hidden = {false}/>
+        <BarStatus />
         <KeyboardAvoidingView style={styles.containerKeyboard} behavior='height'>
           <Logo/>
           <SignInForm login = {this.signinUser} navigation/>
