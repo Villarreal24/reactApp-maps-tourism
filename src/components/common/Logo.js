@@ -5,9 +5,7 @@ import { View, StyleSheet, Image } from 'react-native';
 // const text='INICIAR SESION';
 // create a component
 class Logo extends Component {
-
   render() {
-    const { navigation } = this.props;
     return (
       <View style={styles.container}>
         <Image style={styles.Image}
@@ -21,11 +19,9 @@ class Logo extends Component {
 // define your styles
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 120,
-    justifyContent: 'flex-start',
+    margin: 100,
+    justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 16,
-    backgroundColor: '#FFFFFF',
   },
   Image: {
     width: 120,

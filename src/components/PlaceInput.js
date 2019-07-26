@@ -22,14 +22,22 @@ class PlaceInput extends Component {
     this.setDestination = this.setDestination.bind(this);
   }
 
+// -------------------------------------------------------
+//          Autocompletar input al seleccionar una
+//            opcion del listado de predicciones
+// -------------------------------------------------------
   setDestination(main_text) {
     this.setState({ destinationInput: main_text, predictions: [] });
     Keyboard.dismiss();
   }
 
+// -------------------------------------------------------
+//          Request API, consulta del buscador de
+//           predicciones de los lugares del mapa
+// -------------------------------------------------------
   async getPlaces(input) {
     const result = await Axios.get(
-      `https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyDGJWTDnaUpLl02VFsQmcNECQ_8gvuoQcY&input=${input}&location=29.101443, -110.976510&radius=15000`
+      `https://maps.googleapis.com/maps/api/place/autocomplete/json?key=AIzaSyDGJWTDnaUpLl02VFsQmcNECQ_8gvuoQcY&input=${input}&location=20.868532, -105.437676&radius=10000`
     );
     this.setState({ predictions: result.data.predictions });
   }
@@ -64,6 +72,8 @@ class PlaceInput extends Component {
           }}
           style={placeInput}
           placeholder="Buscar en el mapa"
+          paddingLeft={20}
+          fontSize={16}
         />
         {predictions}
       </View>

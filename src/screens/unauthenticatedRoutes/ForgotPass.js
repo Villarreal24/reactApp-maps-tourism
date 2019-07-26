@@ -1,80 +1,99 @@
 // import liraries
 import React, { Component } from 'react';
-import { View, StyleSheet, TextInput, StatusBar, Text, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
-import ButtonBlue from '../../components/common/ButtonBlue';
+import {
+  View,
+  StyleSheet,
+  TextInput,
+  Text,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  Keyboard,
+  KeyboardAvoidingView
+} from "react-native";
 import Logo from '../../components/common/Logo';
-import BarStatus from '../../components/common/BarStatus';
 
 // create a component
 class ForgotPass extends React.Component {
-
   static navigationOptions = {
     headerStyle: {
       elevation: 0,
       shadowOpacity: 0,
-      borderBottomWidth: 0,
+      borderBottomWidth: 0
     }
   };
 
+  hideKeyboard() {
+    Keyboard.dismiss();
+  }
+
   render() {
     const { navigation } = this.props;
-    
+
     return (
-      <View style={styles.container}>
-        <BarStatus />
-        <KeyboardAvoidingView style={styles.containerKeyboard} behavior='height'>
-          <Logo/>
-              <View style={styles.containerTexto}>
-                <Text style={{
+      <TouchableWithoutFeedback onPress={this.hideKeyboard}>
+        <View style={styles.container}>
+          <KeyboardAvoidingView style={styles.containerKeyboard} behavior='height'>
+            <Logo />
+            <View style={styles.containerTexto}>
+              <Text
+                style={{
                   color: '#8D8D8D',
                   fontSize: 24,
                   paddingHorizontal: 22,
-                  textAlign: 'justify',}}
-                  >Ingresa tu correo{"\n"}
-                  electrónico te mandaremos
-                  un enlace para que reinicies
-                  tu contraseña
-                </Text>
-              </View>
-            <TextInput style={{
-              height: 50,
-              width: '90%',
-              borderRadius: 15,
-              borderColor: '#CECED2',
-              borderWidth: 1,
-              marginBottom: 25
-            }}
-              placeholder='Ingresa tu correo registrado'
+                  textAlign: 'justify'
+                }}
+              >
+                Ingresa tu correo{"\n"} electrónico te mandaremos un enlace para
+                que reinicies tu contraseña
+              </Text>
+            </View>
+            <TextInput
+              style={{
+                height: 50,
+                width: '90%',
+                borderRadius: 15,
+                borderColor: '#CECED2',
+                borderWidth: 1,
+                marginBottom: 25
+              }}
+              placeholder="Ingresa tu correo registrado"
               paddingHorizontal={26}
             />
-            <TouchableOpacity style={styles.Button}
+            <TouchableOpacity
+              style={styles.Button}
               onPress={() => {
                 navigation.navigate('SignUp');
               }}
+            >
+              <Text
+                style={{
+                  fontSize:14,
+                  color:'#FFFFFF',
+                  paddingTop:6,
+                  fontWeight:'bold',
+                  width:'100%',
+                  textAlign: "center"
+                }}
               >
-              <Text style={{
-                fontSize:14,
-                color:'#FFFFFF',
-                paddingTop:6,
-                fontWeight:'bold',
-                width:'100%',
-                textAlign:'center'}}>CONTINUAR</Text>
+                CONTINUAR
+              </Text>
             </TouchableOpacity>
 
-          <View style={styles.containerSignIn}>
-            <TouchableOpacity
-              onPress={() => {
-                navigation.goBack();
-              }}
-            >
-              <Text style={{fontSize:11}}>Tienes una cuenta? 
-              <Text  style={{color:'#516EFE'}}
-              >  Iniciar Sesion</Text></Text>
-              
-            </TouchableOpacity>
-          </View>
-        </KeyboardAvoidingView>
-      </View>
+            <View style={styles.containerSignIn}>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.goBack();
+                }}
+              >
+                <Text style={{ fontSize: 11 }}>
+                  Tienes una cuenta?
+                  <Text style={{ color: "#516EFE" }}>  Iniciar Sesion</Text>
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </KeyboardAvoidingView>
+        </View>
+      </TouchableWithoutFeedback>
     );
   }
 }

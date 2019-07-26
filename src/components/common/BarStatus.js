@@ -6,10 +6,11 @@ class BarStatus extends Component {
     return (
       <View style={styles.container}>
         <StatusBar
+          margin={30}
           barStyle="light-content"
           hidden={false}
           translucent={true}
-          backgroundColor="transparent"
+          backgroundColor='rgba(0,0,0, .3)'
         />
       </View>
     );

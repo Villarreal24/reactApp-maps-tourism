@@ -7,9 +7,6 @@ import SignUp from '../screens/unauthenticatedRoutes/SignUp';
 import ForgotPass from '../screens/unauthenticatedRoutes/ForgotPass';
 
 const UnauthenticatedRoutes = createStackNavigator({
-    Login: {
-      screen: Login,
-    },
     SignIn: {
       screen: SignIn,
     },
@@ -19,6 +16,13 @@ const UnauthenticatedRoutes = createStackNavigator({
     ForgotPass: {
       screen: ForgotPass,
     },
-});
+    Login: {
+      screen: Login,
+    },
+  },
+  {
+    initialRouteName: 'Login'
+  }
+);
 
   export { UnauthenticatedRoutes };

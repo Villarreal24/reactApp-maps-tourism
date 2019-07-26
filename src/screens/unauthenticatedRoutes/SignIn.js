@@ -1,13 +1,11 @@
 /* eslint-disable prettier/prettier */
 // import liraries
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, Button, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
+import { View, StyleSheet, Text, Button, Keyboard, TouchableOpacity, TouchableWithoutFeedback, KeyboardAvoidingView } from 'react-native';
 import Logo from '../../components/common/Logo';
 import { connect } from 'react-redux';
 import SignInForm from './Forms/SignInForm';
 import { actionLogin } from '../../../store/ACTIONS';
-import BarStatus from '../../components/common/BarStatus';
-
 
 // create a component
 class SignIn extends Component {
@@ -23,48 +21,53 @@ class SignIn extends Component {
     }
   };
 
+  hideKeyboard() {
+    Keyboard.dismiss();
+  }
+
   render() {
     const { navigation } = this.props;
 
     return (
-      <View style={styles.container}>
-        <BarStatus />
-        <KeyboardAvoidingView style={styles.containerKeyboard} behavior='height'>
-          <Logo/>
-          <SignInForm login = {this.signinUser} navigation/>
-        
-        <View style={{ flexDirection: "row", margin:5, marginTop:20 }}>
-          <View style={{ flex: 1, paddingLeft:10 }}>
-            <TouchableOpacity
-              onPress={() => {
-                navigation.navigate('ForgotPass');
-              }}
-            >
-              <Text style={{
-                fontSize:11 }}
-                >Olvidaste la contraseña?</Text>
-            </TouchableOpacity>
+      <TouchableWithoutFeedback onPress={this.hideKeyboard}>
+        <View style={styles.container}>
+          <KeyboardAvoidingView style={styles.containerKeyboard} behavior='height'>
+            <Logo/>
+            <SignInForm login = {this.signinUser} navigation/>
+          
+          <View style={{ flexDirection: "row", margin:5, marginTop:20 }}>
+            <View style={{ flex: 1, paddingLeft:10 }}>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate('ForgotPass');
+                }}
+              >
+                <Text style={{
+                  fontSize:11 }}
+                  >Olvidaste la contraseña?</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={{ flex: 1, alignItems:'flex-end', paddingRight:10 }}>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate('SignUp');
+                }}
+              >
+                <Text style={{
+                  fontSize:11 }}
+                >No tienes una cuenta?</Text>
+              </TouchableOpacity>
+            </View>
           </View>
-          <View style={{ flex: 1, alignItems:'flex-end', paddingRight:10 }}>
-            <TouchableOpacity
-              onPress={() => {
-                navigation.navigate('SignUp');
-              }}
-            >
-              <Text style={{
-                fontSize:11 }}
-              >No tienes una cuenta?</Text>
-            </TouchableOpacity>
+          <View style={styles.lineStyle} />
+          </KeyboardAvoidingView>
+          <View style={styles.LoginSocial}>
+            <Button
+              title='Iniciar Sesion con Facebook'>
+            </Button>
           </View>
         </View>
-        <View style={styles.lineStyle} />
-        <View style={styles.LoginSocial}>
-          <Button
-            title='Iniciar Sesion con Facebook'>
-          </Button>
-        </View>
-        </KeyboardAvoidingView>
-      </View>
+      </TouchableWithoutFeedback>
     );
   }
 }
@@ -79,13 +82,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF'
   },
   containerKeyboard: {
-    flex: 1,
+    // flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%',
   },
   containerInputs: {
-    flex: 2,
+    flex: 3,
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
@@ -93,7 +96,7 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
   LoginSocial: {
-    flex: 2,
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
