@@ -1,0 +1,38 @@
+[
+    {
+      "name": "Recorrido Virtual",
+      "address": "Av. del Palmar, Sayulita Nay.",
+      "coords": {
+        "latitude": 20.876408,
+        "longitude": -105.431888
+      },
+      "image": "https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Ficons%2FMap%2FMarkers%2Fvr.png?alt=media&token=78be1a03-0dd6-4605-a733-7afe8c0b64df"
+    },
+    {
+      "name": "AR",
+      "address": "Calle Miramar, 63732 Sayulita, Nay.",
+      "coords": {
+        "latitude": 20.87235,
+        "longitude": -105.437137
+      },
+      "image": "https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Ficons%2FMap%2FMarkers%2Far.png?alt=media&token=3f488942-c9f0-4459-89ea-14a30883e197"
+    },
+    {
+      "name": "Recorrido VR",
+      "address": "Calle Marling, Av. Revolucion 48 - 50, Sayulita Nay.",
+      "coords": {
+        "latitude": 20.869162,
+        "longitude": -105.441042
+      },
+      "image": "https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Ficons%2FMap%2FMarkers%2Fvr.png?alt=media&token=78be1a03-0dd6-4605-a733-7afe8c0b64df"
+    },
+    {
+      "name": "AR",
+      "address": "Delfines 14, Sayulita, Nay.",
+      "coords": {
+        "latitude": 20.870332,
+        "longitude": -105.441167
+      },
+      "image": "https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Ficons%2FMap%2FMarkers%2Far.png?alt=media&token=3f488942-c9f0-4459-89ea-14a30883e197"
+    }
+  ]

@@ -1,40 +1,12 @@
 /* eslint-disable prettier/prettier */
-import React, { Component } from 'react';
 import { takeEvery, call } from 'redux-saga/effects';
 import { authentication, db} from '../Services/Firebase';
 import CONSTANTS from '../CONSTANTS';
-import AwesomeAlert from 'react-native-awesome-alerts';
-
-this.state = { showAlert: false };
-
-const hideAlert = () => {
-    this.setState({
-      showAlert: false,
-    });
-  };
 
 const registryUserNew = (values) =>
     authentication
         .createUserWithEmailAndPassword(values.email, values.password)
-        .then(showAlert => {
-            return (
-                <AwesomeAlert
-                    show={showAlert}
-                    showProgress={false}
-                    title="Inicio de Sesion"
-                    message="Has iniciado Sesion correctamente"
-                    closeOnTouchOutside={true}
-                    closeOnHardwareBackPress={false}
-                    showConfirmButton={true}
-                    confirmText="Okay !"
-                    confirmButtonColor="#DD6B55"
-                    onConfirmPressed={() => {
-                    hideAlert();
-                    }}
-                />
-            );
-        });
-        // .then(success => success);
+        .then(success => success);
 const registryInDataBase = ({ uid, email, name }) => 
     db.collection('users').doc(uid).set({
         user: name,
@@ -44,7 +16,7 @@ const registryInDataBase = ({ uid, email, name }) =>
 function* sagaRegistry(values) {
     try {
         const registry = yield call(registryUserNew, values.datos);
-        const { user: { email, uid }} = registry
+        const { user: { email, uid }} = registry;
         const { datos: { name } } = values;
         yield call(registryInDataBase, { uid, email, name });
 
@@ -53,7 +25,7 @@ function* sagaRegistry(values) {
     }
 }
 
-const loginUser = ({email, password}) => 
+const loginUser = ({email, password}) =>
     authentication.signInWithEmailAndPassword(email, password)
     .then(success => success);
 
