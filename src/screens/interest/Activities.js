@@ -11,13 +11,12 @@ import Cards from '../../components/Cards';
 import AwesomeAlert from 'react-native-awesome-alerts';
 
 class Activities extends Component {
-
   static navigationOptions = {
     header: null
   };
 
   state = { showAlert: true };
- 
+
   hideAlert = () => {
     this.setState({
       showAlert: false
@@ -54,7 +53,7 @@ class Activities extends Component {
               onPress={() => {
                 navigation.navigate('Places');
               }}
-              >
+            >
               <Text style={styles.textButton}>Continuar</Text>
             </TouchableOpacity>
           </View>

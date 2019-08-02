@@ -1,31 +1,32 @@
-/* eslint-disable prettier/prettier */
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { reducer as form } from 'redux-form';
 import createSagaMiddleware from 'redux-saga';
 import functionPrimary from './sagas/Sagas';
 import CONSTANTS from './CONSTANTS';
 
-// const initialState = { isLoggedIn: false };
-
-const reducerSession = (state = null, action) => {
-    switch (action.type) {
-      case CONSTANTS.SET_SESSION:
-        return { state: true };
-      case CONSTANTS.LOGOUT:
-      return { state: false };
-      default:
-        return state;
-    }
-  };
+const reducerSession = (state = {}, action) => {
+  console.log('Se ejecuto reducerSession');
+  switch (action.type) {
+    case CONSTANTS.SET_SESSION:
+      return true;
+    case CONSTANTS.LOGOUT:
+      return false;
+    default:
+      return state;
+  }
+};
 
 const sagaMiddleware = createSagaMiddleware();
 
 const reducers = combineReducers({
-    reducerSession,
-    form,
+  reducerSession,
+  form,
 });
 
-const store = createStore(reducers, applyMiddleware(sagaMiddleware));
+const devTools =
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
+
+const store = createStore(reducers, devTools, applyMiddleware(sagaMiddleware));
 
 sagaMiddleware.run(functionPrimary);
 

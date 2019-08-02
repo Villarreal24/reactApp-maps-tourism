@@ -14,7 +14,7 @@ export default class App extends Component {
     return (
       <View style={styles.container}>
         <Provider store={Store}>
-          <AppNavigator/>
+          <AppNavigator />
         </Provider>
       </View>
     );

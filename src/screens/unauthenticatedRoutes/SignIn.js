@@ -5,7 +5,7 @@ import { View, StyleSheet, Text, Button, Keyboard, TouchableOpacity, TouchableWi
 import Logo from '../../components/common/Logo';
 import { connect } from 'react-redux';
 import SignInForm from './Forms/SignInForm';
-import { actionLogin } from '../../../store/ACTIONS';
+import { actionLogin, actionSetSession } from '../../../store/ACTIONS';
 
 // create a component
 class SignIn extends Component {
@@ -115,6 +115,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   login: (data) => {
     dispatch(actionLogin(data));
+    dispatch(actionSetSession());
   },
 });
 

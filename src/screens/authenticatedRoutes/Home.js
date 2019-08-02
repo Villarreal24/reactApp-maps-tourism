@@ -1,27 +1,37 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   View,
   StyleSheet,
+  Text,
   TouchableWithoutFeedback,
   Keyboard,
   Permissions,
   PermissionsAndroid,
   Platform,
-} from 'react-native';
-import Map from '../../components/map/Map';
-import PlaceInput from '../../components/map/PlaceInput';
-import BarStatus from '../../components/common/BarStatus';
+  Alert,
+} from "react-native";
+import Geolocation from "@react-native-community/geolocation";
+import Axios from 'axios';
+import BottomDrawer from "rn-bottom-drawer";
+import Map from "../../components/map/Map";
+import PlaceInput from "../../components/map/PlaceInput";
+import BarStatus from "../../components/common/BarStatus";
+// import BottomDrawer from '../../components/BottomDrawer';
 
-const locations = require('../../components/map/locations.json');
+const locations = require("../../components/map/locations.json");
+
+const TAB_BAR_HEIGHT = 0;
 
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
       hasMapPermission: false,
-      userLatitude: 20.868933,
-      userLongitude: -105.439972,
-      locations: locations
+      userLatitude: 20.868441,
+      userLongitude: -105.441136,
+      TempLatitude: 0,
+      TempLongitude: 0,
+      locations: locations,
     };
     this.locationWatchId = null;
   }
@@ -32,10 +42,6 @@ class Home extends Component {
   // ------------------------------------------------------
   componentDidMount() {
     this.requestFineLocation();
-
-    // const {
-    //   locations: [sampleLocation]
-    // } = this.state;
   }
 
   componentWillUnmount() {
@@ -45,36 +51,66 @@ class Home extends Component {
   hideKeyboard() {
     Keyboard.dismiss();
   }
-  // ------------------------------------------------------
+
+  // -------------------------------------------------------
   //         Obtiene la posicion actual del usuario
-  // ------------------------------------------------------
-  getUserPosition() {
-    console.log("Entro en la funcion - GetUserPosition");
-    this.setState({ hasMapPermission: true });
-    navigator.geolocation.getCurrentPosition(
-      pos => {
+  // -------------------------------------------------------
+  async getUserPosition() {
+    // this.setState({ hasMapPermission: true });
+    Geolocation.getCurrentPosition(
+      async pos => {
         this.setState({
-          userLatitude: pos.coords.latitude,
-          userLongitude: pos.coords.longitude,
+          TempLatitude: pos.coords.latitude,
+          TempLongitude: pos.coords.longitude
         });
+        const userCity = await this.getCity(userCity);
+        console.log(userCity);
       },
       err => console.warn(err),
       {
-        enableHighAccuracy: true,
+        enableHighAccuracy: true
       }
     );
   }
-  // -----------------------------------------------------
-  //             Pedir acceso a los permisos de
-  //              la geolocalizacion al usuario
-  // -----------------------------------------------------
+
+  // --------------------------------------------------------------
+  //         Reverse Geocoding (Por medio de lat & lon)
+  //           obtener la ciudad y pais del usuario
+  //                           +
+  //      Validar si se encuentra en Sayulita, para realizar
+  //      en renderizado del mapa en sayulita o en el usuario
+  // --------------------------------------------------------------
+  async getCity(userCity) {
+    const { TempLatitude, TempLongitude } = this.state;
+    console.log(TempLatitude, TempLongitude);
+    const result = await Axios.get(
+      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${TempLatitude},${TempLongitude}&key=AIzaSyDGJWTDnaUpLl02VFsQmcNECQ_8gvuoQcY`
+    );
+    userCity = result.data.results[4].formatted_address;
+    if (userCity === 'Sayulita, Nayarit, Mexico') {
+      this.setState({
+        userLatitude: TempLatitude,
+        userLongitude: TempLongitude
+      });
+      console.log(this.state.userLatitude, this.state.userLongitude);
+    } else {
+      Alert.alert(
+        "No se encuentra en Sayulita!",
+        "No tendra los beneficios de trazar rutas y obtener recomendaciones, porque se encuentra en otra ciudad..."
+      );
+    }
+    console.log(result);
+    console.log(userCity);
+    return userCity;
+  }
+
+  // --------------------------------------------------------
+  //              Pedir acceso a los permisos de
+  //               la geolocalizacion al usuario
+  // --------------------------------------------------------
   async requestFineLocation() {
-    // const { status } = await Permissions.getAsync(Permissions.LOCATION);
     try {
-      // if (status === 'granted') {
-      //   const response = await Permissions.askAsync(Permissions.LOCATION);
-      // }
-      if (Platform.OS === "android") {
+      if (Platform.OS === 'android') {
         const { granted } = await PermissionsAndroid.request(
           PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
         );
@@ -89,6 +125,16 @@ class Home extends Component {
     }
   }
 
+  renderContent = () => {
+    return (
+      <View>
+        <Text style={{ fontSize: 20, textAlign: 'center', paddingTop: 10 }}>
+          Explora Sayulita
+        </Text>
+      </View>
+    );
+  };
+
   render() {
     return (
       <TouchableWithoutFeedback onPress={this.hideKeyboard}>
@@ -100,6 +146,14 @@ class Home extends Component {
             userLongitude={this.state.userLongitude}
           />
           <PlaceInput />
+          {/* <BottomDrawer /> */}
+          <BottomDrawer
+            containerHeight={100}
+            offset={TAB_BAR_HEIGHT}
+            // onExpanded={this.show()}
+          >
+            {this.renderContent()}
+          </BottomDrawer>
         </View>
       </TouchableWithoutFeedback>
     );
@@ -108,8 +162,8 @@ class Home extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
-  }
+    flex: 1,
+  },
 });
 
 export default Home;
