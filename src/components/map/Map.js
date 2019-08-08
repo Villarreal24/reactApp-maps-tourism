@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Image } from 'react-native';
-import MapView, { PROVIDER_GOOGLE, Marker }  from 'react-native-maps';
+import { StyleSheet, View, Image, Dimensions } from 'react-native';
+import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
+
+const { width, height } = Dimensions.get('screen');
+
+const locations = require('../../components/map/locations.json');
 
 class Map extends Component {
+  state = {
+    markerImage: null,
+    locations: locations,
+  };
+
   renderMarkers = () => {
-    const { locations } = this.props;
     return (
       <View>
         {locations.map((location, idx) => {
@@ -12,10 +20,16 @@ class Map extends Component {
             coords: { latitude, longitude }
           } = location;
           return (
-            <Marker key={idx} coordinate={{ latitude, longitude }}>
+            <Marker
+              key={idx}
+              title={location.name}
+              description={location.address}
+              coordinate={{ latitude, longitude }}
+              onPress={this.onMarkerPress(location)}
+            >
               <Image
                 style={{ height: 20, width: 20 }}
-                source={{ uri: location.image }}
+                source={{ uri: location.icon }}
               />
             </Marker>
           );
@@ -24,13 +38,28 @@ class Map extends Component {
     );
   };
 
+  onMarkerPress = location => () => {
+    this.setState({
+      markerImage: location,
+    });
+  };
+
+  hideContentMarker = () => {
+    this.setState({ markerImage: null });
+  };
+
   render() {
+    const { markerImage } = this.state;
+
     return (
       <MapView
+        onPress={() => {
+          this.hideContentMarker();
+        }}
         provider={PROVIDER_GOOGLE}
-        showsUserLocation={true}
-        showsMyLocation={true}
-        followsUserLocation={true}
+        showsUserLocation
+        showsMyLocation
+        followsUserLocation
         style={styles.map}
         initialRegion={{
           latitude: this.props.userLatitude,
@@ -40,6 +69,20 @@ class Map extends Component {
         }}
       >
         {this.renderMarkers()}
+        <Image
+          source={{
+            uri: markerImage && markerImage.image
+          }}
+          style={{
+            flex: 1,
+            width: width * 0.95,
+            alignSelf: "center",
+            height: height * 0.15,
+            position: "absolute",
+            bottom: height * 0.12,
+            borderRadius: 6
+          }}
+        />
       </MapView>
     );
   }

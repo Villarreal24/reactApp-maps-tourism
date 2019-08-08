@@ -1,38 +1,32 @@
 [
-    {
-      "name": "Recorrido Virtual",
-      "address": "Av. del Palmar, Sayulita Nay.",
-      "coords": {
-        "latitude": 20.876408,
-        "longitude": -105.431888
-      },
-      "image": "https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Ficons%2FMap%2FMarkers%2Fvr.png?alt=media&token=78be1a03-0dd6-4605-a733-7afe8c0b64df"
+  {
+    "name": "Recorrido Virtual",
+    "address": "Calle Gaviota, 63734 Sayulita Nay.",
+    "coords": {
+      "latitude": 20.871399,
+      "longitude": -105.440513
     },
-    {
-      "name": "AR",
-      "address": "Calle Miramar, 63732 Sayulita, Nay.",
-      "coords": {
-        "latitude": 20.87235,
-        "longitude": -105.437137
-      },
-      "image": "https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Ficons%2FMap%2FMarkers%2Far.png?alt=media&token=3f488942-c9f0-4459-89ea-14a30883e197"
+    "icon": "https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Ficons%2FMap%2FMarkers%2Fvr.png?alt=media&token=78be1a03-0dd6-4605-a733-7afe8c0b64df",
+    "image": "https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Fimages%2Flocations%2FPlaya%20-%20810x540.jpg?alt=media&token=858718dc-52a8-4698-bf43-d63ab99f8b65"
+  },
+  {
+    "name": "Realidad Aumentada",
+    "address": "Calle Miramar, 63732 Sayulita, Nay.",
+    "coords": {
+      "latitude": 20.87235,
+      "longitude": -105.437137
     },
-    {
-      "name": "Recorrido VR",
-      "address": "Calle Marling, Av. Revolucion 48 - 50, Sayulita Nay.",
-      "coords": {
-        "latitude": 20.869162,
-        "longitude": -105.441042
-      },
-      "image": "https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Ficons%2FMap%2FMarkers%2Fvr.png?alt=media&token=78be1a03-0dd6-4605-a733-7afe8c0b64df"
-    },
-    {
-      "name": "AR",
-      "address": "Delfines 14, Sayulita, Nay.",
-      "coords": {
-        "latitude": 20.870332,
-        "longitude": -105.441167
-      },
-      "image": "https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Ficons%2FMap%2FMarkers%2Far.png?alt=media&token=3f488942-c9f0-4459-89ea-14a30883e197"
-    }
-  ]
+    "icon": "https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Ficons%2FMap%2FMarkers%2Far.png?alt=media&token=3f488942-c9f0-4459-89ea-14a30883e197",
+    "image": "https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Fimages%2Flocations%2FLa-terrazola.png?alt=media&token=561f0c28-b068-4b15-88f2-0c84cbc3ca3a"
+  },
+  // {
+  //   "name": "Recorrido Virtual",
+  //   "address": "Av Revolucion 48, Sayulita, Nay.",
+  //   "coords": {
+  //     "latitude": 20.869418,
+  //     "longitude": -105.440773
+  //   },
+  //   "icon": "https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Ficons%2FMap%2FMarkers%2Fvr.png?alt=media&token=78be1a03-0dd6-4605-a733-7afe8c0b64df",
+  //   "image": "https://cdn.getyourguide.com/img/tour_img-649470-146.jpg"
+  // }
+]

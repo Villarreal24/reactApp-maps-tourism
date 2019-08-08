@@ -5,6 +5,10 @@ import { connect } from "react-redux";
 import { authentication } from "../../store/Services/Firebase";
 
 class Selection extends Component {
+  state = {
+    isLoggedIn: null
+  };
+
   componentDidMount() {
     this.props.authenticationUser();
   }
@@ -13,7 +17,7 @@ class Selection extends Component {
     const { navigation, isLoggedIn } = this.props;
     // console.warn("previous", prevProps.isLoggedIn, "current", isLoggedIn);
     console.log(isLoggedIn);
-    if (isLoggedIn === true) {
+    if (isLoggedIn.state === true) {
       navigation.navigate("App");
     } else {
       navigation.navigate("Auth");
@@ -55,11 +59,11 @@ const mapDispatchToProps = dispatch => ({
       console.log("Se ejecuto el dispatch de Selection");
       if (user) {
         console.log("Existe un usuario iniciado");
-        dispatch(actionSetSession(true));
+        dispatch(actionSetSession());
         console.log(user.toJSON());
       } else {
         console.log("No existe sesión");
-        dispatch(actionLogout(false));
+        dispatch(actionLogout());
       }
     });
   }

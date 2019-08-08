@@ -10,12 +10,15 @@ export const actionLogin = datos => ({
   datos,
 });
 
-export const actionSetSession = LoggedIn => ({
+export const actionSetSession = () => ({
   type: CONSTANTS.SET_SESSION,
-  LoggedIn,
 });
 
-export const actionLogout = LoggedIn => ({
+export const actionLogout = () => ({
   type: CONSTANTS.LOGOUT,
-  LoggedIn,
+});
+
+export const actionUserLocation = (values) => ({
+  type: CONSTANTS.USER_LOCATION,
+  values,
 });
