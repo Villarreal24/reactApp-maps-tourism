@@ -1,0 +1,54 @@
+[
+    {
+        "title": "Popular",
+        "data": [[
+            {
+                "name": "Surf",
+                "image": "https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Fimages%2FBottomDrawer%2FPopular%2Fsurf.jpg?alt=media&token=6c4c2b36-3e2d-434f-9fbb-c1d95abed35a",
+            },
+            {
+                "name": "Kayak",
+                "image": "https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Fimages%2FBottomDrawer%2FPopular%2Fkayak.jpg?alt=media&token=48befab7-402c-420b-b29f-29b89c38e9dd",
+            }
+        ]]
+    },
+    {
+        "title": "Lo mas visto",
+        "data": [[
+            {
+                "name": "Centro Sayulita",
+                "image": "https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Fimages%2FBottomDrawer%2FLo%20mas%20visto%2FcentroSayulita.jpg?alt=media&token=2387870e-1d87-4fb7-bdd1-b548f04fa3c5",
+            },
+            {
+                "name": "Ballenas",
+                "image": "https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Fimages%2FBottomDrawer%2FLo%20mas%20visto%2Fballenas.jpg?alt=media&token=dcbb9785-498d-487c-a3e9-430f2f1f5be3",
+            }
+        ]]
+    },
+    {
+        "title": "Cultural",
+        "data": [[
+            {
+                "name": "Altar de Muertos",
+                "image": "https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Fimages%2FBottomDrawer%2FCultural%2FAltarMuertos.jpg?alt=media&token=7e4b40f1-9b66-4213-bb61-fc317ab330bb",
+            },
+            {
+                "name": "Casa de Cultura",
+                "image": "https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Fimages%2FBottomDrawer%2FCultural%2FcasaCultura.jpg?alt=media&token=cd8c84e9-4543-4cf1-99a6-56fee4319cd6",
+            }
+        ]]
+    },
+    {
+        "title": "Videos & VR",
+        "data": [[
+            {
+                "name": "",
+                "image": "https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Fimages%2FBottomDrawer%2FVideos%20%26%20VR%2FpueblosMagicosVR.jpg?alt=media&token=0f751220-cc2f-424b-b85c-60eb4b159da7",
+            },
+            {
+                "name": "",
+                "image": "https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Fimages%2FBottomDrawer%2FVideos%20%26%20VR%2FplayaVR.jpg?alt=media&token=570f9ea9-ec31-42b3-a72e-3c0218f66582",
+            }
+        ]]
+    }
+]

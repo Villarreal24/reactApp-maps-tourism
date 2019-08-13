@@ -1,7 +1,7 @@
 [
   {
     "name": "Recorrido Virtual",
-    "address": "Calle Gaviota, 63734 Sayulita Nay.",
+    "description": "Famosa playa de sayulita",
     "coords": {
       "latitude": 20.871399,
       "longitude": -105.440513
@@ -11,20 +11,30 @@
   },
   {
     "name": "Realidad Aumentada",
-    "address": "Calle Miramar, 63732 Sayulita, Nay.",
+    "description": "Miranos desde tu camara del dispositivo",
     "coords": {
       "latitude": 20.87235,
       "longitude": -105.437137
     },
     "icon": "https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Ficons%2FMap%2FMarkers%2Far.png?alt=media&token=3f488942-c9f0-4459-89ea-14a30883e197",
     "image": "https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Fimages%2Flocations%2FLa-terrazola.png?alt=media&token=561f0c28-b068-4b15-88f2-0c84cbc3ca3a"
-  },
+  }
   // {
   //   "name": "Recorrido Virtual",
-  //   "address": "Av Revolucion 48, Sayulita, Nay.",
+  //   "description": "Av Revolucion 48, Sayulita, Nay.",
   //   "coords": {
   //     "latitude": 20.869418,
   //     "longitude": -105.440773
+  //   },
+  //   "icon": "https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Ficons%2FMap%2FMarkers%2Fvr.png?alt=media&token=78be1a03-0dd6-4605-a733-7afe8c0b64df",
+  //   "image": "https://cdn.getyourguide.com/img/tour_img-649470-146.jpg"
+  // },
+  // {
+  //   "name": "Recorrido Virtual",
+  //   "description": "Av Revolucion 48, Sayulita, Nay.",
+  //   "coords": {
+  //     "latitude": 20.869178,
+  //     "longitude": -105.440143
   //   },
   //   "icon": "https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Ficons%2FMap%2FMarkers%2Fvr.png?alt=media&token=78be1a03-0dd6-4605-a733-7afe8c0b64df",
   //   "image": "https://cdn.getyourguide.com/img/tour_img-649470-146.jpg"

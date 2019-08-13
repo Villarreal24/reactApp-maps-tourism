@@ -12,9 +12,9 @@ const reducerSession = (state = {}, action) => {
   console.log('Se ejecuto reducerSession');
   switch (action.type) {
     case CONSTANTS.SET_SESSION:
-      return { state: true };
+      return { ...state, isLoggedIn: true, user: action.user };
     case CONSTANTS.LOGOUT:
-      return { state: false };
+      return { ...state, idLoggedIn: false };
     default:
       return state;
   }

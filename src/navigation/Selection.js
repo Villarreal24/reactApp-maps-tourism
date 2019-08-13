@@ -14,19 +14,18 @@ class Selection extends Component {
   }
 
   componentDidUpdate() {
+    this.updateRoute();
+  }
+
+  updateRoute = (prevProps, prevState) => {
     const { navigation, isLoggedIn } = this.props;
-    // console.warn("previous", prevProps.isLoggedIn, "current", isLoggedIn);
     console.log(isLoggedIn);
-    if (isLoggedIn.state === true) {
+    if (isLoggedIn.isLoggedIn === true) {
       navigation.navigate("App");
     } else {
       navigation.navigate("Auth");
     }
-    // this.updateRoute();
-  }
-
-  // updateRoute = (prevProps, prevState) => {
-  // };
+  };
 
   render() {
     return (
@@ -49,7 +48,8 @@ const mapStateToProps = state => {
   console.log("Actualizacion de StateToProps");
   console.log(state.reducerSession);
   return {
-    isLoggedIn: state.reducerSession
+    isLoggedIn: state.reducerSession,
+    user: state.reducerSession.user
   };
 };
 
@@ -59,7 +59,7 @@ const mapDispatchToProps = dispatch => ({
       console.log("Se ejecuto el dispatch de Selection");
       if (user) {
         console.log("Existe un usuario iniciado");
-        dispatch(actionSetSession());
+        dispatch(actionSetSession(user));
         console.log(user.toJSON());
       } else {
         console.log("No existe sesión");

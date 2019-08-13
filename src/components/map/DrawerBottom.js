@@ -5,101 +5,113 @@ import {
   Text,
   TouchableOpacity,
   Image,
-  ScrollView,
+  FlatList,
+  SectionList
 } from 'react-native';
 import BottomDrawer from 'rn-bottom-drawer';
+// import { db } from '../../../store/Services/Firebase.js';
 
-const TAB_BAR_HEIGHT = -50;
+const TAB_BAR_HEIGHT = -130;
+
+const subModules = require('../objets/subModules.json');
+const buttonContent = require('../objets/buttonContent.json');
+
+// var docRef = db
+//   .collection("app")
+//   .doc("map")
+//   .collection("buttonDrawer")
+//   .doc("subModules");
+
+// docRef
+//   .get()
+//   .then(function(doc) {
+//     if (doc.exists) {
+//       console.log("Document data:", doc.data());
+//       const dataModules = doc.subModules.data();
+//       console.log(dataModules);
+//     } else {
+//       // doc.data() will be undefined in this case
+//       console.log("No such document!");
+//     }
+//   })
+//   .catch(function(error) {
+//     console.log("Error getting document:", error);
+//   });
 
 class DrawerBottom extends Component {
   // -------------------------------------------------------
-  //       Contenido que se muestra en el BottomDrawer
+  //       Botones - SubModulos en el BottomDrawer
   // -------------------------------------------------------
-  renderContent = () => {
+  renderSubmodules = () => {
     return (
-      <View style={{ backgroundColor: '#F8F8F8' }}>
+      <View style={styles.containerSubModules}>
         <View style={styles.lineStyle} />
-        <Text style={{ fontSize: 20, textAlign: "center", paddingTop: 10 }}>
-          Explora Sayulita
-        </Text>
-        <ScrollView horizontal={true}>
-          <View style={styles.buttonsContainer}>
-            {/* --------------------------------------------------------------
-                                    Boton de "Videos & VR"
-            ----------------------------------------------------------------*/}
+        <Text style={{ fontSize: 20, paddingTop: 10 }}>Explora Sayulita</Text>
+        <FlatList
+          data={subModules}
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          renderItem={({ item, index }) => (
             <TouchableOpacity style={styles.cardButton} activeOpacity={0.6}>
-              <Image
-                style={styles.image}
-                source={{
-                  uri:
-                    'https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Ficons%2FMap%2FBottomDrawer%2Fvideos%26VR.png?alt=media&token=98dbc572-2093-4573-a9da-eb59983d0109',
-                }}
-              />
+              <Image style={styles.image} source={{ uri: item.image }} />
               <View style={styles.containerText}>
-                <Text style={styles.text}>Videos{'\n'} & VR</Text>
+                <Text style={styles.textModuls}>{item.name}</Text>
               </View>
             </TouchableOpacity>
-            {/* --------------------------------------------------------------
-                                Boton de "Lugares Turisticos"
-            ----------------------------------------------------------------*/}
-            <TouchableOpacity style={styles.cardButton} activeOpacity={0.6}>
-              <Image
-                style={styles.image}
-                source={{
-                  uri:
-                    'https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Ficons%2FMap%2FBottomDrawer%2FLugaresTuristicos.png?alt=media&token=0c180bb2-db5f-4ac4-ab42-9ca3171e46b5',
-                }}
-              />
-              <View style={styles.containerText}>
-                <Text style={styles.text}>Lugares{'\n'} Turisticos</Text>
-              </View>
-            </TouchableOpacity>
-            {/* --------------------------------------------------------------
-                                    Boton de "Recorridos"
-            ----------------------------------------------------------------*/}
-            <TouchableOpacity style={styles.cardButton} activeOpacity={0.6}>
-              <Image
-                style={styles.image}
-                source={{
-                  uri:
-                    'https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Ficons%2FMap%2FBottomDrawer%2FRecorridos.png?alt=media&token=fc88c849-59e0-4f0f-8d20-57b2b355b44d',
-                }}
-              />
-              <View style={styles.containerText}>
-                <Text style={styles.text}>Recorridos</Text>
-              </View>
-            </TouchableOpacity>
-            {/* --------------------------------------------------------------
-                                    Boton de "Actividades"
-            ----------------------------------------------------------------*/}
-            <TouchableOpacity style={styles.cardButton} activeOpacity={0.6}>
-              <Image
-                style={styles.image}
-                source={{
-                  uri:
-                    'https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Ficons%2FMap%2FBottomDrawer%2FActividades.png?alt=media&token=f1a95418-e8b7-45a8-9aa4-bb5459d3abc3',
-                }}
-              />
-              <View style={styles.containerText}>
-                <Text style={styles.text}>Actividades</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.cardButton}>
-              <View style={styles.containerText}>
-                <Text style={styles.text}>Otro</Text>
-              </View>
-            </TouchableOpacity>
-          </View>
-        </ScrollView>
+          )}
+          keyExtractor={(item, index) => String(index)}
+        />
       </View>
     );
   };
 
-  onExpanded = () => {
-    console.log("Swipe");
+  // -------------------------------------------------------
+  //         Contenido del BottonDrawer expandido
+  //      (Listado de contenido de los populares etc.)
+  // -------------------------------------------------------
+  expandedContent = () => {
     return (
-      <View>
-        <Text>Holis</Text>
+      <View style={{ flex: 1, marginBottom: 100}}>
+        <SectionList
+          // contentContainerStyle={{ flexGrow: 1 }}
+          showsVerticalScrollIndicator={false}
+          sections={buttonContent}
+          renderSectionHeader={({ section: { title } }) => (
+            <Text
+              style={{
+                marginLeft: 10,
+                marginTop: 15,
+                fontSize: 20,
+                fontWeight: "bold"
+              }}
+            >
+              {title}
+            </Text>
+          )}
+          renderItem={({ item, section }) => (
+            <FlatList
+              data={item}
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+              renderItem={({ item, index }) => (
+                <View>
+                  <TouchableOpacity
+                    style={styles.listCategories}
+                    activeOpacity={0.6}
+                  >
+                    <Image
+                      style={{ width: 216, height: 130, position: 'absolute' }}
+                      source={{ uri: item.image }}
+                    />
+                    <Text style={styles.textList}>{item.name}</Text>
+                  </TouchableOpacity>
+                </View>
+              )}
+              keyExtractor={(item, index) => String(index)}
+            />
+          )}
+          keyExtractor={(item, index) => String(index)}
+        />
       </View>
     );
   };
@@ -107,16 +119,14 @@ class DrawerBottom extends Component {
   render() {
     return (
       <BottomDrawer
-        onExpanded={() => {
-          this.onExpanded();
-        }}
         startUp={false}
-        containerHeight={400}
+        containerHeight={700}
         offset={TAB_BAR_HEIGHT}
         roundedEdges={true}
-        backgroundColor={"#F8F8F8"}
+        backgroundColor={'#F8F8F8'}
       >
-        {this.renderContent()}
+        {this.renderSubmodules()}
+        {this.expandedContent()}
       </BottomDrawer>
     );
   }
@@ -129,22 +139,32 @@ const styles = StyleSheet.create({
   containerText: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "center"
   },
-  text: {
+  containerSubModules: {
+    backgroundColor: "#F8F8F8",
+    alignItems: "center",
+    marginHorizontal: 5
+  },
+  textModuls: {
     fontSize: 15,
     fontWeight: "bold",
     textAlign: 'center',
+    color: '#FFFFFF'
+  },
+  textList: {
+    padding: 7,
+    fontSize: 18,
+    width: '100%',
     color: '#FFFFFF',
+    backgroundColor: 'rgba(52, 52, 52, 0.1)'
   },
   lineStyle: {
-    flex: 1,
     borderWidth: 2,
     borderColor: '#DBDBDB',
     marginTop: 10,
-    marginLeft: 185,
     width: 30,
-    borderRadius: 10,
+    borderRadius: 10
   },
   cardButton: {
     alignItems: 'center',
@@ -154,15 +174,24 @@ const styles = StyleSheet.create({
     width: 95,
     height: 90,
     borderRadius: 5,
-    textAlign: 'center',
+    elevation: 2
+  },
+  listCategories: {
+    alignItems: 'flex-start',
+    justifyContent: 'flex-end',
+    margin: 10,
+    width: 216,
+    height: 130,
+    borderRadius: 8,
+    elevation: 3
   },
   image: {
     opacity: 0.6,
     width: 95,
     height: 90,
     position: 'absolute',
-    borderRadius: 4,
-  },
+    borderRadius: 4
+  }
 });
 
 export default DrawerBottom;

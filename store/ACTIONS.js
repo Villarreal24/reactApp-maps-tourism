@@ -14,11 +14,11 @@ export const actionSetSession = () => ({
   type: CONSTANTS.SET_SESSION,
 });
 
-export const actionLogout = () => ({
+export const actionLogout = user => ({
   type: CONSTANTS.LOGOUT,
+  user,
 });
 
-export const actionUserLocation = (values) => ({
+export const actionUserLocation = () => ({
   type: CONSTANTS.USER_LOCATION,
-  values,
 });

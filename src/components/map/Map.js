@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import { StyleSheet, View, Image, Dimensions } from 'react-native';
-import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
+import React, { Component } from "react";
+import { StyleSheet, View, Image, Dimensions, CalloutView } from "react-native";
+import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
 
-const { width, height } = Dimensions.get('screen');
+const { width, height } = Dimensions.get("screen");
 
-const locations = require('../../components/map/locations.json');
+const locations = require("../../components/objets/locations.json");
 
 class Map extends Component {
   state = {
-    markerImage: null,
-    locations: locations,
+    // markerImage: null,
+    locations: locations
   };
 
   renderMarkers = () => {
@@ -17,7 +17,7 @@ class Map extends Component {
       <View>
         {locations.map((location, idx) => {
           const {
-            coords: { latitude, longitude }
+            coords: { latitude, longitude },
           } = location;
           return (
             <Marker
@@ -40,7 +40,7 @@ class Map extends Component {
 
   onMarkerPress = location => () => {
     this.setState({
-      markerImage: location,
+      markerImage: location.image,
     });
   };
 
@@ -65,23 +65,15 @@ class Map extends Component {
           latitude: this.props.userLatitude,
           longitude: this.props.userLongitude,
           latitudeDelta: 0.015,
-          longitudeDelta: 0.0121
+          longitudeDelta: 0.0121,
         }}
       >
         {this.renderMarkers()}
         <Image
           source={{
-            uri: markerImage && markerImage.image
+            uri: markerImage,
           }}
-          style={{
-            flex: 1,
-            width: width * 0.95,
-            alignSelf: "center",
-            height: height * 0.15,
-            position: "absolute",
-            bottom: height * 0.12,
-            borderRadius: 6
-          }}
+          style={styles.imageMarkers}
         />
       </MapView>
     );
@@ -90,8 +82,17 @@ class Map extends Component {
 
 const styles = StyleSheet.create({
   map: {
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFillObject
   },
+  imageMarkers: {
+    flex: 1,
+    width: width * 0.95,
+    alignSelf: 'center',
+    height: height * 0.20,
+    position: 'absolute',
+    bottom: height * 0.12,
+    borderRadius: 6
+  }
 });
 
 export default Map;

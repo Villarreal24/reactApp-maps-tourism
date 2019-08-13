@@ -34,7 +34,7 @@ const authenticatedRoutes = createBottomTabNavigator({
     navigationOptions: {
       tabBarLabel:"Perfil",
       tabBarIcon: ({ tintColor }) => (
-        <Icon name="profile" size={30} color="black" />
+        <Icon name="user" size={30} color="black" />
       ),
     },
   },

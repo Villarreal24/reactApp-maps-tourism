@@ -1,0 +1,18 @@
+[
+    {
+        "name": "Videos & VR",
+        "image": "https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Fimages%2FBottomDrawer%2FsubModulos%2Fvideos%26VR.png?alt=media&token=afd098c0-b8f9-4bad-a666-b2a22b6f17a0"
+    },
+    {
+        "name": "Lugares Turisticos",
+        "image": "https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Fimages%2FBottomDrawer%2FsubModulos%2FLugaresTuristicos.png?alt=media&token=6b412cdf-21eb-4ab3-9fa6-0f0777deec84"
+    },
+    {
+        "name": "Recorridos",
+        "image": "https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Fimages%2FBottomDrawer%2FsubModulos%2FRecorridos.png?alt=media&token=3a712c26-0a82-4418-bbfc-133831f6f028"
+    },
+    {
+        "name": "Actividades",
+        "image": "https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Fimages%2FBottomDrawer%2FsubModulos%2FActividades.png?alt=media&token=35de8dfa-830c-4213-b932-40f389f9800b"
+    }
+]
