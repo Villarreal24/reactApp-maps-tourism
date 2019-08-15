@@ -5,10 +5,6 @@ import { connect } from "react-redux";
 import { authentication } from "../../store/Services/Firebase";
 
 class Selection extends Component {
-  state = {
-    isLoggedIn: null
-  };
-
   componentDidMount() {
     this.props.authenticationUser();
   }
@@ -17,15 +13,15 @@ class Selection extends Component {
     this.updateRoute();
   }
 
-  updateRoute = (prevProps, prevState) => {
-    const { navigation, isLoggedIn } = this.props;
-    console.log(isLoggedIn);
-    if (isLoggedIn.isLoggedIn === true) {
-      navigation.navigate("App");
+  async updateRoute() {
+    const { navigation, user } = this.props;
+    console.log(user);
+    if (user) {
+      navigation.navigate('App');
     } else {
-      navigation.navigate("Auth");
+      navigation.navigate('Auth');
     }
-  };
+  }
 
   render() {
     return (
@@ -45,24 +41,19 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => {
-  console.log("Actualizacion de StateToProps");
   console.log(state.reducerSession);
   return {
-    isLoggedIn: state.reducerSession,
-    user: state.reducerSession.user
+    user: state.reducerSession
   };
 };
 
 const mapDispatchToProps = dispatch => ({
   authenticationUser: () => {
     authentication.onAuthStateChanged(user => {
-      console.log("Se ejecuto el dispatch de Selection");
       if (user) {
-        console.log("Existe un usuario iniciado");
+        console.log(user);
         dispatch(actionSetSession(user));
-        console.log(user.toJSON());
       } else {
-        console.log("No existe sesión");
         dispatch(actionLogout());
       }
     });

@@ -1,7 +1,15 @@
-/* eslint-disable prettier/prettier */
 // import liraries
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, Button, Keyboard, TouchableOpacity, TouchableWithoutFeedback, KeyboardAvoidingView } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Text,
+  Button,
+  Keyboard,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  KeyboardAvoidingView
+} from "react-native";
 import Logo from '../../components/common/Logo';
 import { connect } from 'react-redux';
 import SignInForm from './Forms/SignInForm';
@@ -9,9 +17,9 @@ import { actionLogin, actionSetSession } from '../../../store/ACTIONS';
 
 // create a component
 class SignIn extends Component {
-  signinUser = (values) => {
+  signinUser = values => {
     this.props.login(values);
-  }
+  };
 
   static navigationOptions = {
     headerStyle: {
@@ -31,40 +39,48 @@ class SignIn extends Component {
     return (
       <TouchableWithoutFeedback onPress={this.hideKeyboard}>
         <View style={styles.container}>
-          <KeyboardAvoidingView style={styles.containerKeyboard} behavior='height'>
-            <Logo/>
-            <SignInForm login = {this.signinUser} navigation/>
-          
-          <View style={{ flexDirection: "row", margin:5, marginTop:20 }}>
-            <View style={{ flex: 1, paddingLeft:10 }}>
-              <TouchableOpacity
-                onPress={() => {
-                  navigation.navigate('ForgotPass');
-                }}
+          <KeyboardAvoidingView
+            style={styles.containerKeyboard}
+            behavior="height"
+          >
+            <Logo />
+            <SignInForm login={this.signinUser} navigation />
+            <View style={{ flexDirection: "row", margin: 5, marginTop: 20 }}>
+              <View style={{ flex: 1, paddingLeft: 10 }}>
+                <TouchableOpacity
+                  onPress={() => {
+                    navigation.navigate('ForgotPass');
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontSize: 11 }}
+                  >
+                    Olvidaste la contraseña?
+                  </Text>
+                </TouchableOpacity>
+              </View>
+              <View
+                style={{ flex: 1, alignItems: "flex-end", paddingRight: 10 }}
               >
-                <Text style={{
-                  fontSize:11 }}
-                  >Olvidaste la contraseña?</Text>
-              </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    navigation.navigate('SignUp');
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontSize: 11 }}
+                  >
+                    No tienes una cuenta?
+                  </Text>
+                </TouchableOpacity>
+              </View>
             </View>
-            <View style={{ flex: 1, alignItems:'flex-end', paddingRight:10 }}>
-              <TouchableOpacity
-                onPress={() => {
-                  navigation.navigate('SignUp');
-                }}
-              >
-                <Text style={{
-                  fontSize:11 }}
-                >No tienes una cuenta?</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-          <View style={styles.lineStyle} />
+            <View style={styles.lineStyle} />
           </KeyboardAvoidingView>
           <View style={styles.LoginSocial}>
-            <Button
-              title='Iniciar Sesion con Facebook'>
-            </Button>
+            <Button title="Iniciar Sesion con Facebook" />
           </View>
         </View>
       </TouchableWithoutFeedback>
@@ -113,10 +129,13 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  login: (data) => {
-    dispatch(actionLogin(data));
+  login: data => {
     dispatch(actionSetSession());
-  },
+    dispatch(actionLogin(data));
+  }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SignIn);

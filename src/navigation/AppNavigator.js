@@ -13,6 +13,6 @@ export default createAppContainer(createSwitchNavigator({
   App: authenticatedRoutes,
 },
 {
-  initialRouteName: 'App',
+  initialRouteName: 'AuthLoading',
 }
 ));

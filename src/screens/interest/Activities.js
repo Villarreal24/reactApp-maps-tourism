@@ -8,7 +8,7 @@ import {
   SafeAreaView
 } from "react-native";
 import Cards from '../../components/Cards';
-import AwesomeAlert from 'react-native-awesome-alerts';
+import AwesomeAlert from "react-native-awesome-alerts";
 
 class Activities extends Component {
   static navigationOptions = {
@@ -49,7 +49,8 @@ class Activities extends Component {
           </Text>
           <Cards data={activities} />
           <View style={styles.containerButton}>
-            <TouchableOpacity style={styles.ButtonContinue}
+            <TouchableOpacity
+              style={styles.ButtonContinue}
               onPress={() => {
                 navigation.navigate('Places');
               }}

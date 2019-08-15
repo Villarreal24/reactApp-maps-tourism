@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View } from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, View } from 'react-native';
 import AppNavigator from './src/navigation/AppNavigator';
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
 import Store from './store/Store';
 
-export default class App extends Component {
+class App extends Component {
   constructor() {
     super();
     this.state = { nombre: 'VRTourism'};
@@ -24,5 +24,7 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  }  
+  }
 });
+
+export default App;

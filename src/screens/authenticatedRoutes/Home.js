@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   View,
   StyleSheet,
@@ -6,16 +6,16 @@ import {
   Keyboard,
   PermissionsAndroid,
   Platform,
-  Alert
-} from 'react-native';
-import Geolocation from '@react-native-community/geolocation';
-import Axios from "axios";
-import { connect } from 'react-redux';
-import Map from '../../components/map/Map';
-import PlaceInput from '../../components/map/PlaceInput';
-import BarStatus from '../../components/common/BarStatus';
-import { actionUserLocation } from '../../../store/ACTIONS';
-import DrawerBottom from '../../components/map/DrawerBottom';
+  Alert,
+} from "react-native";
+import Geolocation from "@react-native-community/geolocation";
+import Axios from 'axios';
+import { connect } from "react-redux";
+import Map from "../../components/map/Map";
+import PlaceInput from "../../components/map/PlaceInput";
+import BarStatus from "../../components/common/BarStatus";
+import { actionUserLocation } from "../../../store/ACTIONS";
+import DrawerBottom from "../../components/map/DrawerBottom";
 
 class Home extends Component {
   constructor(props) {
@@ -25,7 +25,8 @@ class Home extends Component {
       userLatitude: 20.868441,
       userLongitude: -105.441136,
       TempLatitude: 0,
-      TempLongitude: 0
+      TempLongitude: 0,
+      showAlert: true,
     };
     this.locationWatchId = null;
   }
@@ -55,14 +56,14 @@ class Home extends Component {
       async pos => {
         this.setState({
           TempLatitude: pos.coords.latitude,
-          TempLongitude: pos.coords.longitude,
+          TempLongitude: pos.coords.longitude
         });
         const userCity = await this.getCity(userCity);
         console.log(userCity);
       },
       err => console.warn(err),
       {
-        enableHighAccuracy: true,
+        enableHighAccuracy: true
       }
     );
   }
@@ -81,20 +82,20 @@ class Home extends Component {
       `https://maps.googleapis.com/maps/api/geocode/json?latlng=${TempLatitude},${TempLongitude}&key=AIzaSyDGJWTDnaUpLl02VFsQmcNECQ_8gvuoQcY`
     );
     userCity = result.data.results[4].formatted_address;
-    if (userCity === "Sayulita, Nayarit, Mexico") {
+    if (userCity === 'Sayulita, Nayarit, Mexico') {
       this.setState({
         userLatitude: TempLatitude,
-        userLongitude: TempLongitude,
+        userLongitude: TempLongitude
       });
       console.log(this.state.userLatitude, this.state.userLongitude);
     } else {
       Alert.alert(
-        'No se encuentra en Sayulita!',
-        'No tendra los beneficios de trazar rutas y obtener recomendaciones, porque se encuentra en otra ciudad...'
+        "No se encuentra en Sayulita!",
+        "No tendra los beneficios de trazar rutas y obtener recomendaciones, porque se encuentra en otra ciudad..."
       );
     }
-    console.log(result);
-    console.log(userCity);
+    // console.log(result);
+    // console.log(userCity);
     return userCity;
   }
 
@@ -104,16 +105,17 @@ class Home extends Component {
   // --------------------------------------------------------
   async requestFineLocation() {
     try {
-      if (Platform.OS === "android") {
+      if (Platform.OS === 'android') {
         const { granted } = await PermissionsAndroid.request(
           PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
         );
-        if (granted == PermissionsAndroid.RESULTS.granted) {
-          this.getUserPosition();
+        if (granted === PermissionsAndroid.RESULTS.granted) {
+          await this.getUserPosition();
+          this.setState({ hasMapPermission: true });
           // this.locationUser();
         }
       } else {
-        this.getUserPosition();
+        await this.getUserPosition();
         // this.locationUser();
       }
     } catch (err) {
@@ -121,18 +123,25 @@ class Home extends Component {
     }
   }
 
+  hideAlert = () => {
+    this.setState({
+      showAlert: false,
+    });
+  };
+
   render() {
     return (
       <TouchableWithoutFeedback onPress={this.hideKeyboard}>
         <View style={styles.container}>
+          <PlaceInput />
           <Map
             hasMapPermission={this.state.hasMapPermission}
             userLatitude={this.state.userLatitude}
             userLongitude={this.state.userLongitude}
+            // PolyCoordinates={this.props.PolyCoordinates}
           />
           <DrawerBottom />
           <BarStatus />
-          <PlaceInput />
         </View>
       </TouchableWithoutFeedback>
     );
@@ -141,17 +150,17 @@ class Home extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   lineStyle: {
     flex: 1,
     borderWidth: 2,
-    borderColor: '#DBDBDB',
+    borderColor: "#DBDBDB",
     marginTop: 10,
     marginLeft: 185,
     width: 25,
-    borderRadius: 10
-  }
+    borderRadius: 10,
+  },
 });
 
 // const mapStateToProps = state => {

@@ -14,11 +14,19 @@ export const actionSetSession = () => ({
   type: CONSTANTS.SET_SESSION,
 });
 
-export const actionLogout = user => ({
+export const actionLogout = () => ({
   type: CONSTANTS.LOGOUT,
-  user,
 });
 
 export const actionUserLocation = () => ({
   type: CONSTANTS.USER_LOCATION,
+});
+
+export const actionRouteCoords = coords => ({
+  type: CONSTANTS.ROUTE_COORDS,
+  coords,
+});
+
+export const actionWipeRoute = () => ({
+  type: CONSTANTS.WIPE_ROUTE
 });
