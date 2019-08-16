@@ -10,6 +10,10 @@ export const actionLogin = datos => ({
   datos,
 });
 
+export const actionSignOut = () => ({
+  type: CONSTANTS.SIGNOUT,
+});
+
 export const actionSetSession = () => ({
   type: CONSTANTS.SET_SESSION,
 });

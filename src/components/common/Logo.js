@@ -8,7 +8,8 @@ class Logo extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Image style={styles.Image}
+        <Image
+          style={styles.Image}
           source={require('../../../assets/images/Logo.png')}
         />
       </View>
@@ -19,7 +20,7 @@ class Logo extends Component {
 // define your styles
 const styles = StyleSheet.create({
   container: {
-    margin: 100,
+    margin: 80,
     justifyContent: 'center',
     alignItems: 'center',
   },

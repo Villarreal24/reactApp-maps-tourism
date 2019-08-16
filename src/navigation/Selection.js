@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, StyleSheet, ActivityIndicator } from "react-native";
+import { View, StyleSheet, ActivityIndicator, StatusBar } from "react-native";
 import { actionSetSession, actionLogout } from "../../store/ACTIONS";
 import { connect } from "react-redux";
 import { authentication } from "../../store/Services/Firebase";
@@ -10,23 +10,16 @@ class Selection extends Component {
   }
 
   componentDidUpdate() {
-    this.updateRoute();
-  }
-
-  async updateRoute() {
     const { navigation, user } = this.props;
     console.log(user);
-    if (user) {
-      navigation.navigate('App');
-    } else {
-      navigation.navigate('Auth');
-    }
+    navigation.navigate(user ? 'App' : 'Auth');
   }
 
   render() {
     return (
       <View style={styles.container}>
         <ActivityIndicator size="large" />
+        <StatusBar barStyle="default" />
       </View>
     );
   }

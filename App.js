@@ -3,6 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import AppNavigator from './src/navigation/AppNavigator';
 import { Provider } from 'react-redux';
 import Store from './store/Store';
+import * as NavigationService from "./src/navigation/NavigationService.js";
 
 class App extends Component {
   constructor() {
@@ -10,11 +11,19 @@ class App extends Component {
     this.state = { nombre: 'VRTourism'};
   }
 
+  componentDidMount() {
+    NavigationService.setNavigator(this.navigator);
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <Provider store={Store}>
-          <AppNavigator />
+          <AppNavigator
+            ref={nav => {
+              this.navigator = nav;
+            }}
+          />
         </Provider>
       </View>
     );

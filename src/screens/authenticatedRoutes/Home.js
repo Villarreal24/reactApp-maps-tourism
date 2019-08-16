@@ -11,6 +11,7 @@ import {
 import Geolocation from "@react-native-community/geolocation";
 import Axios from 'axios';
 import { connect } from "react-redux";
+import { withNavigationFocus } from 'react-navigation';
 import Map from "../../components/map/Map";
 import PlaceInput from "../../components/map/PlaceInput";
 import BarStatus from "../../components/common/BarStatus";
@@ -133,7 +134,7 @@ class Home extends Component {
     return (
       <TouchableWithoutFeedback onPress={this.hideKeyboard}>
         <View style={styles.container}>
-          <PlaceInput />
+          {/* <PlaceInput /> */}
           <Map
             hasMapPermission={this.state.hasMapPermission}
             userLatitude={this.state.userLatitude}

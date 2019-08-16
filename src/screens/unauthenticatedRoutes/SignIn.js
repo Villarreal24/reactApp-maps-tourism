@@ -13,7 +13,7 @@ import {
 import Logo from '../../components/common/Logo';
 import { connect } from 'react-redux';
 import SignInForm from './Forms/SignInForm';
-import { actionLogin, actionSetSession } from '../../../store/ACTIONS';
+import { actionLogin } from '../../../store/ACTIONS';
 
 // create a component
 class SignIn extends Component {
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     borderColor: '#CECED2',
     margin: 10,
     width: '90%'
-  },
+  }
 });
 
 const mapStateToProps = state => ({
@@ -130,7 +130,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   login: data => {
-    dispatch(actionSetSession());
     dispatch(actionLogin(data));
   }
 });

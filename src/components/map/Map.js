@@ -3,6 +3,7 @@ import { StyleSheet, View, Image, Dimensions, Button } from "react-native";
 import { connect } from "react-redux";
 import MapView, { PROVIDER_GOOGLE, Marker, Polyline } from "react-native-maps";
 import { actionWipeRoute } from "../../../store/ACTIONS.js";
+import PlaceInput from "./PlaceInput.js";
 
 const { width, height } = Dimensions.get("screen");
 
@@ -87,7 +88,7 @@ class Map extends Component {
     const { coords } = this.props;
 
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, paddingTop: 15 }}>
         <MapView
           onPress={() => {
             this.hideContentMarker();
@@ -111,6 +112,7 @@ class Map extends Component {
           />
           {this.renderMarkers()}
         </MapView>
+        <PlaceInput />
         {this.cancelRoute()}
         {this.markerDetails()}
       </View>
@@ -120,6 +122,7 @@ class Map extends Component {
 
 const styles = StyleSheet.create({
   map: {
+    paddingTop: 15,
     ...StyleSheet.absoluteFillObject
   },
   imageMarkers: {

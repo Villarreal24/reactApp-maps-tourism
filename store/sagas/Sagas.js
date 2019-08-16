@@ -1,8 +1,9 @@
-import { PermissionsAndroid, Platform } from "react-native";
-import Geolocation from "@react-native-community/geolocation";
-import { takeEvery, call } from "redux-saga/effects";
-import { authentication, db } from "../Services/Firebase";
-import CONSTANTS from "../CONSTANTS";
+import { Alert, ToastAndroid } from 'react-native';
+import Geolocation from '@react-native-community/geolocation';
+import { takeEvery, call } from 'redux-saga/effects';
+import { authentication, db } from '../Services/Firebase';
+import CONSTANTS from '../CONSTANTS';
+import * as NavigationService from "../../src/navigation/NavigationService.js";
 
 // -----------------------------------------------------------
 //       Solicitud de registro de un nuevo usuario y
@@ -14,24 +15,29 @@ const registryUserNew = values =>
     .then(success => success);
 const registryInDataBase = ({ uid, email, name }) =>
   db
-    .collection("users")
+    .collection('users')
     .doc(uid)
     .set({
       user: name,
-      email: email
+      email: email,
     });
 
 function* sagaRegistry(values) {
   try {
     const registry = yield call(registryUserNew, values.datos);
     const {
-      user: { email, uid }
+      user: { email, uid },
     } = registry;
     const {
-      datos: { name }
+      datos: { name },
     } = values;
     yield call(registryInDataBase, { uid, email, name });
+    ToastAndroid.show("Registro exitoso !", ToastAndroid.SHORT);
   } catch (error) {
+    Alert.alert(
+      "Problema al registrarse!",
+      "Este correo ya se encuentra registrado."
+    );
     console.log(error);
   }
 }
@@ -46,18 +52,28 @@ const loginUser = ({ email, password }) =>
 
 function* sagaLogin(values) {
   try {
-    console.log(values);
-    const result = yield call(loginUser, values.datos);
-    console.log(result);
+    yield call(loginUser, values.datos);
+    NavigationService.navigate('App');
   } catch (error) {
+    Alert.alert(
+      "Problema al iniciar sesion!",
+      "Lo siento, correo y/o contraseña incorrectos."
+    );
     console.log(error);
   }
 }
 
-// --------------------------------------------------------
-//              Pedir acceso a los permisos de
-//               la geolocalizacion al usuario
-// -------------------------------------------------------
+function* sagaSignOut() {
+  try {
+    authentication.signOut();
+    NavigationService.navigate('Auth');
+  } catch (error) {
+    Alert.alert(
+      "Problema al cerrar sesion!",
+      "Lo siento, revise su conexion a internet."
+    );
+  }
+}
 
 // -------------------------------------------------------
 //         Obtiene la posicion actual del usuario
@@ -68,14 +84,14 @@ const getUserPosition = () => {
     async pos => {
       this.setState({
         TempLatitude: pos.coords.latitude,
-        TempLongitude: pos.coords.longitude
+        TempLongitude: pos.coords.longitude,
       });
       const userCity = await this.getCity(userCity);
       console.log(userCity);
     },
     err => console.warn(err),
     {
-      enableHighAccuracy: true
+      enableHighAccuracy: true,
     }
   );
 };
@@ -86,11 +102,12 @@ function* sagaLocation(values) {
 }
 
 // -----------------------------------------------------------
-//            Llamado a las funciones generadoras
+//            Llamando a las funciones generadoras
 // -----------------------------------------------------------
 export default function* functionPrimary() {
   yield takeEvery(CONSTANTS.REGISTRY, sagaRegistry);
   yield takeEvery(CONSTANTS.LOGIN, sagaLogin);
+  yield takeEvery(CONSTANTS.SIGNOUT, sagaSignOut);
   yield takeEvery(CONSTANTS.USER_LOCATION, sagaLocation);
-  console.log("Desde nuestra funcion generadora");
+  console.log('Desde nuestra funcion generadora');
 }

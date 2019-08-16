@@ -47,17 +47,19 @@ class PlaceInput extends Component {
     const predictions = this.state.predictions.map(prediction => {
       const { id, structured_formatting } = prediction;
       return (
-        <TouchableOpacity
-          key={id}
-          onPress={() => this.setDestination(structured_formatting.main_text)}
-        >
-          <View style={suggestion}>
-            <Text style={main_text}>{structured_formatting.main_text}</Text>
-            <Text style={secondary_text}>
-              {prediction.structured_formatting.secondary_text}
-            </Text>
-          </View>
-        </TouchableOpacity>
+        <View style={{ flex:1 }}>
+          <TouchableOpacity
+            key={id}
+            onPress={() => this.setDestination(structured_formatting.main_text)}
+          >
+            <View style={suggestion}>
+              <Text style={main_text}>{structured_formatting.main_text}</Text>
+              <Text style={secondary_text}>
+                {prediction.structured_formatting.secondary_text}
+              </Text>
+            </View>
+          </TouchableOpacity>
+        </View>
       );
     });
     return (

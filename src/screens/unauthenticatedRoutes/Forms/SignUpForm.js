@@ -1,27 +1,42 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Button } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+  Button
+} from "react-native";
 import { Field, reduxForm } from 'redux-form';
 
-const fieldName = (props) => {
+const fieldName = props => {
   return (
-  <View style={styles.containerInput}>
-    <TextInput style={styles.textInput}
-      placeholder={props.ph}
-      paddingHorizontal={20}
-      onChangeText={props.input.onChange}
-      keyboardType={props.input.name === 'email' ? 'email-address' : 'default'}
-      autoCapitalize="none"
-      secureTextEntry={!!(props.input.name === 'password' || props.input.name === 'confirmation')}
-      onBlur={props.input.onBlur}
-    />
-    {props.meta.touched &&
-        props.meta.error && <Text style={styles.errors}>{props.meta.error}</Text>}
-  </View>
-  )
+    <View style={styles.containerInput}>
+      <TextInput
+        style={styles.textInput}
+        placeholder={props.ph}
+        paddingHorizontal={20}
+        onChangeText={props.input.onChange}
+        keyboardType={
+          props.input.name === "email" ? "email-address" : "default"
+        }
+        autoCapitalize="none"
+        secureTextEntry={
+          !!(
+            props.input.name === "password" ||
+            props.input.name === "confirmation"
+          )
+        }
+        onBlur={props.input.onBlur}
+      />
+      {props.meta.touched && props.meta.error && (
+        <Text style={styles.errors}>{props.meta.error}</Text>
+      )}
+    </View>
+  );
 };
 
-
-const validate = (values) => {
+const validate = values => {
   const errors = {};
   if (!values.nombre) {
     errors.nombre = 'requerido';
@@ -62,9 +77,7 @@ const SignUpForm = (props) => (
     <Field name="confirmation" component={fieldName} ph="********" />
 
     <TouchableOpacity style={styles.Button}
-      onPress={
-        props.handleSubmit(props.registry)
-      }
+      onPress={props.handleSubmit(props.registry)}
     >
       <Text style={{
         fontSize:14,
