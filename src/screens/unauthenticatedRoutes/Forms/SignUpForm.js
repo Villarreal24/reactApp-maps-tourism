@@ -4,8 +4,7 @@ import {
   Text,
   StyleSheet,
   TextInput,
-  TouchableOpacity,
-  Button
+  TouchableOpacity
 } from "react-native";
 import { Field, reduxForm } from 'redux-form';
 
@@ -38,18 +37,18 @@ const fieldName = props => {
 
 const validate = values => {
   const errors = {};
-  if (!values.nombre) {
-    errors.nombre = 'requerido';
-  } else if (values.nombre.length < 5) {
-    errors.nombre = 'deben ser al menos 5 caracteres';
-  } else if (values.nombre.length > 40) {
-    errors.nombre = 'debe ser menor de 40 caracteres';
+  if (!values.name) {
+    errors.name = 'requerido';
+  } else if (values.name.length < 5) {
+    errors.name = 'deben ser al menos 5 caracteres';
+  } else if (values.name.length > 40) {
+    errors.name = 'debe ser menor de 40 caracteres';
   }
 
   if (!values.email) {
-    errors.correo = 'requerido';
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.correo)) {
-    errors.correo = 'correo invalido';
+    errors.email = 'requerido';
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+    errors.email = 'correo invalido';
   }
 
   if (!values.password) {
@@ -61,34 +60,40 @@ const validate = values => {
   }
 
   if (!values.confirmation) {
-    errors.confirmacion = 'requerido';
-  } else if (values.password !== values.confirmacion) {
-    errors.confirmacion = 'el password debe coincidir';
+    errors.confirmation = 'requerido';
+  } else if (values.password !== values.confirmation) {
+    errors.confirmation = 'el password debe coincidir';
   }
 
   return errors;
 };
 
-const SignUpForm = (props) => (
+const SignUpForm = props => (
   <View style={styles.containerInput}>
-    <Field name="name" component={fieldName} ph="Nombre" />
+    <Field name="name" component={fieldName} ph="Nombre Completo" />
     <Field name="email" component={fieldName} ph="Tu correo electronico" />
     <Field name="password" component={fieldName} ph="********" />
     <Field name="confirmation" component={fieldName} ph="********" />
 
-    <TouchableOpacity style={styles.Button}
+    <TouchableOpacity
+      style={styles.Button}
       onPress={props.handleSubmit(props.registry)}
     >
-      <Text style={{
-        fontSize:14,
-        color:'#FFFFFF',
-        paddingTop:6,
-        fontWeight:'bold',
-        width:'88%',
-        textAlign:'center'}}>REGISTRARSE</Text>
+      <Text
+        style={{
+          fontSize:14,
+          color:'#FFFFFF',
+          paddingTop:6,
+          fontWeight:'bold',
+          width:'88%',
+          textAlign: "center"
+        }}
+      >
+        REGISTRARSE
+      </Text>
     </TouchableOpacity>
   </View>
-  );
+);
 
 const styles = StyleSheet.create({
   containerInput: {
@@ -97,7 +102,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 16,
   },
-  textInput:{
+  textInput: {
     height: 50,
     width: '90%',
     borderRadius: 15,
@@ -115,7 +120,7 @@ const styles = StyleSheet.create({
   },
   errors: {
     color: '#FF0000',
-  },
+  }
 });
 
 export default reduxForm({

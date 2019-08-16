@@ -12,6 +12,7 @@ const fieldName = (props) => (
       keyboardType={props.input.name === 'email' ? 'email-address' : 'default'}
       autoCapitalize="none"
       onBlur={props.input.onBlur}
+      secureTextEntry={props.input.name === 'password'}
     />
     {props.meta.touched &&
         props.meta.error && <Text style={styles.errors}>{props.meta.error}</Text>}
@@ -39,7 +40,7 @@ const validate = (values) => {
 
 const SignInForm = (props) => (
   <View style={styles.containerInput}>
-    <Field name="email" component={fieldName} ph="Tu correo electronico" />
+    <Field name="email" component={fieldName} ph="Ejemplo@gmail.com" />
     <Field name="password" component={fieldName} ph="********" />
     <TouchableOpacity style={styles.Button}
       onPress={props.handleSubmit(props.login)}

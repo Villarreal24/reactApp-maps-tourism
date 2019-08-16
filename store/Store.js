@@ -1,5 +1,5 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
-import { reducer as form } from 'redux-form';
+import { reducer as reduxForm } from 'redux-form';
 import createSagaMiddleware from 'redux-saga';
 import functionPrimary from './sagas/Sagas';
 import CONSTANTS from './CONSTANTS';
@@ -40,7 +40,7 @@ const sagaMiddleware = createSagaMiddleware();
 const reducers = combineReducers({
   reducerSession,
   reducerPolylineCoords,
-  form,
+  form: reduxForm
 });
 
 /*eslint-disable */

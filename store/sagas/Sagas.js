@@ -33,11 +33,9 @@ function* sagaRegistry(values) {
     } = values;
     yield call(registryInDataBase, { uid, email, name });
     ToastAndroid.show("Registro exitoso !", ToastAndroid.SHORT);
+    NavigationService.navigate('SignIn');
   } catch (error) {
-    Alert.alert(
-      "Problema al registrarse!",
-      "Este correo ya se encuentra registrado."
-    );
+    Alert.alert("Problema al registrarse!", "Revise su conexion a internet.");
     console.log(error);
   }
 }

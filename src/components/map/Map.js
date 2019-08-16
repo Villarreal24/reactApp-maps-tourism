@@ -1,27 +1,35 @@
-import React, { Component } from "react";
-import { StyleSheet, View, Image, Dimensions, Button } from "react-native";
-import { connect } from "react-redux";
-import MapView, { PROVIDER_GOOGLE, Marker, Polyline } from "react-native-maps";
-import { actionWipeRoute } from "../../../store/ACTIONS.js";
-import PlaceInput from "./PlaceInput.js";
+import React, { Component } from 'react';
+import {
+  StyleSheet,
+  View,
+  Image,
+  Video,
+  Dimensions,
+  ActivityIndicator,
+} from 'react-native';
+import { connect } from 'react-redux';
+import MapView, { PROVIDER_GOOGLE, Marker, Polyline } from 'react-native-maps';
+import { actionWipeRoute } from '../../../store/ACTIONS.js';
+import PlaceInput from './PlaceInput.js';
 
-const { width, height } = Dimensions.get("screen");
+const { width, height } = Dimensions.get('screen');
 
-const locations = require("../../components/objets/locations.json");
+const locations = require('../../components/objets/locations.json');
 
 class Map extends Component {
   constructor(props) {
     super(props);
     this.state = {
       markerImage: null,
-      locations: locations
+      locations: locations,
+      loading: false
     };
   }
 
   renderMarkers = () => {
     return locations.map((location, idx) => {
       const {
-        coords: { latitude, longitude },
+        coords: { latitude, longitude }
       } = location;
       return (
         <Marker
@@ -31,7 +39,7 @@ class Map extends Component {
           coordinate={{ latitude, longitude }}
           onPress={() => {
             this.setState({
-              markerImage: location.image,
+              markerImage: location.image
             });
           }}
         >
@@ -45,43 +53,22 @@ class Map extends Component {
   };
 
   markerDetails = () => (
-    <View style={{ flex: 1 }}>
+    <View style={styles.containerMarkerDetails}>
       <Image
         source={{
           uri: this.state.markerImage
         }}
         style={styles.imageMarkers}
+        onLoadStart={() => this.setState({ loading: true })}
+        onLoadEnd={() => this.setState({ loading: false })}
       />
+      {this.state.loading && <ActivityIndicator size="large" />}
     </View>
   );
 
   hideContentMarker = () => {
     this.setState({ markerImage: null });
     this.props.WipeRoute();
-  };
-
-  // toggleCancel = () => {
-  //   this.setState({
-  //     showButton: !this.state.showButton
-  //   });
-  // };
-
-  cancelRoute = () => {
-    if (this.props.coords === []) {
-      return (
-        <View
-          style={{
-            position: 'absolute',//use absolute position to show button on top of the map
-            top: '50%', //for center align
-            alignSelf: 'flex-end' //for align to right
-          }}
-        >
-          <Button title="Quitar Ruta" onPress={this.props.WipeRoute()} />
-        </View>
-      );
-    } else {
-      return null;
-    }
   };
 
   render() {
@@ -102,7 +89,7 @@ class Map extends Component {
             latitude: this.props.userLatitude,
             longitude: this.props.userLongitude,
             latitudeDelta: 0.015,
-            longitudeDelta: 0.0121
+            longitudeDelta: 0.0121,
           }}
         >
           <MapView.Polyline
@@ -113,7 +100,6 @@ class Map extends Component {
           {this.renderMarkers()}
         </MapView>
         <PlaceInput />
-        {this.cancelRoute()}
         {this.markerDetails()}
       </View>
     );
@@ -123,30 +109,35 @@ class Map extends Component {
 const styles = StyleSheet.create({
   map: {
     paddingTop: 15,
-    ...StyleSheet.absoluteFillObject
+    ...StyleSheet.absoluteFillObject,
+  },
+  containerMarkerDetails: {
+    flex: 1,
+    justifyContent: 'center',
+    marginTop: 100
   },
   imageMarkers: {
     flex: 1,
     width: width * 0.95,
-    alignSelf: 'center',
+    alignSelf: "center",
     height: height * 0.2,
-    position: 'absolute',
+    position: "absolute",
     bottom: height * 0.12,
-    borderRadius: 6
-  }
+    borderRadius: 6,
+  },
 });
 
 const mapStateToProps = state => {
   return {
     coords: state.reducerPolylineCoords,
-    showButton: state.reducerPolylineCoords
+    showButton: state.reducerPolylineCoords,
   };
 };
 
 const mapDispatchToProps = dispatch => ({
   WipeRoute: () => {
     dispatch(actionWipeRoute());
-  }
+  },
 });
 
 export default connect(
