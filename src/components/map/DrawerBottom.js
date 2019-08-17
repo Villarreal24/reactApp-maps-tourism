@@ -13,7 +13,7 @@ import { connect } from "react-redux";
 import { actionRouteCoords } from "../../../store/ACTIONS.js";
 // import { db } from '../../../store/Services/Firebase.js';
 
-const TAB_BAR_HEIGHT = -100;
+const TAB_BAR_HEIGHT = -120;
 
 const subModules = require("../objets/subModules.json");
 const buttonContent = require("../objets/buttonContent.json");

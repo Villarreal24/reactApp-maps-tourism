@@ -1,35 +1,37 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   StyleSheet,
   View,
   Image,
-  Video,
   Dimensions,
-  ActivityIndicator,
-} from 'react-native';
-import { connect } from 'react-redux';
-import MapView, { PROVIDER_GOOGLE, Marker, Polyline } from 'react-native-maps';
-import { actionWipeRoute } from '../../../store/ACTIONS.js';
-import PlaceInput from './PlaceInput.js';
+  ActivityIndicator
+} from "react-native";
+import Video from "react-native-video";
+import Youtube from "react-native-youtube";
+import { connect } from "react-redux";
+import MapView, { PROVIDER_GOOGLE, Marker, Polyline } from "react-native-maps";
+import { actionWipeRoute } from "../../../store/ACTIONS.js";
+import PlaceInput from "./PlaceInput.js";
 
-const { width, height } = Dimensions.get('screen');
+const { width, height } = Dimensions.get("screen");
 
-const locations = require('../../components/objets/locations.json');
+const locations = require("../../components/objets/locations.json");
 
 class Map extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      markerImage: null,
+      markerContent: {},
       locations: locations,
-      loading: false
+      loading: false,
+      isReady: false
     };
   }
 
   renderMarkers = () => {
     return locations.map((location, idx) => {
       const {
-        coords: { latitude, longitude }
+        coords: { latitude, longitude },
       } = location;
       return (
         <Marker
@@ -39,7 +41,7 @@ class Map extends Component {
           coordinate={{ latitude, longitude }}
           onPress={() => {
             this.setState({
-              markerImage: location.image
+              markerContent: location,
             });
           }}
         >
@@ -52,22 +54,52 @@ class Map extends Component {
     });
   };
 
-  markerDetails = () => (
-    <View style={styles.containerMarkerDetails}>
-      <Image
-        source={{
-          uri: this.state.markerImage
-        }}
-        style={styles.imageMarkers}
-        onLoadStart={() => this.setState({ loading: true })}
-        onLoadEnd={() => this.setState({ loading: false })}
-      />
-      {this.state.loading && <ActivityIndicator size="large" />}
-    </View>
-  );
+  markerDetails = () => {
+    const { markerContent, loading } = this.state;
+    switch (markerContent.name) {
+      case "Realidad Aumentada":
+        console.log(markerContent.name);
+        return (
+          <View style={styles.containerMarkerDetails}>
+            <Image
+              source={{ uri: markerContent.url }}
+              style={styles.imageMarkers}
+              onLoadStart={() => this.setState({ loading: true })}
+              onLoadEnd={() => this.setState({ loading: false })}
+            />
+            {loading && <ActivityIndicator size="large" />}
+          </View>
+        );
+      case "Recorrido Virtual":
+        return (
+          <View style={styles.containerMarkerDetails}>
+            <Video
+              source={require('../../../assets/videos/test.mp4')}
+              ref={ref => {
+                this.player = ref;
+              }}
+              onBuffer={this.onBuffer}
+              onError={this.videoError}
+              style={styles.imageMarkers}
+              onLoadStart={() => this.setState({ loading: true })}
+              onLoadEnd={() => this.setState({ loading: false })}
+            />
+            {/* <Youtube
+              videoId="W7h-Yho8EB0"
+              style={styles.imageMarkers}
+              onReady={e => this.setState({ isReady: true })}
+              play={true}
+            /> */}
+            {loading && <ActivityIndicator size="large" />}
+          </View>
+        );
+      default:
+        return null;
+    }
+  };
 
   hideContentMarker = () => {
-    this.setState({ markerImage: null });
+    this.setState({ markerContent: {} });
     this.props.WipeRoute();
   };
 
@@ -89,7 +121,7 @@ class Map extends Component {
             latitude: this.props.userLatitude,
             longitude: this.props.userLongitude,
             latitudeDelta: 0.015,
-            longitudeDelta: 0.0121,
+            longitudeDelta: 0.0121
           }}
         >
           <MapView.Polyline
@@ -109,35 +141,35 @@ class Map extends Component {
 const styles = StyleSheet.create({
   map: {
     paddingTop: 15,
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFillObject
   },
   containerMarkerDetails: {
     flex: 1,
-    justifyContent: 'center',
-    marginTop: 100
+    justifyContent: "center",
+    marginTop: 100,
   },
   imageMarkers: {
     flex: 1,
     width: width * 0.95,
-    alignSelf: "center",
+    alignSelf: 'center',
     height: height * 0.2,
-    position: "absolute",
+    position: 'absolute',
     bottom: height * 0.12,
-    borderRadius: 6,
-  },
+    borderRadius: 6
+  }
 });
 
 const mapStateToProps = state => {
   return {
     coords: state.reducerPolylineCoords,
-    showButton: state.reducerPolylineCoords,
+    showButton: state.reducerPolylineCoords
   };
 };
 
 const mapDispatchToProps = dispatch => ({
   WipeRoute: () => {
     dispatch(actionWipeRoute());
-  },
+  }
 });
 
 export default connect(

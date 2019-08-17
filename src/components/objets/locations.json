@@ -7,7 +7,8 @@
       "longitude": -105.440513
     },
     "icon": "https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Ficons%2FMap%2FMarkers%2Fvr.png?alt=media&token=78be1a03-0dd6-4605-a733-7afe8c0b64df",
-    "image": "https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Fimages%2Flocations%2FPlaya%20-%20810x540.jpg?alt=media&token=858718dc-52a8-4698-bf43-d63ab99f8b65"
+    "url": "https://www.youtube.com/watch?v=pHhxOFLpEJE",
+    // "url": "https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Fimages%2Flocations%2FPlaya%20-%20810x540.jpg?alt=media&token=858718dc-52a8-4698-bf43-d63ab99f8b65"
   },
   {
     "name": "Realidad Aumentada",
@@ -17,7 +18,7 @@
       "longitude": -105.437137
     },
     "icon": "https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Ficons%2FMap%2FMarkers%2Far.png?alt=media&token=3f488942-c9f0-4459-89ea-14a30883e197",
-    "image": "https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Fimages%2Flocations%2FLa-terrazola.png?alt=media&token=561f0c28-b068-4b15-88f2-0c84cbc3ca3a"
+    "url": "https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Fimages%2Flocations%2FLa-terrazola.png?alt=media&token=561f0c28-b068-4b15-88f2-0c84cbc3ca3a"
   },
   {
     "name": "Recorrido Virtual",
@@ -27,7 +28,7 @@
       "longitude": -105.440773
     },
     "icon": "https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Ficons%2FMap%2FMarkers%2Fvr.png?alt=media&token=78be1a03-0dd6-4605-a733-7afe8c0b64df",
-    "image": "https://cdn.getyourguide.com/img/tour_img-649470-146.jpg"
+    "url": "https://cdn.getyourguide.com/img/tour_img-649470-146.jpg"
   },
   {
     "name": "Recorrido Virtual",
@@ -37,7 +38,7 @@
       "longitude": -105.450223
     },
     "icon": "https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Ficons%2FMap%2FMarkers%2Fvr.png?alt=media&token=78be1a03-0dd6-4605-a733-7afe8c0b64df",
-    "image": "https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Fimages%2Flocations%2FPuntaSayulita-XOTU.png?alt=media&token=4c832a98-b0c4-449c-91d0-78cf13a5fd1b"
+    "url": "https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Fimages%2Flocations%2FPuntaSayulita-XOTU.png?alt=media&token=4c832a98-b0c4-449c-91d0-78cf13a5fd1b"
   },
   {
     "name": "Realidad Aumentada",
@@ -47,6 +48,6 @@
       "longitude": -105.445072
     },
     "icon": "https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Ficons%2FMap%2FMarkers%2Far.png?alt=media&token=3f488942-c9f0-4459-89ea-14a30883e197",
-    "image": "https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Fimages%2Flocations%2FAR-SI-SE%C3%91OR.png?alt=media&token=3ac51153-ea63-460b-ac85-9485db467cf7"
+    "url": "https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Fimages%2Flocations%2FAR-SI-SE%C3%91OR.png?alt=media&token=3ac51153-ea63-460b-ac85-9485db467cf7"
   }
 ]
