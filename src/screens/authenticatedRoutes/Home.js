@@ -11,9 +11,7 @@ import {
 import Geolocation from "@react-native-community/geolocation";
 import Axios from 'axios';
 import { connect } from "react-redux";
-import { withNavigationFocus } from 'react-navigation';
 import Map from "../../components/map/Map";
-import PlaceInput from "../../components/map/PlaceInput";
 import BarStatus from "../../components/common/BarStatus";
 import { actionUserLocation } from "../../../store/ACTIONS";
 import DrawerBottom from "../../components/map/DrawerBottom";
@@ -23,8 +21,12 @@ class Home extends Component {
     super(props);
     this.state = {
       hasMapPermission: false,
-      userLatitude: 20.868441,
-      userLongitude: -105.441136,
+      region: {
+        latitude: 20.868441,
+        longitude: -105.441136,
+        latitudeDelta: 0.015,
+        longitudeDelta: 0.0121
+      },
       TempLatitude: 0,
       TempLongitude: 0,
       showAlert: true,
@@ -85,10 +87,9 @@ class Home extends Component {
     userCity = result.data.results[4].formatted_address;
     if (userCity === 'Sayulita, Nayarit, Mexico') {
       this.setState({
-        userLatitude: TempLatitude,
-        userLongitude: TempLongitude
+        latitude: TempLatitude,
+        longitude: TempLongitude
       });
-      console.log(this.state.userLatitude, this.state.userLongitude);
     } else {
       Alert.alert(
         "No se encuentra en Sayulita!",
@@ -134,12 +135,9 @@ class Home extends Component {
     return (
       <TouchableWithoutFeedback onPress={this.hideKeyboard}>
         <View style={styles.container}>
-          {/* <PlaceInput /> */}
           <Map
             hasMapPermission={this.state.hasMapPermission}
-            userLatitude={this.state.userLatitude}
-            userLongitude={this.state.userLongitude}
-            // PolyCoordinates={this.props.PolyCoordinates}
+            region={this.state.region}
           />
           <DrawerBottom />
           <BarStatus />

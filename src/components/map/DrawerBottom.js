@@ -19,12 +19,20 @@ const subModules = require("../objets/subModules.json");
 const buttonContent = require("../objets/buttonContent.json");
 
 const PolyCoordinates = [
-  { latitude: 20.870672, longitude: -105.440461 },
-  { latitude: 20.870008, longitude: -105.440204 },
-  { latitude: 20.86956, longitude: -105.44123 },
-  { latitude: 20.868658, longitude: -105.440795 },
-  { latitude: 20.869287, longitude: -105.439312 },
-  { latitude: 20.868355, longitude: -105.436225 }
+  { latitude: 20.869904, longitude: -105.440426 },
+  { latitude: 20.869565, longitude: -105.44123 },
+  { latitude: 20.868465, longitude: -105.440704 },
+  { latitude: 20.868647, longitude: -105.440795 },
+  { latitude: 20.868717, longitude: -105.440618 },
+  { latitude: 20.869255, longitude: -105.439349 },
+  { latitude: 20.869314, longitude: -105.439379 },
+  { latitude: 20.869345, longitude: -105.43972 },
+  { latitude: 20.869384, longitude: -105.440755 },
+  { latitude: 20.869594, longitude: -105.440882 },
+  { latitude: 20.869769, longitude: -105.440749 },
+  { latitude: 20.86969, longitude: -105.440938 },
+  { latitude: 20.869929, longitude: -105.44106 },
+  { latitude: 20.870535, longitude: -105.441349 }
 ];
 
 // var docRef = db
@@ -156,9 +164,6 @@ class DrawerBottom extends Component {
 }
 
 const styles = StyleSheet.create({
-  buttonsContainer: {
-    flexDirection: 'row',
-  },
   containerText: {
     flex: 1,
     alignItems: 'center',

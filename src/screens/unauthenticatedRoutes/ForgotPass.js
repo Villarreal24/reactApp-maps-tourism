@@ -32,7 +32,10 @@ class ForgotPass extends React.Component {
     return (
       <TouchableWithoutFeedback onPress={this.hideKeyboard}>
         <View style={styles.container}>
-          <KeyboardAvoidingView style={styles.containerKeyboard} behavior='height'>
+          <KeyboardAvoidingView
+            style={styles.containerKeyboard}
+            behavior="height"
+          >
             <Logo />
             <View style={styles.containerTexto}>
               <Text
@@ -43,7 +46,7 @@ class ForgotPass extends React.Component {
                   textAlign: 'justify'
                 }}
               >
-                Ingresa tu correo{"\n"} electrónico te mandaremos un enlace para
+                Ingresa tu correo{"\n"}electrónico te mandaremos un enlace para
                 que reinicies tu contraseña
               </Text>
             </View>

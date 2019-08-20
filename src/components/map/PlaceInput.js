@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
   placeInput: {
     justifyContent: "flex-start",
     alignItems: "center",
-    marginTop: 15,
+    marginTop: 30,
     marginHorizontal: 10,
     borderRadius: 8,
     height: 47,

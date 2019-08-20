@@ -73,7 +73,7 @@ const SignUpForm = props => (
     <Field name="name" component={fieldName} ph="Nombre Completo" />
     <Field name="email" component={fieldName} ph="Tu correo electronico" />
     <Field name="password" component={fieldName} ph="********" />
-    <Field name="confirmation" component={fieldName} ph="********" />
+    <Field name="confirmation" component={fieldName} ph="Confirmar contraseña" />
 
     <TouchableOpacity
       style={styles.Button}

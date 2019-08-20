@@ -16,6 +16,7 @@ class App extends Component {
   }
 
   render() {
+    // console.disableYellowBox = true;
     return (
       <View style={styles.container}>
         <Provider store={Store}>
