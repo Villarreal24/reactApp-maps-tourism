@@ -150,6 +150,7 @@ class DrawerBottom extends Component {
   render() {
     return (
       <BottomDrawer
+        style={{ flex: 1 }}
         startUp={false}
         containerHeight={700}
         offset={TAB_BAR_HEIGHT}

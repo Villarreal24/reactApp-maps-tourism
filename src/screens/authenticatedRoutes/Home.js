@@ -11,9 +11,9 @@ import {
 import Geolocation from "@react-native-community/geolocation";
 import Axios from 'axios';
 import { connect } from "react-redux";
+import { actionUserLocation } from "../../../store/ACTIONS";
 import Map from "../../components/map/Map";
 import BarStatus from "../../components/common/BarStatus";
-import { actionUserLocation } from "../../../store/ACTIONS";
 import DrawerBottom from "../../components/map/DrawerBottom";
 
 class Home extends Component {
@@ -27,9 +27,12 @@ class Home extends Component {
         latitudeDelta: 0.015,
         longitudeDelta: 0.0121
       },
-      TempLatitude: 0,
-      TempLongitude: 0,
-      showAlert: true,
+      regionUser: {
+        latitude: 0,
+        longitude: 0,
+        latitudeDelta: 0.015,
+        longitudeDelta: 0.0121
+      },
     };
     this.locationWatchId = null;
   }
@@ -58,8 +61,12 @@ class Home extends Component {
     Geolocation.getCurrentPosition(
       async pos => {
         this.setState({
-          TempLatitude: pos.coords.latitude,
-          TempLongitude: pos.coords.longitude
+          regionUser: {
+            latitude: pos.coords.latitude,
+            longitude: pos.coords.longitude,
+            latitudeDelta: 0.015,
+            longitudeDelta: 0.0121
+          }
         });
         const userCity = await this.getCity(userCity);
         console.log(userCity);
@@ -80,7 +87,6 @@ class Home extends Component {
   // --------------------------------------------------------------
   async getCity(userCity) {
     const { TempLatitude, TempLongitude } = this.state;
-    console.log(TempLatitude, TempLongitude);
     const result = await Axios.get(
       `https://maps.googleapis.com/maps/api/geocode/json?latlng=${TempLatitude},${TempLongitude}&key=AIzaSyDGJWTDnaUpLl02VFsQmcNECQ_8gvuoQcY`
     );
@@ -125,12 +131,6 @@ class Home extends Component {
     }
   }
 
-  hideAlert = () => {
-    this.setState({
-      showAlert: false,
-    });
-  };
-
   render() {
     return (
       <TouchableWithoutFeedback onPress={this.hideKeyboard}>
@@ -138,6 +138,7 @@ class Home extends Component {
           <Map
             hasMapPermission={this.state.hasMapPermission}
             region={this.state.region}
+            regionUser={this.state.regionUser}
           />
           <DrawerBottom />
           <BarStatus />

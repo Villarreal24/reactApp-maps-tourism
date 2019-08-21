@@ -13,6 +13,7 @@ import MapView, { PROVIDER_GOOGLE, Marker, Polyline } from 'react-native-maps';
 import { actionWipeRoute } from '../../../store/ACTIONS.js';
 import PlaceInput from './PlaceInput.js';
 import { CenterSayulitaButton } from "./CenterSayulitaButton";
+import { CenterLocationuser } from './CenterLocationUser.js';
 
 const { width, height } = Dimensions.get('screen');
 
@@ -25,7 +26,7 @@ class Map extends Component {
       markerContent: {},
       locations: locations,
       loading: false,
-      isReady: false,
+      Centerlocation: false
     };
   }
 
@@ -114,7 +115,7 @@ class Map extends Component {
     }
   };
 
-  centerMap() {
+  centerMapSayulita = () => {
     const {
       latitude,
       longitude,
@@ -128,7 +129,27 @@ class Map extends Component {
       latitudeDelta,
       longitudeDelta
     });
-  }
+
+    this.setState({ Centerlocation: false });
+  };
+
+  centerMapUser = () => {
+    const {
+      latitude,
+      longitude,
+      latitudeDelta,
+      longitudeDelta
+    } = this.props.regionUser;
+
+    this.map.animateToRegion({
+      latitude,
+      longitude,
+      latitudeDelta,
+      longitudeDelta
+    });
+
+    this.setState({ Centerlocation: true });
+  };
 
   hideContentMarker = () => {
     this.setState({ markerContent: {} });
@@ -136,9 +157,10 @@ class Map extends Component {
   };
 
   render() {
-    const { coords, region } = this.props;
+    const { coords, region, regionUser } = this.props;
+    const { Centerlocation } = this.state;
     return (
-      <View style={{ flex: 1, paddingTop: 15 }}>
+      <View style={{ flex: 1, paddingTop: 45 }}>
         <MapView
           onPress={() => {
             this.hideContentMarker();
@@ -146,11 +168,12 @@ class Map extends Component {
           provider={PROVIDER_GOOGLE}
           showsUserLocation
           showsMyLocation
+          showsMyLocationButton={false}
           followsUserLocation
           rotateEnabled={false}
           ref={map => (this.map = map)}
           style={styles.map}
-          initialRegion={region}
+          initialRegion={Centerlocation === true ? regionUser : region}
         >
           <Polyline
             coordinates={coords}
@@ -160,11 +183,8 @@ class Map extends Component {
           {this.renderMarkers()}
         </MapView>
         <PlaceInput />
-        <CenterSayulitaButton
-          cb={() => {
-            this.centerMap();
-          }}
-        />
+        <CenterSayulitaButton cb={() => this.centerMapSayulita()} />
+        <CenterLocationuser cb={() => this.centerMapUser()} />
         {this.markerDetails()}
       </View>
     );
@@ -173,8 +193,9 @@ class Map extends Component {
 
 const styles = StyleSheet.create({
   map: {
+    flex: 1,
     paddingTop: 15,
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
   },
   containerMarkerDetails: {
     flex: 1,
