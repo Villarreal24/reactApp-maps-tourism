@@ -35,10 +35,20 @@ const reducerPolylineCoords = (state = [], action) => {
   }
 };
 
+const reducerExpandedDrawer = (state = [], action) => {
+  switch (action.type) {
+    case CONSTANTS.SET_EXPANDED_DRAWER:
+      return action.data;
+    default:
+      return state;
+  }
+};
+
 const sagaMiddleware = createSagaMiddleware();
 
 const reducers = combineReducers({
   reducerSession,
+  reducerExpandedDrawer,
   reducerPolylineCoords,
   form: reduxForm
 });

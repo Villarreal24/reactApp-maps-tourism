@@ -34,3 +34,8 @@ export const actionRouteCoords = coords => ({
 export const actionWipeRoute = () => ({
   type: CONSTANTS.WIPE_ROUTE
 });
+
+export const actionSetExpandedDrawer = data => ({
+  type: CONSTANTS.SET_EXPANDED_DRAWER,
+  data
+});

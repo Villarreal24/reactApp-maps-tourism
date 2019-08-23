@@ -9,7 +9,7 @@ import Selection from './Selection';
 export default createAppContainer(createSwitchNavigator({
   AuthLoading: Selection,
   Auth: UnauthenticatedRoutes,
-  Interest: InterestStack, 
+  Interest: InterestStack,
   App: authenticatedRoutes,
 },
 {

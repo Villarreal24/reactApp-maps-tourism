@@ -2,6 +2,12 @@ import { NavigationActions } from 'react-navigation';
 
 const config = {};
 
+let _navigator;
+
+export function setTopLevelNavigator(navigatorRef) {
+  _navigator = navigatorRef;
+}
+
 export function setNavigator(nav) {
   if (nav) {
     config.navigator = nav;

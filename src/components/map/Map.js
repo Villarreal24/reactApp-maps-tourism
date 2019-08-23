@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   View,
+  Button,
   Image,
   Dimensions,
   ActivityIndicator,
@@ -178,7 +179,7 @@ class Map extends Component {
           <Polyline
             coordinates={coords}
             strokeColor="#09ABD4"
-            strokeWidth={4}
+            strokeWidth={5}
           />
           {this.renderMarkers()}
         </MapView>

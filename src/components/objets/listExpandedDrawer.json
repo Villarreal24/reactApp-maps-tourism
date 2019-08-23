@@ -5,6 +5,41 @@
             {
                 "name": "Surf",
                 "image": "https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Fimages%2FBottomDrawer%2FPopular%2Fsurf.jpg?alt=media&token=6c4c2b36-3e2d-434f-9fbb-c1d95abed35a",
+                "data": [
+                    {
+                        "title": "Surf",
+                        "description": "En Sayulita las olas van de buenas a excelentes, pero lo que más importa es la vibra, y en Sayulita fue la vibra la que trajo la fama. Visitantes y lugareños son un grupo pintoresco y vistoso en la playa y sobre las olas.",
+                        "image": "https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Fimages%2FBottomDrawer%2FPopular%2Fsurf-main.jpg?alt=media&token=633e084f-acec-48fa-a46b-9d034dc6d969",
+                        "data": [
+                            {
+                                "listName": "Videos",
+                                "data": [[
+                                    {
+                                        "url": "https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Fimages%2FBottomDrawer%2FPopular%2Fvideos1.jpg?alt=media&token=285e78b2-cba2-4200-a6c6-5d45904fafe2",
+                                        "icon": "url"
+                                    },
+                                    {
+                                        "url": "https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Fimages%2FBottomDrawer%2FPopular%2Fvideos2.jpg?alt=media&token=14d43c36-0b19-4478-b05e-1fe28f9eecec",
+                                        "icon": ""
+                                    }
+                                ]]
+                            },
+                            {
+                                "listName": "Relacionado",
+                                "data": [[
+                                    {
+                                        "name": "",
+                                        "url": "https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Fimages%2FBottomDrawer%2FPopular%2Frelated1.jpg?alt=media&token=8660572b-f6de-4897-8e73-805a91e000df"
+                                    },
+                                    {
+                                        "name": "",
+                                        "url": "https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Fimages%2FBottomDrawer%2FPopular%2Frelated2.jpg?alt=media&token=b764bd6e-5690-4eb4-9767-fe9c5cb0ecf5"
+                                    }
+                                ]]
+                            }
+                        ]
+                    }
+                ]
             },
             {
                 "name": "Kayak",

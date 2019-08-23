@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   View,
   StyleSheet,
@@ -7,16 +7,22 @@ import {
   Image,
   FlatList,
   SectionList,
-} from "react-native";
-import BottomDrawer from "rn-bottom-drawer";
-import { connect } from "react-redux";
-import { actionRouteCoords } from "../../../store/ACTIONS.js";
+} from 'react-native';
+import BottomDrawer from 'rn-bottom-drawer';
+import { connect } from 'react-redux';
+import {
+  actionRouteCoords,
+  actionSetExpandedDrawer
+} from "../../../store/ACTIONS.js";
+import getDirections from 'react-native-google-maps-directions';
+import * as NavigationService from '../../navigation/NavigationService';
+
 // import { db } from '../../../store/Services/Firebase.js';
 
 const TAB_BAR_HEIGHT = -120;
 
-const subModules = require("../objets/subModules.json");
-const buttonContent = require("../objets/buttonContent.json");
+const subModules = require('../objets/subModules.json');
+const listExpandedDrawer = require('../objets/listExpandedDrawer.json');
 
 const PolyCoordinates = [
   { latitude: 20.869904, longitude: -105.440426 },
@@ -29,10 +35,11 @@ const PolyCoordinates = [
   { latitude: 20.869345, longitude: -105.43972 },
   { latitude: 20.869384, longitude: -105.440755 },
   { latitude: 20.869594, longitude: -105.440882 },
+  { latitude: 20.869687, longitude: -105.440944 },
   { latitude: 20.869769, longitude: -105.440749 },
   { latitude: 20.86969, longitude: -105.440938 },
   { latitude: 20.869929, longitude: -105.44106 },
-  { latitude: 20.870535, longitude: -105.441349 }
+  { latitude: 20.870535, longitude: -105.441349 },
 ];
 
 // var docRef = db
@@ -58,9 +65,59 @@ const PolyCoordinates = [
 //   });
 
 class DrawerBottom extends Component {
-  // state = {
-  //   PolyCoordinates: PolyCoordinates
-  // };
+  handleGetDirections = () => {
+    const data = {
+      source: {
+        latitude: 20.869904,
+        longitude: -105.440426,
+      },
+      destination: {
+        latitude: 20.870535,
+        longitude: -105.441349,
+      },
+      params: [
+        {
+          key: 'travelmode',
+          value: 'walking' // may be "walking", "bicycling" or "transit" as well
+        },
+        {
+          key: 'dir_action',
+          value: 'navigate' // this instantly initializes navigation using the given travel mode
+        },
+      ],
+      waypoints: [
+        {
+          latitude: 20.86844,
+          longitude: -105.440765,
+        },
+        {
+          latitude: 20.868808,
+          longitude: -105.4406,
+        },
+        {
+          latitude: 20.869458,
+          longitude: -105.439708,
+        },
+        {
+          latitude: 20.869559,
+          longitude: -105.440936,
+        },
+        {
+          latitude: 20.869711,
+          longitude: -105.440718,
+        },
+        {
+          latitude: 20.869906,
+          longitude: -105.441115,
+        },
+        {
+          latitude: 20.871036,
+          longitude: -105.440364,
+        },
+      ],
+    };
+    getDirections(data);
+  };
 
   // -------------------------------------------------------
   //       Botones - SubModulos en el BottomDrawer
@@ -79,8 +136,9 @@ class DrawerBottom extends Component {
               style={styles.cardButton}
               activeOpacity={0.6}
               onPress={() => {
-                if (item.name === "Recorridos") {
-                  this.props.routeCoords(PolyCoordinates);
+                if (item.name === 'Recorridos') {
+                  this.handleGetDirections();
+                  // this.props.routeCoords(PolyCoordinates);
                 }
               }}
             >
@@ -104,9 +162,8 @@ class DrawerBottom extends Component {
     return (
       <View style={{ flex: 1, marginBottom: 100 }}>
         <SectionList
-          // contentContainerStyle={{ flexGrow: 1 }}
           showsVerticalScrollIndicator={false}
-          sections={buttonContent}
+          sections={listExpandedDrawer}
           renderSectionHeader={({ section: { title } }) => (
             <Text
               style={{
@@ -129,9 +186,14 @@ class DrawerBottom extends Component {
                   <TouchableOpacity
                     style={styles.listCategories}
                     activeOpacity={0.6}
+                    onPress={() => {
+                      // const data = item.data;
+                      this.props.updateExpandedDrawer(item.data);
+                      NavigationService.navigate("ContentListDrawer");
+                    }}
                   >
                     <Image
-                      style={{ width: 216, height: 130, position: "absolute" }}
+                      style={{ width: 216, height: 130, position: 'absolute' }}
                       source={{ uri: item.image }}
                     />
                     <Text style={styles.textList}>{item.name}</Text>
@@ -155,7 +217,7 @@ class DrawerBottom extends Component {
         containerHeight={700}
         offset={TAB_BAR_HEIGHT}
         roundedEdges={true}
-        backgroundColor={"#F8F8F8"}
+        backgroundColor={'#F8F8F8'}
       >
         {this.renderSubmodules()}
         {this.expandedContent()}
@@ -178,27 +240,27 @@ const styles = StyleSheet.create({
   textModuls: {
     fontSize: 15,
     fontWeight: 'bold',
-    textAlign: "center",
-    color: "#FFFFFF",
+    textAlign: 'center',
+    color: '#FFFFFF',
   },
   textList: {
     padding: 7,
     fontSize: 18,
-    width: "100%",
-    color: "#FFFFFF",
-    backgroundColor: "rgba(52, 52, 52, 0.1)",
+    width: '100%',
+    color: '#FFFFFF',
+    backgroundColor: 'rgba(52, 52, 52, 0.1)',
   },
   lineStyle: {
     borderWidth: 2,
-    borderColor: "#DBDBDB",
+    borderColor: '#DBDBDB',
     marginTop: 10,
     width: 30,
     borderRadius: 10,
   },
   cardButton: {
-    alignItems: "center",
-    justifyContent: "flex-end",
-    backgroundColor: "#000000",
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    backgroundColor: '#000000',
     margin: 6,
     width: 95,
     height: 90,
@@ -206,8 +268,8 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   listCategories: {
-    alignItems: "flex-start",
-    justifyContent: "flex-end",
+    alignItems: 'flex-start',
+    justifyContent: 'flex-end',
     margin: 10,
     width: 216,
     height: 130,
@@ -218,19 +280,23 @@ const styles = StyleSheet.create({
     opacity: 0.6,
     width: 95,
     height: 90,
-    position: "absolute",
+    position: 'absolute',
     borderRadius: 4,
   },
 });
 
 const mapStateToProps = state => ({
-  coords: state.reducerPolylineCoords
+  coords: state.reducerPolylineCoords,
+  data: state.reducerExpandedContent
 });
 
 const mapDispatchToProps = dispatch => ({
-  routeCoords: (PolyCoordinates) => {
+  routeCoords: PolyCoordinates => {
     dispatch(actionRouteCoords(PolyCoordinates));
   },
+  updateExpandedDrawer: item => {
+    dispatch(actionSetExpandedDrawer(item));
+  }
 });
 
 export default connect(
