@@ -11,7 +11,6 @@ class Selection extends Component {
 
   componentDidUpdate() {
     const { navigation, user } = this.props;
-    console.log(user);
     navigation.navigate(user ? 'App' : 'Auth');
   }
 
@@ -34,7 +33,6 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => {
-  console.log(state.reducerSession);
   return {
     user: state.reducerSession
   };
@@ -44,7 +42,6 @@ const mapDispatchToProps = dispatch => ({
   authenticationUser: () => {
     authentication.onAuthStateChanged(user => {
       if (user) {
-        console.log(user);
         dispatch(actionSetSession(user));
       } else {
         dispatch(actionLogout());

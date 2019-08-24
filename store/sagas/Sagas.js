@@ -20,22 +20,27 @@ const registryInDataBase = ({ uid, email, name }) =>
     .set({
       user: name,
       email: email,
+      selectInduction: false
     });
 
 function* sagaRegistry(values) {
   try {
     const registry = yield call(registryUserNew, values.datos);
     const {
-      user: { email, uid },
+      user: { email, uid }
     } = registry;
     const {
-      datos: { name },
+      datos: { name }
     } = values;
     yield call(registryInDataBase, { uid, email, name });
     ToastAndroid.show("Registro exitoso !", ToastAndroid.SHORT);
     NavigationService.navigate('SignIn');
   } catch (error) {
-    Alert.alert("Problema al registrarse!", "Revise su conexion a internet.");
+    if (error.code === "auth/network-request-failed") {
+      Alert.alert("Problema al Registrarse!", "Revise su conexion a internet");
+    } else if (error.code === "auth/email-already-in-use") {
+      Alert.alert("Problema al registrarse!", "El email ingresado ya existe");
+    }
     console.log(error);
   }
 }
@@ -48,19 +53,47 @@ const loginUser = ({ email, password }) =>
     .signInWithEmailAndPassword(email, password)
     .then(success => success);
 
+// -----------------------------------------------------------
+//          Valida si el usuario ya ha iniciado sesion
+//         anteriormente para mandarlo a las pantallas
+//        de seleccion de intereses o del menu principal
+// -----------------------------------------------------------
+const screensInterest = uid => {
+  const interestRef = db.collection("users").doc(uid);
+  const getDoc = interestRef.get().then(doc => doc.data());
+  getDoc.then(value => {
+    if (value.selectInduction === true) {
+      NavigationService.navigate('App');
+    } else {
+      NavigationService.navigate('Interest');
+    }
+  });
+};
+
 function* sagaLogin(values) {
   try {
-    yield call(loginUser, values.datos);
-    NavigationService.navigate('App');
+    const login = yield call(loginUser, values.datos);
+    const uid = login.user.uid;
+    yield call(screensInterest, uid);
   } catch (error) {
-    Alert.alert(
-      "Problema al iniciar sesion!",
-      "Lo siento, correo y/o contraseña incorrectos."
-    );
     console.log(error);
+    if (error.code === "auth/network-request-failed") {
+      Alert.alert(
+        "Problema al iniciar sesion!",
+        "Revise su conexion a internet"
+      );
+    } else if (error.code === "auth/wrong-password") {
+      Alert.alert(
+        "Problema al iniciar sesion!",
+        "Lo siento, correo y/o contraseña incorrectos"
+      );
+    }
   }
 }
 
+// -------------------------------------------------------
+//             Cierra la sesion del usuario
+// -------------------------------------------------------
 function* sagaSignOut() {
   try {
     authentication.signOut();
@@ -99,6 +132,26 @@ function* sagaLocation(values) {
   // yield call(getUserPosition);
 }
 
+const changeInduction = () => {
+  const user = authentication.currentUser;
+  console.log(user.uid);
+  db.collection('users')
+    .doc(user.uid)
+    .update({
+      selectInduction: true
+    });
+};
+
+function* sagaChangeInduction() {
+  try {
+    yield call(changeInduction);
+    NavigationService.navigate('Home');
+  } catch (error) {
+    console.log(error);
+    Alert.alert("Problema al iniciar sesion!", "Revise su conexion a internet");
+  }
+}
+
 // -----------------------------------------------------------
 //            Llamando a las funciones generadoras
 // -----------------------------------------------------------
@@ -107,5 +160,5 @@ export default function* functionPrimary() {
   yield takeEvery(CONSTANTS.LOGIN, sagaLogin);
   yield takeEvery(CONSTANTS.SIGNOUT, sagaSignOut);
   yield takeEvery(CONSTANTS.USER_LOCATION, sagaLocation);
-  console.log('Desde nuestra funcion generadora');
+  yield takeEvery(CONSTANTS.CHANGE_INDUCTION, sagaChangeInduction);
 }

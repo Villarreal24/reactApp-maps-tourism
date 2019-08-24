@@ -71,7 +71,7 @@ class ContentListDrawer extends Component {
                   marginLeft: 20,
                   marginTop: 15,
                   fontSize: 22,
-                  fontWeight: 'bold',
+                  fontWeight: 'bold'
                 }}
               >
                 {listName}
@@ -92,7 +92,11 @@ class ContentListDrawer extends Component {
                       }
                     >
                       <Image
-                        style={{ width: 216, height: 130, position: "absolute" }}
+                        style={{
+                          width: 216,
+                          height: 130,
+                          position: "absolute"
+                        }}
                         source={{ uri: item.url }}
                       />
                       {/* <Text style={styles.textList}>{item.name}</Text> */}

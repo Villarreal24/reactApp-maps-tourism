@@ -39,3 +39,7 @@ export const actionSetExpandedDrawer = data => ({
   type: CONSTANTS.SET_EXPANDED_DRAWER,
   data
 });
+
+export const actionChangeInduction = () => ({
+  type: CONSTANTS.CHANGE_INDUCTION
+});
