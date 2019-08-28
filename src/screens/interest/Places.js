@@ -1,12 +1,24 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, SafeAreaView } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  SafeAreaView,
+  StatusBar,
+  Dimensions
+} from "react-native";
 import Cards from '../../components/Cards';
+
+const { width, height } = Dimensions.get('screen');
+const HeightBar = StatusBar.currentHeight;
 
 class Places extends Component {
 
-    static navigationOptions = {
-        header: null
-      };
+  static navigationOptions = {
+    header: null
+  };
 
   render() {
     const { navigation } = this.props;
@@ -21,24 +33,23 @@ class Places extends Component {
     ]
 
     return (
-      <View style={{flex: 1}}>
-        <Image style={styles.image}
-            resizeMode='cover'
-            source={require('../../../assets/images/Interest.png')}
+      <View style={{ flex: 1, paddingTop: HeightBar }}>
+        <Image
+          style={styles.image}
+          resizeMode="cover"
+          source={require("../../../assets/images/Interest.png")}
         />
         <SafeAreaView style={styles.container}>
-          <Text style={styles.title}>
-              Selecciona donde te gusta comer
-          </Text>
-          <Cards data = {places} />
+          <Text style={styles.title}>Selecciona donde te gusta comer</Text>
+          <Cards data={places} />
           <View style={styles.containerButton}>
-            <TouchableOpacity style={styles.ButtonContinue}
+            <TouchableOpacity
+              style={styles.ButtonContinue}
               onPress={() => {
                 navigation.navigate('Food');
               }}
-              >
-              <Text style={styles.textButton}
-                >Continuar</Text>
+            >
+              <Text style={styles.textButton}>Continuar</Text>
             </TouchableOpacity>
           </View>
         </SafeAreaView>
@@ -55,11 +66,11 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(52, 52, 52, 0.2)'
   },
   title: {
-      color: '#FFFFFF',
-      fontSize: 20,
-      paddingTop: 15,
-      width: '80%',
-      marginBottom: 5,
+    color: '#FFFFFF',
+    fontSize: 20,
+    paddingTop: 15,
+    width: '80%',
+    marginBottom: 5
   },
   textButton: {
     fontSize:16,
@@ -79,13 +90,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#00212F',
     padding: 10,
     width: '80%',
-    height:50,
-    borderRadius:15,
+    height: 50,
+    borderRadius: 15
   },
   image: {
-      position: 'absolute',
-      width: '100%',
-      height: '100%',
+    position: 'absolute',
+    height: height,
+    width: width
   },
 });
 

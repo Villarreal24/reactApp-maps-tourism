@@ -8,14 +8,18 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  StatusBar
 } from "react-native";
 import Logo from '../../components/common/Logo';
+
+const HeightBar = StatusBar.currentHeight;
 
 // create a component
 class ForgotPass extends React.Component {
   static navigationOptions = {
     headerStyle: {
+      marginTop: HeightBar,
       elevation: 0,
       shadowOpacity: 0,
       borderBottomWidth: 0

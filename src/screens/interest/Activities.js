@@ -5,23 +5,34 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
-  SafeAreaView
+  SafeAreaView,
+  StatusBar,
+  Dimensions
 } from "react-native";
-import Cards from '../../components/Cards';
 import AwesomeAlert from "react-native-awesome-alerts";
+import { connect } from "react-redux";
+import Cards from '../../components/Cards';
+import { actionGetDataActivities } from '../../../store/ACTIONS';
+
+const { width, height } = Dimensions.get('screen');
+const HeightBar = StatusBar.currentHeight;
 
 class Activities extends Component {
   static navigationOptions = {
     header: null
   };
 
-  state = { showAlert: true };
+  state = { showAlert: true, data: null };
 
   hideAlert = () => {
     this.setState({
       showAlert: false
     });
   };
+
+  componentDidMount() {
+    this.props.getData();
+  }
 
   render() {
     const { navigation } = this.props;
@@ -38,16 +49,21 @@ class Activities extends Component {
 
     return (
       // eslint-disable-next-line react-native/no-inline-styles
-      <View style={{ flex: 1 }}>
-        <Image style={styles.image}
-          resizeMode='cover'
+      <View style={{ flex: 1, paddingTop: HeightBar }}>
+        <StatusBar
+          translucent
+          backgroundColor="rgba(128,128,128, .5)"
+          barStyle="light-content"
+        />
+        <Image
+          style={styles.image}
           source={require('../../../assets/images/Interest.png')}
         />
         <SafeAreaView style={styles.container}>
           <Text style={styles.title}>
             Selecciona las actividades que te gustan realizar
           </Text>
-          <Cards data={activities} />
+          <Cards data={this.props.data} />
           <View style={styles.containerButton}>
             <TouchableOpacity
               style={styles.ButtonContinue}
@@ -80,45 +96,61 @@ class Activities extends Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: 'rgba(52, 52, 52, 0.2)'
-    },
-    title: {
-      color: '#FFFFFF',
-      fontSize: 20,
-      paddingTop: 15,
-      width: '80%',
-      marginBottom: 5,
-    },
-    textButton: {
-      fontSize:16,
-      color:'#FFFFFF',
-      paddingTop:3,
-      fontWeight:'bold',
-      width:'100%',
-      textAlign:'center'
-    },
-    containerButton: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      width: '100%',
-    },
-    ButtonContinue: {
-      backgroundColor: '#00212F',
-      padding: 10,
-      width: '80%',
-      height:50,
-      borderRadius:15,
-    },
-    image: {
-        position: 'absolute',
-        width: '100%',
-        height: '100%',
-    },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(52, 52, 52, 0.2)'
+  },
+  title: {
+    color: '#FFFFFF',
+    fontSize: 20,
+    paddingTop: 15,
+    width: '80%',
+    marginBottom: 5
+  },
+  textButton: {
+    fontSize: 16,
+    color: '#FFFFFF',
+    paddingTop: 3,
+    fontWeight: 'bold',
+    width: '100%',
+    textAlign: 'center'
+  },
+  containerButton: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%'
+  },
+  ButtonContinue: {
+    backgroundColor: '#00212F',
+    padding: 10,
+    width: '80%',
+    height: 50,
+    borderRadius: 15
+  },
+  image: {
+    position: 'absolute',
+    resizeMode: 'cover',
+    height: height,
+    width: width
+  }
 });
 
-export default Activities;
+const mapStateToProps = state => {
+  return {
+    Data: state.DataActivities
+  };
+};
+
+const mapDispatchToProps = dispatch => ({
+  getData: () => {
+    dispatch(actionGetDataActivities());
+  }
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Activities);

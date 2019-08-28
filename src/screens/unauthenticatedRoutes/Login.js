@@ -1,18 +1,42 @@
 // import liraries
 import React, { Component } from "react";
 import { SafeAreaView } from 'react-navigation';
-import { View, StyleSheet, TouchableOpacity, Text, Image } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+  Image,
+  StatusBar,
+  isAndroid
+} from "react-native";
 
 // create a component
 class Login extends React.Component {
   static navigationOptions = {
-    header: null,
+    header: null
   };
+
+  componentDidMount() {
+    this._navListener = this.props.navigation.addListener('didFocus', () => {
+      StatusBar.setBarStyle('light-content');
+      isAndroid && StatusBar.setBackgroundColor('#6a51ae');
+    });
+  }
+
+  componentWillUnmount() {
+    this._navListener.remove();
+  }
 
   render() {
     const { navigation } = this.props;
     return (
       <View style={styles.container}>
+        <StatusBar
+          translucent
+          backgroundColor="transparent"
+          barStyle="light-content"
+        />
         <Image
           style={styles.image}
           resizeMode="cover"
@@ -23,7 +47,7 @@ class Login extends React.Component {
             style={{
               color: '#FFFFFF',
               fontSize: 40,
-              paddingHorizontal: 15,
+              paddingHorizontal: 10,
               textAlign: 'center'
             }}
           >
@@ -82,7 +106,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "rgba(0,0,0,.8)",
+    backgroundColor: 'black',
     paddingHorizontal: 16
   },
   ContainerTexto: {
@@ -104,7 +128,7 @@ const styles = StyleSheet.create({
     width: "90%",
     height: 50,
     borderRadius: 15,
-    textAlign: "center",
+    textAlign: "center"
   },
   ButtonSignUp: {
     alignItems: "center",
@@ -114,13 +138,13 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 15,
     textAlign: "center",
-    marginTop: 20,
+    marginTop: 20
   },
   image: {
+    resizeMode: 'contain',
     position: "absolute",
-    width: "125%",
-    height: "100%",
-    opacity: 0.4
+    height: '100%',
+    opacity: 0.6
   }
 });
 

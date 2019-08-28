@@ -33,8 +33,9 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => {
+  console.log("State de Selection ", state.InitialSession);
   return {
-    user: state.reducerSession
+    user: state.InitialSession
   };
 };
 

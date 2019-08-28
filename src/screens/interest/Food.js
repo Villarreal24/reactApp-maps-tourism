@@ -5,11 +5,16 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
-  SafeAreaView
+  SafeAreaView,
+  StatusBar,
+  Dimensions
 } from "react-native";
 import { connect } from "react-redux";
 import Cards from '../../components/Cards';
 import { actionChangeInduction } from '../../../store/ACTIONS';
+
+const { width, height } = Dimensions.get('screen');
+const HeightBar = StatusBar.currentHeight;
 
 class Food extends Component {
   static navigationOptions = {
@@ -51,7 +56,7 @@ class Food extends Component {
     ];
 
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, paddingTop: HeightBar }}>
         <Image
           style={styles.image}
           resizeMode='cover'
@@ -113,8 +118,8 @@ const styles = StyleSheet.create({
   },
   image: {
     position: 'absolute',
-    width: '100%',
-    height: '100%'
+    height: height,
+    width: width
   }
 });
 

@@ -1,9 +1,27 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Button,
+  StatusBar,
+  isAndroid
+} from "react-native";
 import { connect } from 'react-redux';
 import { actionSignOut } from "../../../store/ACTIONS";
 
 class Profile extends Component {
+  componentDidMount() {
+    this._navListener = this.props.navigation.addListener('didFocus', () => {
+      StatusBar.setBarStyle('dark-content');
+      isAndroid && StatusBar.setBackgroundColor('#EBEBEB');
+    });
+  }
+
+  componentWillUnmount() {
+    this._navListener.remove();
+  }
+
   render() {
     return (
       <View style={styles.container}>

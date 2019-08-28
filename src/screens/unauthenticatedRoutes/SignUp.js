@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard,
+  StatusBar,
   KeyboardAvoidingView
 } from "react-native";
 // import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
@@ -14,6 +15,8 @@ import Logo from '../../components/common/Logo';
 import { connect } from 'react-redux';
 import SignUpForm from './Forms/SignUpForm';
 import { actionRegistry } from '../../../store/ACTIONS';
+
+const HeightBar = StatusBar.currentHeight;
 
 // create a component
 class SignUp extends Component {
@@ -23,6 +26,7 @@ class SignUp extends Component {
 
   static navigationOptions = {
     headerStyle: {
+      marginTop: HeightBar,
       elevation: 0,
       shadowOpacity: 0,
       borderBottomWidth: 0,
@@ -37,6 +41,11 @@ class SignUp extends Component {
     return (
       <TouchableWithoutFeedback onPress={this.hideKeyboard}>
         <View style={styles.container}>
+          <StatusBar
+            translucent
+            backgroundColor="#EBEBEB"
+            barStyle="dark-content"
+          />
           <KeyboardAvoidingView
             style={styles.containerKeyboard}
             behavior="padding"

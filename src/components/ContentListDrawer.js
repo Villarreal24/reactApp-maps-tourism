@@ -7,19 +7,22 @@ import {
   TouchableOpacity,
   Dimensions,
   FlatList,
-  SectionList
+  SectionList,
+  StatusBar,
+  BackHandler
 } from "react-native";
-import * as NavigationService from "../../navigation/NavigationService";
+import * as NavigationService from "../navigation/NavigationService";
 import Icon from "react-native-ionicons";
 import { connect } from 'react-redux';
 
 const { width, height } = Dimensions.get('screen');
-
-const contentExpandedDrawerList = require("../objets/contentExpandedDrawerList.json");
-
+const HeightBar = StatusBar.currentHeight;
 
 class ContentListDrawer extends Component {
   static navigationOptions = {
+    headerStyle: {
+      marginTop: HeightBar
+    },
     headerTransparent: true,
     mode: "modal",
     headerMode: "none",
@@ -35,10 +38,26 @@ class ContentListDrawer extends Component {
     )
   };
 
+  componentDidMount() {
+    this.backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
+      NavigationService.navigate('App'); // works best when the goBack is async
+      return true;
+    });
+  }
+
+  componentWillUnmount() {
+    this.backHandler.remove();
+  }
+
   render() {
     const data = this.props.data[0];
     return (
       <View style={styles.container}>
+        <StatusBar
+          translucent={true}
+          backgroundColor="rgba(0,0,0, .5)"
+          barStyle="light-content"
+        />
         <Image
 // -------------------------------------------------------
 //        Imagen pendiente de ajustar correctamente
@@ -141,7 +160,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return {
-    data: state.reducerExpandedDrawer
+    data: state.ExpandedDrawer
   };
 };
 

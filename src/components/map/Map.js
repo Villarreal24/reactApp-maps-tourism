@@ -6,6 +6,7 @@ import {
   Image,
   Dimensions,
   ActivityIndicator,
+  StatusBar
 } from 'react-native';
 // import Video from "react-native-video";
 // import Youtube from "react-native-youtube";
@@ -17,6 +18,7 @@ import { CenterSayulitaButton } from "./CenterSayulitaButton";
 import { CenterLocationuser } from './CenterLocationUser.js';
 
 const { width, height } = Dimensions.get('screen');
+const HeightBar = StatusBar.currentHeight;
 
 const locations = require('../../components/objets/locations.json');
 
@@ -161,7 +163,7 @@ class Map extends Component {
     const { coords, region, regionUser } = this.props;
     const { Centerlocation } = this.state;
     return (
-      <View style={{ flex: 1, paddingTop: 45 }}>
+      <View style={{ flex: 1, paddingTop: HeightBar }}>
         <MapView
           onPress={() => {
             this.hideContentMarker();
@@ -216,15 +218,15 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return {
-    coords: state.reducerPolylineCoords,
-    showButton: state.reducerPolylineCoords,
+    coords: state.PolylineCoords,
+    showButton: state.PolylineCoords,
   };
 };
 
 const mapDispatchToProps = dispatch => ({
   WipeRoute: () => {
     dispatch(actionWipeRoute());
-  },
+  }
 });
 
 export default connect(

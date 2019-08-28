@@ -7,14 +7,17 @@ import {
   PermissionsAndroid,
   Platform,
   Alert,
+  StatusBar,
+  isAndroid
 } from "react-native";
 import Geolocation from "@react-native-community/geolocation";
 import Axios from 'axios';
 import { connect } from "react-redux";
 import { actionUserLocation } from "../../../store/ACTIONS";
 import Map from "../../components/map/Map";
-import BarStatus from "../../components/common/BarStatus";
-import DrawerBottom from "../../components/map/DrawerBottom";
+import DrawerBottom from "../../components/DrawerBottom";
+
+const HeightBar = StatusBar.currentHeight;
 
 class Home extends Component {
   constructor(props) {
@@ -32,9 +35,13 @@ class Home extends Component {
         longitude: 0,
         latitudeDelta: 0.015,
         longitudeDelta: 0.0121
-      },
+      }
     };
     this.locationWatchId = null;
+  }
+
+  componentWillUnmount() {
+    this._navListener.remove();
   }
 
   // ------------------------------------------------------
@@ -42,12 +49,12 @@ class Home extends Component {
   //            de geolocalizacion del usuario
   // ------------------------------------------------------
   componentDidMount() {
+    this._navListener = this.props.navigation.addListener('didFocus', () => {
+      StatusBar.setBarStyle('light-content');
+      isAndroid && StatusBar.setBackgroundColor('#6a51ae');
+    });
     this.requestFineLocation();
   }
-
-  // componentWillUnmount() {
-  //   navigator.geolocation.clearWatch(this.locationWatchId);
-  // }
 
   hideKeyboard() {
     Keyboard.dismiss();
@@ -135,13 +142,17 @@ class Home extends Component {
     return (
       <TouchableWithoutFeedback onPress={this.hideKeyboard}>
         <View style={styles.container}>
+          <StatusBar
+            translucent={true}
+            backgroundColor="rgba(0,0,0, .3)"
+            barStyle="light-content"
+          />
           <Map
             hasMapPermission={this.state.hasMapPermission}
             region={this.state.region}
             regionUser={this.state.regionUser}
           />
           <DrawerBottom />
-          <BarStatus />
         </View>
       </TouchableWithoutFeedback>
     );
@@ -150,7 +161,7 @@ class Home extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1
   },
   lineStyle: {
     flex: 1,
@@ -159,8 +170,8 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginLeft: 185,
     width: 25,
-    borderRadius: 10,
-  },
+    borderRadius: 10
+  }
 });
 
 // const mapStateToProps = state => {

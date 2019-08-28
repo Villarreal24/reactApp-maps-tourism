@@ -2,33 +2,33 @@ import CONSTANTS from './CONSTANTS';
 
 export const actionRegistry = values => ({
   type: CONSTANTS.REGISTRY,
-  datos: values,
+  datos: values
 });
 
 export const actionLogin = datos => ({
   type: CONSTANTS.LOGIN,
-  datos,
+  datos
 });
 
 export const actionSignOut = () => ({
-  type: CONSTANTS.SIGNOUT,
+  type: CONSTANTS.SIGNOUT
 });
 
 export const actionSetSession = () => ({
-  type: CONSTANTS.SET_SESSION,
+  type: CONSTANTS.SET_SESSION
 });
 
 export const actionLogout = () => ({
-  type: CONSTANTS.LOGOUT,
+  type: CONSTANTS.LOGOUT
 });
 
 export const actionUserLocation = () => ({
-  type: CONSTANTS.USER_LOCATION,
+  type: CONSTANTS.USER_LOCATION
 });
 
 export const actionRouteCoords = coords => ({
   type: CONSTANTS.ROUTE_COORDS,
-  coords,
+  coords
 });
 
 export const actionWipeRoute = () => ({
@@ -42,4 +42,12 @@ export const actionSetExpandedDrawer = data => ({
 
 export const actionChangeInduction = () => ({
   type: CONSTANTS.CHANGE_INDUCTION
+});
+
+export const actionGetDataActivities = () => ({
+  type: CONSTANTS.GET_DATA_ACTIVITIES
+});
+
+export const actionShowDataActivities = () => ({
+  type: CONSTANTS.SHOW_DATA_ACTIVITIES,
 });

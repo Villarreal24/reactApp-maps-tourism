@@ -5,7 +5,7 @@ import {
   View,
   StyleSheet,
   Keyboard,
-  TouchableOpacity,
+  TouchableOpacity
 } from 'react-native';
 import Axios from "axios";
 import _ from "lodash";
@@ -63,7 +63,7 @@ class PlaceInput extends Component {
       );
     });
     return (
-      <View>
+      <View style={{ paddingTop: 20 }}>
         <TextInput
           value={this.state.destinationInput}
           autoCapitalize="none"

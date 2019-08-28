@@ -6,23 +6,23 @@ import {
   TouchableOpacity,
   Image,
   FlatList,
-  SectionList,
+  SectionList
 } from 'react-native';
 import BottomDrawer from 'rn-bottom-drawer';
 import { connect } from 'react-redux';
 import {
   actionRouteCoords,
   actionSetExpandedDrawer
-} from "../../../store/ACTIONS.js";
+} from "../../store/ACTIONS.js";
 import getDirections from 'react-native-google-maps-directions';
-import * as NavigationService from '../../navigation/NavigationService';
+import * as NavigationService from '../navigation/NavigationService';
 
 // import { db } from '../../../store/Services/Firebase.js';
 
 const TAB_BAR_HEIGHT = -120;
 
-const subModules = require('../objets/subModules.json');
-const listExpandedDrawer = require('../objets/listExpandedDrawer.json');
+const subModules = require('./objets/subModules.json');
+const listExpandedDrawer = require('./objets/listExpandedDrawer.json');
 
 const PolyCoordinates = [
   { latitude: 20.869904, longitude: -105.440426 },
@@ -83,7 +83,7 @@ class DrawerBottom extends Component {
         {
           key: 'dir_action',
           value: 'navigate' // this instantly initializes navigation using the given travel mode
-        },
+        }
       ],
       waypoints: [
         {
@@ -187,9 +187,8 @@ class DrawerBottom extends Component {
                     style={styles.listCategories}
                     activeOpacity={0.6}
                     onPress={() => {
-                      // const data = item.data;
+                      NavigationService.navigate('ContentListDrawer');
                       this.props.updateExpandedDrawer(item.data);
-                      NavigationService.navigate("ContentListDrawer");
                     }}
                   >
                     <Image
@@ -230,32 +229,32 @@ const styles = StyleSheet.create({
   containerText: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   containerSubModules: {
     backgroundColor: '#F8F8F8',
     alignItems: 'center',
-    marginHorizontal: 5,
+    marginHorizontal: 5
   },
   textModuls: {
     fontSize: 15,
     fontWeight: 'bold',
     textAlign: 'center',
-    color: '#FFFFFF',
+    color: '#FFFFFF'
   },
   textList: {
     padding: 7,
     fontSize: 18,
     width: '100%',
     color: '#FFFFFF',
-    backgroundColor: 'rgba(52, 52, 52, 0.1)',
+    backgroundColor: 'rgba(52, 52, 52, 0.1)'
   },
   lineStyle: {
     borderWidth: 2,
     borderColor: '#DBDBDB',
     marginTop: 10,
     width: 30,
-    borderRadius: 10,
+    borderRadius: 10
   },
   cardButton: {
     alignItems: 'center',
@@ -265,7 +264,7 @@ const styles = StyleSheet.create({
     width: 95,
     height: 90,
     borderRadius: 5,
-    elevation: 2,
+    elevation: 2
   },
   listCategories: {
     alignItems: 'flex-start',
@@ -274,28 +273,28 @@ const styles = StyleSheet.create({
     width: 216,
     height: 130,
     borderRadius: 8,
-    elevation: 3,
+    elevation: 3
   },
   image: {
     opacity: 0.6,
     width: 95,
     height: 90,
     position: 'absolute',
-    borderRadius: 4,
-  },
+    borderRadius: 4
+  }
 });
 
 const mapStateToProps = state => ({
-  coords: state.reducerPolylineCoords,
-  data: state.reducerExpandedContent
+  coords: state.PolylineCoords,
+  data: state.ExpandedDrawer
 });
 
 const mapDispatchToProps = dispatch => ({
   routeCoords: PolyCoordinates => {
     dispatch(actionRouteCoords(PolyCoordinates));
   },
-  updateExpandedDrawer: item => {
-    dispatch(actionSetExpandedDrawer(item));
+  updateExpandedDrawer: data => {
+    dispatch(actionSetExpandedDrawer(data));
   }
 });
 

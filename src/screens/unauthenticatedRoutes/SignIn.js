@@ -4,6 +4,7 @@ import {
   View,
   StyleSheet,
   Text,
+  StatusBar,
   Button,
   Keyboard,
   TouchableOpacity,
@@ -15,6 +16,8 @@ import { connect } from 'react-redux';
 import SignInForm from './Forms/SignInForm';
 import { actionLogin } from '../../../store/ACTIONS';
 
+const HeightBar = StatusBar.currentHeight;
+
 // create a component
 class SignIn extends Component {
   signinUser = values => {
@@ -23,9 +26,10 @@ class SignIn extends Component {
 
   static navigationOptions = {
     headerStyle: {
+      marginTop: HeightBar,
       elevation: 0,
       shadowOpacity: 0,
-      borderBottomWidth: 0,
+      borderBottomWidth: 0
     }
   };
 
@@ -35,10 +39,14 @@ class SignIn extends Component {
 
   render() {
     const { navigation } = this.props;
-
     return (
       <TouchableWithoutFeedback onPress={this.hideKeyboard}>
         <View style={styles.container}>
+          <StatusBar
+            translucent
+            backgroundColor="#EBEBEB"
+            barStyle="dark-content"
+          />
           <KeyboardAvoidingView
             style={styles.containerKeyboard}
             behavior="height"
