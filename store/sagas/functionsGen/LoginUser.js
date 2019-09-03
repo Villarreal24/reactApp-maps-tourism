@@ -31,6 +31,7 @@ const screensInterest = uid => {
 export default function* SagaLogin(values) {
   try {
     const login = yield call(loginUser, values.datos);
+    console.log(login);
     const uid = login.user.uid;
     yield call(screensInterest, uid);
   } catch (error) {

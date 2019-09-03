@@ -6,7 +6,8 @@ import {
   TouchableOpacity,
   Image,
   FlatList,
-  SectionList
+  SectionList,
+  Dimensions
 } from 'react-native';
 import BottomDrawer from 'rn-bottom-drawer';
 import { connect } from 'react-redux';
@@ -16,13 +17,17 @@ import {
 } from "../../store/ACTIONS.js";
 import getDirections from 'react-native-google-maps-directions';
 import * as NavigationService from '../navigation/NavigationService';
+import { db } from '../../store/Services/Firebase';
+import Spinner from "react-native-loading-spinner-overlay";
 
 // import { db } from '../../../store/Services/Firebase.js';
 
-const TAB_BAR_HEIGHT = -120;
+const TAB_BAR_HEIGHT = -90;
 
 const subModules = require('./objets/subModules.json');
 const listExpandedDrawer = require('./objets/listExpandedDrawer.json');
+
+let height = Dimensions.get('screen').height;
 
 const PolyCoordinates = [
   { latitude: 20.869904, longitude: -105.440426 },
@@ -43,6 +48,8 @@ const PolyCoordinates = [
 ];
 
 // var docRef = db
+
+
 //   .collection("app")
 //   .doc("map")
 //   .collection("buttonDrawer")
@@ -65,6 +72,11 @@ const PolyCoordinates = [
 //   });
 
 class DrawerBottom extends Component {
+  state = {
+    documentData: null,
+    loading: true
+  };
+
   handleGetDirections = () => {
     const data = {
       source: {
@@ -119,14 +131,35 @@ class DrawerBottom extends Component {
     getDirections(data);
   };
 
+  async componentDidMount() {
+    // await this.props.getData("activities");
+    await this.getData();
+  }
+
+  async getData() {
+    await db
+      .doc("app/drawerBottom")
+      .get()
+      .then(doc => {
+        this.setState({ TData: doc.data() });
+        this.state.subModules = Object.values(this.state.TData);
+        this.setState({ loading: false });
+      });
+    // const snapshot = await db.collection("app/drawerBottom/expanded").get();
+    // const docs = snapshot.docs.map(doc => doc.data());
+    // console.log(docs);
+  }
+
   // -------------------------------------------------------
   //       Botones - SubModulos en el BottomDrawer
   // -------------------------------------------------------
   renderSubmodules = () => {
+    const { loading, subModules } = this.state;
     return (
       <View style={styles.containerSubModules}>
         <View style={styles.lineStyle} />
         <Text style={{ fontSize: 20, paddingTop: 10 }}>Explora Sayulita</Text>
+        <Spinner visible={loading} />
         <FlatList
           data={subModules}
           horizontal={true}
@@ -160,7 +193,7 @@ class DrawerBottom extends Component {
   // -------------------------------------------------------
   expandedContent = () => {
     return (
-      <View style={{ flex: 1, marginBottom: 100 }}>
+      <View style={{ flex: 1, paddingBottom: height * 0.1 }}>
         <SectionList
           showsVerticalScrollIndicator={false}
           sections={listExpandedDrawer}
@@ -187,8 +220,8 @@ class DrawerBottom extends Component {
                     style={styles.listCategories}
                     activeOpacity={0.6}
                     onPress={() => {
-                      NavigationService.navigate('ContentListDrawer');
                       this.props.updateExpandedDrawer(item.data);
+                      NavigationService.navigate('ContentListDrawer');
                     }}
                   >
                     <Image
@@ -213,7 +246,7 @@ class DrawerBottom extends Component {
       <BottomDrawer
         style={{ flex: 1 }}
         startUp={false}
-        containerHeight={700}
+        containerHeight={height * 0.75}
         offset={TAB_BAR_HEIGHT}
         roundedEdges={true}
         backgroundColor={'#F8F8F8'}

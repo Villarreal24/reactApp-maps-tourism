@@ -51,7 +51,7 @@ class Login extends React.Component {
               textAlign: 'center'
             }}
           >
-            Explora el mundo desde tu celular!
+            Explora Nayarit desde tu celular!
           </Text>
         </View>
         <SafeAreaView style={{ flex: 1, width: "100%" }}>

@@ -44,10 +44,12 @@ export const actionChangeInduction = () => ({
   type: CONSTANTS.CHANGE_INDUCTION
 });
 
-export const actionGetDataActivities = () => ({
-  type: CONSTANTS.GET_DATA_ACTIVITIES
+export const actionGetDataInterest = doc => ({
+  type: CONSTANTS.GET_DATA_INTEREST,
+  doc
 });
 
-export const actionShowDataActivities = () => ({
-  type: CONSTANTS.SHOW_DATA_ACTIVITIES,
+export const actionShowDataInterest = data => ({
+  type: CONSTANTS.SHOW_DATA_INTEREST,
+  data
 });

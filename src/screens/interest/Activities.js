@@ -12,7 +12,8 @@ import {
 import AwesomeAlert from "react-native-awesome-alerts";
 import { connect } from "react-redux";
 import Cards from '../../components/Cards';
-import { actionGetDataActivities } from '../../../store/ACTIONS';
+import { db } from '../../../store/Services/Firebase';
+import { actionGetDataInterest } from '../../../store/ACTIONS';
 
 const { width, height } = Dimensions.get('screen');
 const HeightBar = StatusBar.currentHeight;
@@ -22,7 +23,13 @@ class Activities extends Component {
     header: null
   };
 
-  state = { showAlert: true, data: null };
+  state = {
+    showAlert: true,
+    data: null,
+    loading: true,
+    TData: null,
+    documentData: null
+  };
 
   hideAlert = () => {
     this.setState({
@@ -30,22 +37,24 @@ class Activities extends Component {
     });
   };
 
-  componentDidMount() {
-    this.props.getData();
+  async componentDidMount() {
+    // await this.props.getData("activities");
+    await this.getData();
+  }
+
+  async getData() {
+    await db
+      .doc("interest/activities")
+      .get()
+      .then(doc => {
+        this.setState({ TData: doc.data() });
+        this.state.documentData = Object.values(this.state.TData);
+      });
   }
 
   render() {
     const { navigation } = this.props;
     const { showAlert } = this.state;
-
-    const activities = [
-      { name: 'Playa', image: 'https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Ficons%2FActivities%2Fplaya.png?alt=media&token=42874fc4-8c5c-4677-b314-4bc26069bb98'},
-      { name: 'Museos', image: 'https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Ficons%2FActivities%2Fexposicion.png?alt=media&token=2850e7ad-3231-44a5-93b2-c61376623c24'},
-      { name: 'Tours y Recorridos', image: 'https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Ficons%2FActivities%2Fviajar.png?alt=media&token=9b97d467-0bee-46e5-ab9f-ee82d715a6a2'},
-      { name: 'Clubs y discotecas', image: 'https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Ficons%2FActivities%2Fbola-de-discoteca.png?alt=media&token=7d0e8533-ae59-462a-a953-b6a3ddf8538a'},
-      { name: 'Descanso', image: 'https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Ficons%2FActivities%2Farea-de-descanso.png?alt=media&token=6bb7949c-6698-4f68-98a7-892288c44739'},
-      { name: 'Turismo y Aventura', image: 'https://firebasestorage.googleapis.com/v0/b/vr-tourism-1559586745843.appspot.com/o/assets%2Ficons%2FActivities%2Fexcursionista.png?alt=media&token=4cac254e-71c5-4033-83ae-e799f9e79291'},
-    ];
 
     return (
       // eslint-disable-next-line react-native/no-inline-styles
@@ -63,7 +72,7 @@ class Activities extends Component {
           <Text style={styles.title}>
             Selecciona las actividades que te gustan realizar
           </Text>
-          <Cards data={this.props.data} />
+          <Cards data={this.state.documentData} />
           <View style={styles.containerButton}>
             <TouchableOpacity
               style={styles.ButtonContinue}
@@ -100,14 +109,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(52, 52, 52, 0.2)'
+    backgroundColor: 'rgba(52, 52, 52, 0.2)',
   },
   title: {
     color: '#FFFFFF',
     fontSize: 20,
     paddingTop: 15,
     width: '80%',
-    marginBottom: 5
+    marginBottom: 5,
   },
   textButton: {
     fontSize: 16,
@@ -139,14 +148,16 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => {
+  console.log('State de Activities: ', state.DataActivities);
   return {
-    Data: state.DataActivities
+    Data: state.DataActivities,
   };
 };
 
 const mapDispatchToProps = dispatch => ({
-  getData: () => {
-    dispatch(actionGetDataActivities());
+  getData: doc => {
+    console.log(doc);
+    dispatch(actionGetDataInterest(doc));
   }
 });
 

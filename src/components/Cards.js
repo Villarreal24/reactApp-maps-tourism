@@ -5,7 +5,7 @@ import {
   StyleSheet,
   FlatList,
   TouchableOpacity,
-  Image,
+  Image
 } from 'react-native';
 // import { db } from '../../store/Services/Firebase';
 
@@ -13,67 +13,15 @@ class Cards extends Component {
   state = {
     itemSelected: null,
     checked: false
-    // selected: [],
-    // arraySelected: [null][false],
-    // selected: (new Map(): Map<string, boolean>)
   };
-
-  // componentWillMount() {
-  //   // this.getData();
-  //   // setTimeout(() => {
-  //     // console.log('TimeOut');
-  //     // db.collection('app').doc('interest').collection('activities').get().then(function(querySnapshot) {
-  //     //   querySnapshot.forEach(function(doc) {
-  //     //       // doc.data() is never undefined for query doc snapshots
-  //     //       // console.log(doc.data());
-  //     //     const content = doc.data();
-  //     //     console.log(content);
-  //     //     console.log(content.name);
-  //     //     let ArrayActivities = Object.values(content);
-  //     //   });
-  //     // });
-  //   // }, 1000);
-  // }
 
   render() {
     const { navigation } = this.props;
-
-    // const getData = () => {
-    //   db.collection('app').doc('interest').collection('activities').get().then(function(querySnapshot) {
-    //     querySnapshot.forEach(function(doc) {
-    //         // doc.data() is never undefined for query doc snapshots
-    //         console.log(doc.id, " => ", doc.data());
-    //       // const content = doc;
-    //     });
-    //   });
-    // }
-
-    const onPressAction = (item, index) => {
-      // console.log(index);
-      // this.setState((state) => {
-      //   // copy the map rather than modifying state.
-      //   const selected = new Map(state.selected);
-      //   selected.set(index, !selected.get(index)); // toggle
-      //   return console.log(selected);
-      // });
-      // let { checked } = this.state;
-      // let targetcheck = checked[index];
-      // targetcheck.name = !targetcheck.name;
-    };
-
     const selectionItem = index => {
       this.setState({
         checked: !this.state.checked,
-        itemSelected: index,
+        itemSelected: index
       });
-      // let selectedIndex = this.state.selected.indexOf(index+this.props.checked);
-      //   if(selectedIndex== -1){
-      //     this.setState({selected: [...this.state.selected,index+this.props.checked]})
-      //   }
-
-      // this.setState({
-      //   arraySelected:[index][!this.state.arraySelected]
-      // })
     };
 
     return (
@@ -90,7 +38,7 @@ class Cards extends Component {
                 justifyContent: 'center',
                 alignItems: 'center',
                 marginHorizontal: 15,
-                marginVertical: 5,
+                marginVertical: 5
               }}
             >
               <TouchableOpacity

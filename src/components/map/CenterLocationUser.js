@@ -10,7 +10,7 @@ export const CenterLocationuser = function(props) {
     ? props.cb
     : () => console.log("Callback function not passed to CenterSayulitaButton !");
 
-  const bottom = props.bottom ? props.bottom : 170;
+  const bottom = props.bottom ? props.bottom : 180;
 
   return (
     <View style={[styles.container, { top: HEIGHT - bottom }]}>

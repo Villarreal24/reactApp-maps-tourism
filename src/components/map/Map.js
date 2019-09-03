@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   View,
-  Button,
   Image,
   Dimensions,
   ActivityIndicator,
@@ -12,6 +11,7 @@ import {
 // import Youtube from "react-native-youtube";
 import { connect } from 'react-redux';
 import MapView, { PROVIDER_GOOGLE, Marker, Polyline } from 'react-native-maps';
+import { db } from '../../../store/Services/Firebase';
 import { actionWipeRoute } from '../../../store/ACTIONS.js';
 import PlaceInput from './PlaceInput.js';
 import { CenterSayulitaButton } from "./CenterSayulitaButton";
@@ -20,17 +20,31 @@ import { CenterLocationuser } from './CenterLocationUser.js';
 const { width, height } = Dimensions.get('screen');
 const HeightBar = StatusBar.currentHeight;
 
-const locations = require('../../components/objets/locations.json');
+// const locations = require('../../components/objets/locations.json');
+// console.log(locations);
 
 class Map extends Component {
   constructor(props) {
     super(props);
     this.state = {
       markerContent: {},
-      locations: locations,
+      locations: {},
       loading: false,
       Centerlocation: false
     };
+  }
+
+  async componentDidMount() {
+    await this.getData();
+  }
+
+  async getData() {
+    await db
+      .doc("map/locations")
+      .get()
+      .then(doc => {
+        this.setState({ locations: doc.data() });
+      });
   }
 
   // --------------------------------------------------------------
@@ -38,7 +52,9 @@ class Map extends Component {
   //     recorriendo un arreglo .json obteniendo data + imagenes
   // --------------------------------------------------------------
   renderMarkers = () => {
-    return locations.map((location, idx) => {
+    const { locations } = this.state;
+    const data = Object.values(locations);
+    return data.map((location, idx) => {
       const {
         coords: { latitude, longitude }
       } = location;
@@ -198,7 +214,7 @@ const styles = StyleSheet.create({
   map: {
     flex: 1,
     paddingTop: 15,
-    ...StyleSheet.absoluteFill,
+    ...StyleSheet.absoluteFill
   },
   containerMarkerDetails: {
     flex: 1,
@@ -212,14 +228,14 @@ const styles = StyleSheet.create({
     height: height * 0.2,
     position: "absolute",
     bottom: height * 0.12,
-    borderRadius: 6,
-  },
+    borderRadius: 6
+  }
 });
 
 const mapStateToProps = state => {
   return {
     coords: state.PolylineCoords,
-    showButton: state.PolylineCoords,
+    showButton: state.PolylineCoords
   };
 };
 

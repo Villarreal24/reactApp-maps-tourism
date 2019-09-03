@@ -60,7 +60,7 @@ class SignUp extends Component {
                   textAlign: 'left',
                 }}
               >
-                Bienvenido, regístrate y disfruta de tu aplicacion
+                Bienvenido, regístrate para recordar tus preferencias
               </Text>
             </View>
             <SignUpForm registry={this.registerUser} />

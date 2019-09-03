@@ -140,8 +140,8 @@ const styles = StyleSheet.create({
   containerDetails: {
     flex: 1,
     position: 'absolute',
-    top: '32%',
-    paddingTop: 30,
+    top: '33%',
+    paddingTop: 20,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     backgroundColor: '#FBFBFB'
