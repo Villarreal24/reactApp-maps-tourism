@@ -92,7 +92,7 @@ class Activities extends Component {
             closeOnTouchOutside={true}
             closeOnHardwareBackPress={false}
             showConfirmButton={true}
-            confirmText="Okay !"
+            confirmText="Aceptar !"
             confirmButtonColor="#DD6B55"
             onConfirmPressed={() => {
               this.hideAlert();

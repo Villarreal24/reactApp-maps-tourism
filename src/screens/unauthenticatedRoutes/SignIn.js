@@ -62,7 +62,8 @@ class SignIn extends Component {
                 >
                   <Text
                     style={{
-                      fontSize: 11 }}
+                      fontSize: 11
+                    }}
                   >
                     Olvidaste la contraseña?
                   </Text>

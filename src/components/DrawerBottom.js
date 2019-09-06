@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   View,
   StyleSheet,
@@ -8,26 +8,25 @@ import {
   FlatList,
   SectionList,
   Dimensions
-} from 'react-native';
-import BottomDrawer from 'rn-bottom-drawer';
-import { connect } from 'react-redux';
+} from "react-native";
+import BottomDrawer from "rn-bottom-drawer";
+import { connect } from "react-redux";
 import {
   actionRouteCoords,
   actionSetExpandedDrawer
-} from "../../store/ACTIONS.js";
-import getDirections from 'react-native-google-maps-directions';
-import * as NavigationService from '../navigation/NavigationService';
-import { db } from '../../store/Services/Firebase';
-import Spinner from "react-native-loading-spinner-overlay";
+} from '../../store/ACTIONS.js';
+import getDirections from "react-native-google-maps-directions";
+import * as NavigationService from "../navigation/NavigationService";
+import { db } from "../../store/Services/Firebase";
 
 // import { db } from '../../../store/Services/Firebase.js';
 
 const TAB_BAR_HEIGHT = -90;
 
-const subModules = require('./objets/subModules.json');
-const listExpandedDrawer = require('./objets/listExpandedDrawer.json');
+const listExpandedDrawer = require("./objets/listExpandedDrawer.json");
+console.log(listExpandedDrawer);
 
-let height = Dimensions.get('screen').height;
+let height = Dimensions.get("screen").height;
 
 const PolyCoordinates = [
   { latitude: 20.869904, longitude: -105.440426 },
@@ -44,32 +43,8 @@ const PolyCoordinates = [
   { latitude: 20.869769, longitude: -105.440749 },
   { latitude: 20.86969, longitude: -105.440938 },
   { latitude: 20.869929, longitude: -105.44106 },
-  { latitude: 20.870535, longitude: -105.441349 },
+  { latitude: 20.870535, longitude: -105.441349 }
 ];
-
-// var docRef = db
-
-
-//   .collection("app")
-//   .doc("map")
-//   .collection("buttonDrawer")
-//   .doc("subModules");
-
-// docRef
-//   .get()
-//   .then(function(doc) {
-//     if (doc.exists) {
-//       console.log("Document data:", doc.data());
-//       const dataModules = doc.subModules.data();
-//       console.log(dataModules);
-//     } else {
-//       // doc.data() will be undefined in this case
-//       console.log("No such document!");
-//     }
-//   })
-//   .catch(function(error) {
-//     console.log("Error getting document:", error);
-//   });
 
 class DrawerBottom extends Component {
   state = {
@@ -81,73 +56,76 @@ class DrawerBottom extends Component {
     const data = {
       source: {
         latitude: 20.869904,
-        longitude: -105.440426,
+        longitude: -105.440426
       },
       destination: {
         latitude: 20.870535,
-        longitude: -105.441349,
+        longitude: -105.441349
       },
       params: [
         {
-          key: 'travelmode',
-          value: 'walking' // may be "walking", "bicycling" or "transit" as well
+          key: "travelmode",
+          value: "walking", // may be "walking", "bicycling" or "transit" as well
         },
         {
-          key: 'dir_action',
-          value: 'navigate' // this instantly initializes navigation using the given travel mode
-        }
+          key: "dir_action",
+          value: "navigate", // this instantly initializes navigation using the given travel mode
+        },
       ],
       waypoints: [
         {
           latitude: 20.86844,
-          longitude: -105.440765,
+          longitude: -105.440765
         },
         {
           latitude: 20.868808,
-          longitude: -105.4406,
+          longitude: -105.4406
         },
         {
           latitude: 20.869458,
-          longitude: -105.439708,
+          longitude: -105.439708
         },
         {
           latitude: 20.869559,
-          longitude: -105.440936,
+          longitude: -105.440936
         },
         {
           latitude: 20.869711,
-          longitude: -105.440718,
+          longitude: -105.440718
         },
         {
           latitude: 20.869906,
-          longitude: -105.441115,
+          longitude: -105.441115
         },
         {
           latitude: 20.871036,
-          longitude: -105.440364,
-        },
-      ],
+          longitude: -105.440364
+        }
+      ]
     };
     getDirections(data);
   };
 
-  async componentDidMount() {
+  componentDidMount() {
     // await this.props.getData("activities");
-    await this.getData();
+    this.getData();
   }
 
-  async getData() {
-    await db
-      .doc("app/drawerBottom")
+  getData() {
+    db.doc('drawerBottom/subModules')
       .get()
       .then(doc => {
         this.setState({ TData: doc.data() });
         this.state.subModules = Object.values(this.state.TData);
+      });
+    db.doc('drawerBottom/subModules/listView/categories')
+      .get()
+      .then(doc => {
+        this.setState({ TData: doc.data() });
+        this.state.expanded = Object.values(this.state.TData);
+        console.log(this.state.expanded);
         this.setState({ loading: false });
       });
-    // const snapshot = await db.collection("app/drawerBottom/expanded").get();
-    // const docs = snapshot.docs.map(doc => doc.data());
-    // console.log(docs);
   }
 
   // -------------------------------------------------------
@@ -159,7 +137,6 @@ class DrawerBottom extends Component {
       <View style={styles.containerSubModules}>
         <View style={styles.lineStyle} />
         <Text style={{ fontSize: 20, paddingTop: 10 }}>Explora Sayulita</Text>
-        <Spinner visible={loading} />
         <FlatList
           data={subModules}
           horizontal={true}
@@ -169,7 +146,7 @@ class DrawerBottom extends Component {
               style={styles.cardButton}
               activeOpacity={0.6}
               onPress={() => {
-                if (item.name === 'Recorridos') {
+                if (item.name === "Recorridos") {
                   this.handleGetDirections();
                   // this.props.routeCoords(PolyCoordinates);
                 }
@@ -196,45 +173,58 @@ class DrawerBottom extends Component {
       <View style={{ flex: 1, paddingBottom: height * 0.1 }}>
         <SectionList
           showsVerticalScrollIndicator={false}
-          sections={listExpandedDrawer}
+          sections={this.state.expanded}
           renderSectionHeader={({ section: { title } }) => (
             <Text
               style={{
                 marginLeft: 10,
                 marginTop: 15,
                 fontSize: 20,
-                fontWeight: 'bold',
+                fontWeight: "bold"
               }}
             >
               {title}
             </Text>
           )}
-          renderItem={({ item, section }) => (
-            <FlatList
-              data={item}
-              horizontal={true}
-              showsHorizontalScrollIndicator={false}
-              renderItem={({ item, index }) => (
-                <View>
-                  <TouchableOpacity
-                    style={styles.listCategories}
-                    activeOpacity={0.6}
-                    onPress={() => {
-                      this.props.updateExpandedDrawer(item.data);
-                      NavigationService.navigate('ContentListDrawer');
-                    }}
-                  >
-                    <Image
-                      style={{ width: 216, height: 130, position: 'absolute' }}
-                      source={{ uri: item.image }}
-                    />
-                    <Text style={styles.textList}>{item.name}</Text>
-                  </TouchableOpacity>
-                </View>
-              )}
-              keyExtractor={(item, index) => String(index)}
-            />
-          )}
+          renderItem={({ item, section }) => {
+            // console.log(item);
+            const temp = Object.values(item);
+            const data = Object.values(temp[0]);
+            // console.log(data);
+            return (
+              <View>
+                <FlatList
+                  data={data}
+                  horizontal={true}
+                  showsHorizontalScrollIndicator={false}
+                  renderItem={({ item, index }) => (
+                    <View>
+                      <TouchableOpacity
+                        style={styles.listCategories}
+                        activeOpacity={0.6}
+                        onPress={() => {
+                          console.log(item.name);
+                          this.props.updateExpandedDrawer(item.name);
+                          NavigationService.navigate("ContentListDrawer");
+                        }}
+                      >
+                        <Image
+                          style={{
+                            width: 216,
+                            height: 130,
+                            position: "absolute"
+                          }}
+                          source={{ uri: item.image }}
+                        />
+                        <Text style={styles.textList}>{item.name}</Text>
+                      </TouchableOpacity>
+                    </View>
+                  )}
+                  keyExtractor={(item, index) => String(index)}
+                />
+              </View>
+            );
+          }}
           keyExtractor={(item, index) => String(index)}
         />
       </View>
@@ -242,6 +232,8 @@ class DrawerBottom extends Component {
   };
 
   render() {
+    const { loading } = this.state;
+
     return (
       <BottomDrawer
         style={{ flex: 1 }}
@@ -249,10 +241,11 @@ class DrawerBottom extends Component {
         containerHeight={height * 0.75}
         offset={TAB_BAR_HEIGHT}
         roundedEdges={true}
-        backgroundColor={'#F8F8F8'}
+        backgroundColor={"#F8F8F8"}
       >
         {this.renderSubmodules()}
         {this.expandedContent()}
+        {/* <Spinner visible={loading} /> */}
       </BottomDrawer>
     );
   }
@@ -261,38 +254,38 @@ class DrawerBottom extends Component {
 const styles = StyleSheet.create({
   containerText: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
+    alignItems: "center",
+    justifyContent: "center"
   },
   containerSubModules: {
-    backgroundColor: '#F8F8F8',
-    alignItems: 'center',
+    backgroundColor: "#F8F8F8",
+    alignItems: "center",
     marginHorizontal: 5
   },
   textModuls: {
     fontSize: 15,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    color: '#FFFFFF'
+    fontWeight: "bold",
+    textAlign: "center",
+    color: "#FFFFFF"
   },
   textList: {
     padding: 7,
     fontSize: 18,
-    width: '100%',
-    color: '#FFFFFF',
-    backgroundColor: 'rgba(52, 52, 52, 0.1)'
+    width: "100%",
+    color: "#FFFFFF",
+    backgroundColor: "rgba(52, 52, 52, 0.1)",
   },
   lineStyle: {
     borderWidth: 2,
-    borderColor: '#DBDBDB',
+    borderColor: "#DBDBDB",
     marginTop: 10,
     width: 30,
     borderRadius: 10
   },
   cardButton: {
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    backgroundColor: '#000000',
+    alignItems: "center",
+    justifyContent: "flex-end",
+    backgroundColor: "#000000",
     margin: 6,
     width: 95,
     height: 90,
@@ -300,8 +293,8 @@ const styles = StyleSheet.create({
     elevation: 2
   },
   listCategories: {
-    alignItems: 'flex-start',
-    justifyContent: 'flex-end',
+    alignItems: "flex-start",
+    justifyContent: "flex-end",
     margin: 10,
     width: 216,
     height: 130,
@@ -312,14 +305,14 @@ const styles = StyleSheet.create({
     opacity: 0.6,
     width: 95,
     height: 90,
-    position: 'absolute',
+    position: "absolute",
     borderRadius: 4
   }
 });
 
 const mapStateToProps = state => ({
   coords: state.PolylineCoords,
-  data: state.ExpandedDrawer
+  data: state.ExpandedDrawer,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -328,7 +321,7 @@ const mapDispatchToProps = dispatch => ({
   },
   updateExpandedDrawer: data => {
     dispatch(actionSetExpandedDrawer(data));
-  }
+  },
 });
 
 export default connect(
