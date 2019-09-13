@@ -9,7 +9,7 @@ class Logo extends Component {
     return (
       <View style={styles.container}>
         <Image
-          style={styles.Image}
+          style={styles.image}
           source={require('../../../assets/images/Logo.png')}
         />
       </View>
@@ -25,6 +25,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   Image: {
+    width: 120,
+    height: 90,
+    position: 'absolute',
+  },
+  image: {
     width: 120,
     height: 90,
     position: 'absolute'

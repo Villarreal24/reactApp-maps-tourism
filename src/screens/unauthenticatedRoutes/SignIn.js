@@ -15,6 +15,7 @@ import Logo from '../../components/common/Logo';
 import { connect } from 'react-redux';
 import SignInForm from './Forms/SignInForm';
 import { actionLogin } from '../../../store/ACTIONS';
+import {SocialIcon} from 'react-native-elements';
 
 const HeightBar = StatusBar.currentHeight;
 
@@ -89,7 +90,20 @@ class SignIn extends Component {
             <View style={styles.lineStyle} />
           </KeyboardAvoidingView>
           <View style={styles.LoginSocial}>
-            <Button title="Iniciar Sesion con Facebook" />
+            <SocialIcon
+              style={styles.ButtonSocial}
+              title='Iniciar Sesion con Facebook'
+              button
+              type='facebook'
+            />
+            <SocialIcon
+              style={styles.ButtonSocial}
+              title="Iniciar Sesion con Instagram"
+              button
+              dark
+              type="instagram"
+            />
+            {/* <Button title="Iniciar Sesion con Facebook" /> */}
           </View>
         </View>
       </TouchableWithoutFeedback>
@@ -107,7 +121,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF'
   },
   containerKeyboard: {
-    // flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%',
@@ -124,6 +137,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    width: '100%',
+  },
+  ButtonSocial: {
+    width: '80%',
+    height: 45,
+    borderRadius: 15,
+    marginBottom: 20,
   },
   lineStyle: {
     borderWidth: 0.4,

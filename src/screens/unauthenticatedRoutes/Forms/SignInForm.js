@@ -75,9 +75,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#007AFF',
     padding: 10,
     width: '90%',
-    height:50,
-    borderRadius:15,
-    textAlign: 'center'
+    height: 50,
+    borderRadius: 15,
+    textAlign: 'center',
   },
   errors: {
     color: '#FF0000',

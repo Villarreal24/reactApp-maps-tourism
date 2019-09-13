@@ -23,9 +23,6 @@ import { db } from "../../store/Services/Firebase";
 
 const TAB_BAR_HEIGHT = -90;
 
-const listExpandedDrawer = require("./objets/listExpandedDrawer.json");
-console.log(listExpandedDrawer);
-
 let height = Dimensions.get("screen").height;
 
 const PolyCoordinates = [

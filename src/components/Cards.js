@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     top: 5,
     bottom: 0,
     left: 5,
-    right: 0,
+    right: 0
   },
   checkSelect: {
     width: 27,
