@@ -11,8 +11,8 @@ export default createAppContainer(createSwitchNavigator({
   AuthLoading: Selection,
   Auth: UnauthenticatedRoutes,
   Interest: InterestStack,
-  App: TabNavigator,
-  DeepApp: authenticatedRoutes
+  App: authenticatedRoutes,
+  // DeepApp: authenticatedRoutes
 },
 {
   initialRouteName: 'AuthLoading',

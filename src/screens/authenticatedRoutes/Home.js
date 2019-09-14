@@ -19,7 +19,17 @@ import DrawerBottom from "../../components/DrawerBottom";
 
 const HeightBar = StatusBar.currentHeight;
 
-class Home extends Component {
+class Home extends React.Component {
+  static navigationOptions = {
+    header: null,
+    headerStyle: {
+      marginTop: HeightBar,
+      elevation: 0,
+      shadowOpacity: 0,
+      borderBottomWidth: 0
+    }
+  };
+
   constructor(props) {
     super(props);
     this.state = {

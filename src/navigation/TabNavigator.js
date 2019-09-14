@@ -11,6 +11,7 @@ const TabNavigator = createBottomTabNavigator({
     screen: Home,
 
     navigationOptions: {
+      header: null,
       tabBarLabel:"Inicio",
       tabBarIcon: ({ tintColor, focused }) => (
         <Icon name="home" size={30} color="black" />
@@ -53,4 +54,8 @@ const TabNavigator = createBottomTabNavigator({
   }
 );
 
-  export { TabNavigator };
+TabNavigator.navigationOptions = {
+  header: null
+};
+
+export default TabNavigator;

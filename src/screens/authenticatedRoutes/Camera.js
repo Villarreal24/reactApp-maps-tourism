@@ -15,7 +15,7 @@ class Camera extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text> Camera </Text>
+        <Text> Camara </Text>
       </View>
     );
   }
