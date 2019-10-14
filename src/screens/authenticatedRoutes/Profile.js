@@ -3,10 +3,11 @@ import {
   View,
   Text,
   StyleSheet,
-  Button,
+  Image,
   StatusBar,
   isAndroid,
-  TouchableOpacity
+  TouchableOpacity,
+  TextInput
 } from "react-native";
 import { connect } from "react-redux";
 import { actionSignOut } from "../../../store/ACTIONS";
@@ -39,6 +40,58 @@ class Profile extends Component {
             color={"#3C3B3B"}
           />
         </View>
+        <View style={styles.containerPhoto}>
+          <Image
+            style={styles.image}
+            resizeMode="cover"
+            source={require("../../../assets/images/Perfil.png")}
+          />
+          <Text style={{ textAlign: "center", color: "#555555" }}>
+            Iniciado con Facebook
+          </Text>
+        </View>
+        <View style={styles.containerInputs}>
+          <Text style={styles.titleInput}>Nombre Completo</Text>
+          <TextInput
+            style={styles.inputs}
+            placeholder="Ted Benet"
+            placeholderTextColor="#555555"
+            paddingHorizontal={20}
+            underlineColorAndroid='#E8E8E8'
+          />
+          <Text style={styles.titleInput}>Email</Text>
+          <TextInput
+            style={styles.inputs}
+            placeholder="Ted.benet18@gmail.com"
+            placeholderTextColor="#555555"
+            paddingHorizontal={20}
+            underlineColorAndroid='#E8E8E8'
+          />
+          <Text style={styles.titleInput}>Contraseña</Text>
+          <TextInput
+            style={styles.inputs}
+            placeholder="**********"
+            placeholderTextColor="#555555"
+            paddingHorizontal={20}
+            underlineColorAndroid='#E8E8E8'
+          />
+          <Text style={styles.titleInput}>Edad</Text>
+          <TextInput
+            style={styles.inputs}
+            placeholder="32"
+            placeholderTextColor="#555555"
+            paddingHorizontal={20}
+            underlineColorAndroid='#E8E8E8'
+          />
+          <Text style={styles.titleInput}>Sexo</Text>
+          <TextInput
+            style={styles.inputs}
+            placeholder="Masculino"
+            placeholderTextColor="#555555"
+            paddingHorizontal={20}
+            underlineColorAndroid='#E8E8E8'
+          />
+        </View>
         <View style={styles.PositionSignOut}>
           <TouchableOpacity
             style={styles.ButtonSignOut}
@@ -64,22 +117,49 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF"
   },
   containerTitle: {
-    flex: 1,
     flexDirection: "row",
     marginTop: HeightBar + 15,
-    width: '100%'
+    width: "100%"
   },
   title: {
     fontSize: 20,
     fontWeight: "bold",
     color: "#555555",
     textAlign: "center",
-    alignItems: 'center',
+    alignItems: "center",
     paddingLeft: 27,
     flex: 1
   },
   headerIcon: {
-    alignItems: 'flex-end',
+    alignItems: "flex-end"
+  },
+  containerPhoto: {
+    flex: 1,
+    marginTop: 5,
+    marginBottom: 10
+  },
+  image: {
+    resizeMode: "contain",
+    height: 150,
+    width: 200
+  },
+  containerInputs: {
+    flex: 2,
+    width: '100%',
+    alignItems: 'flex-start',
+    paddingHorizontal: 10,
+    marginTop: 20
+  },
+  titleInput: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: -5
+  },
+  inputs: {
+    marginLeft: -15,
+    fontSize: 16,
+    width: '100%',
+    paddingBottom: 20
   },
   PositionSignOut: {
     flex: 1,

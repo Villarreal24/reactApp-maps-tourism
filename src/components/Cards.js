@@ -12,17 +12,25 @@ import {
 class Cards extends Component {
   state = {
     itemSelected: null,
-    checked: false
+    checked: false,
+    pressed: false,
+    selected_category: []
+  };
+
+  _handleCategorySelect = index => {
+    this.selectedArray = this.state.selected_category;
+
+    if (this.selectedArray.indexOf(index) < 0) {
+      this.selectedArray.push(index);
+    } else {
+      this.selectedArray.splice(this.selectedArray.indexOf(index), 1);
+    }
+
+    this.setState({ selected_category: this.selectedArray });
   };
 
   render() {
     const { navigation } = this.props;
-    const selectionItem = index => {
-      this.setState({
-        checked: !this.state.checked,
-        itemSelected: index
-      });
-    };
 
     return (
       <View style={styles.container}>
@@ -42,9 +50,8 @@ class Cards extends Component {
               }}
             >
               <TouchableOpacity
-                onPress={() => {
-                  selectionItem(index);
-                }}
+                onPress={() => this._handleCategorySelect(index.toString())}
+                underlayColor={"gray"}
                 style={styles.cardButton}
                 activeOpacity={0.6}
               >
@@ -52,9 +59,10 @@ class Cards extends Component {
                   <Image
                     style={styles.checkSelect}
                     source={
-                      this.state.itemSelected === index
-                        ? require('../../assets/icons/success.png')
-                        : require('../../assets/icons/error.png')
+                      this.state.selected_category.indexOf(index.toString()) >=
+                      0
+                        ? require("../../assets/icons/success.png")
+                        : require("../../assets/icons/error.png")
                     }
                   />
                 </View>

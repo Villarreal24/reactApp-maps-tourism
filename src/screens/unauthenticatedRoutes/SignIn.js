@@ -98,12 +98,10 @@ class SignIn extends Component {
             />
             <SocialIcon
               style={styles.ButtonSocial}
-              title="Iniciar Sesion con Instagram"
+              title="Iniciar Sesion con Google"
               button
-              dark
-              type="instagram"
+              type="google"
             />
-            {/* <Button title="Iniciar Sesion con Facebook" /> */}
           </View>
         </View>
       </TouchableWithoutFeedback>

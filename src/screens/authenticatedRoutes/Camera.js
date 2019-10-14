@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, StatusBar, isAndroid } from 'react-native';
+// import { RNCamera, FaceDetector } from 'react-native-camera';
 
 class Camera extends Component {
   componentDidMount() {

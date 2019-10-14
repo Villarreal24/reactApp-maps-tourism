@@ -80,7 +80,12 @@ class ContentListDrawer extends Component {
     if (loading) {
       // eslint-disable-next-line prettier/prettier
       return (
-        <Spinner visible={loading} size={"large"} />
+        <Spinner
+          visible={loading}
+          size={"large"}
+          overlayColor={"#FFFFFF"}
+          color={"black"}
+        />
       );
     } else {
       return (
@@ -195,7 +200,11 @@ const styles = StyleSheet.create({
     height: 130,
     borderRadius: 8,
     elevation: 3
-  }
+  },
+  textList: {
+    padding: 5,
+    color: 'black',
+  },
 });
 
 const mapStateToProps = state => {

@@ -38,7 +38,7 @@ class Activities extends Component {
   };
 
   async componentDidMount() {
-    // await this.props.getData("activities");
+    await this.props.getData("activities");
     await this.getData();
   }
 
