@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, StatusBar, isAndroid } from 'react-native';
-// import { RNCamera, FaceDetector } from 'react-native-camera';
+import {
+  View,
+  StyleSheet,
+  StatusBar,
+  isAndroid,
+  Dimensions
+} from "react-native";
+import { RNCamera } from 'react-native-camera';
+
+const { width: winWidth, height: winHeight } = Dimensions.get('window');
 
 class Camera extends Component {
   componentDidMount() {
     this._navListener = this.props.navigation.addListener('didFocus', () => {
-      StatusBar.setBarStyle('dark-content');
+      StatusBar.setBarStyle('light-content');
       isAndroid && StatusBar.setBackgroundColor('#EBEBEB');
     });
   }
@@ -16,7 +24,7 @@ class Camera extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text> Camara </Text>
+        <RNCamera style={styles.preview} />
       </View>
     );
   }
@@ -24,11 +32,16 @@ class Camera extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 16,
-    backgroundColor: '#FFFFFF'
+    flex: 1
+  },
+  preview: {
+    height: winHeight,
+    width: winWidth,
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    right: 0,
+    bottom: 0
   }
 });
 
