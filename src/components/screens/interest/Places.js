@@ -7,11 +7,10 @@ import {
   TouchableOpacity,
   SafeAreaView,
   StatusBar,
-  Dimensions,
-  ActivityIndicator,
+  Dimensions
 } from 'react-native';
-import Cards from "../../components/Cards";
-import { db } from "../../../store/Services/Firebase";
+import Cards from "../../Cards";
+import { db } from "../../../../store/Services/Firebase";
 import Spinner from "react-native-loading-spinner-overlay";
 
 const { width, height } = Dimensions.get("screen");
@@ -52,7 +51,7 @@ class Places extends Component {
         <Image
           style={styles.image}
           resizeMode="cover"
-          source={require('../../../assets/images/Interest.png')}
+          source={require('../../../../assets/images/Interest.png')}
         />
         <SafeAreaView style={styles.container}>
           <Spinner visible={loading} />

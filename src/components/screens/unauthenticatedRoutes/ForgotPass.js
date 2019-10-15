@@ -11,7 +11,7 @@ import {
   KeyboardAvoidingView,
   StatusBar
 } from "react-native";
-import Logo from '../../components/common/Logo';
+import Logo from '../../../components/common/Logo';
 
 const HeightBar = StatusBar.currentHeight;
 

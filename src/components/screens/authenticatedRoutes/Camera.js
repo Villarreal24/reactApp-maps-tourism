@@ -11,6 +11,7 @@ import { RNCamera } from 'react-native-camera';
 const { width: winWidth, height: winHeight } = Dimensions.get('window');
 
 class Camera extends Component {
+  // ---------- Cambio de color de la StatusBar ------------
   componentDidMount() {
     this._navListener = this.props.navigation.addListener('didFocus', () => {
       StatusBar.setBarStyle('light-content');

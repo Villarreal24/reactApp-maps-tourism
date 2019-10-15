@@ -13,9 +13,9 @@ import {
 import Geolocation from "@react-native-community/geolocation";
 import Axios from 'axios';
 import { connect } from "react-redux";
-import { actionUserLocation } from "../../../store/ACTIONS";
-import Map from "../../components/map/Map";
-import DrawerBottom from "../../components/DrawerBottom";
+import { actionUserLocation } from "../../../../store/ACTIONS";
+import Map from "../../map/Map";
+import DrawerBottom from "../../DrawerBottom";
 
 const HeightBar = StatusBar.currentHeight;
 

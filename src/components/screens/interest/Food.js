@@ -10,9 +10,9 @@ import {
   Dimensions
 } from "react-native";
 import { connect } from "react-redux";
-import { db } from '../../../store/Services/Firebase';
-import { actionChangeInduction } from '../../../store/ACTIONS';
-import Cards from '../../components/Cards';
+import { db } from '../../../../store/Services/Firebase';
+import { actionChangeInduction } from '../../../../store/ACTIONS';
+import Cards from '../../Cards';
 import Spinner from 'react-native-loading-spinner-overlay';
 
 const { width, height } = Dimensions.get('screen');
@@ -53,7 +53,7 @@ class Food extends Component {
         <Image
           style={styles.image}
           resizeMode='cover'
-          source={require('../../../assets/images/Interest.png')}
+          source={require('../../../../assets/images/Interest.png')}
         />
         <SafeAreaView style={styles.container}>
           <Spinner visible={loading} />

@@ -2,9 +2,9 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { createBottomTabNavigator } from 'react-navigation';
-import Home from '../screens/authenticatedRoutes/Home';
-import Profile from '../screens/authenticatedRoutes/Profile';
-import Camera from '../screens/authenticatedRoutes/Camera';
+import Home from '../components/screens/authenticatedRoutes/Home';
+import Profile from '../components/screens/authenticatedRoutes/Profile';
+import Camera from '../components/screens/authenticatedRoutes/Camera';
 
 const TabNavigator = createBottomTabNavigator({
   Home: {

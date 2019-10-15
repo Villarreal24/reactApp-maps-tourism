@@ -40,7 +40,7 @@ class Login extends React.Component {
         <Image
           style={styles.image}
           resizeMode="cover"
-          source={require('../../../assets/images/Login.png')}
+          source={require('../../../../assets/images/Login.png')}
         />
         <View style={styles.ContainerTexto}>
           <Text

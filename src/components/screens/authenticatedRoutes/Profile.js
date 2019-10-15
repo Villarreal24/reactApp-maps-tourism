@@ -10,7 +10,7 @@ import {
   TextInput
 } from "react-native";
 import { connect } from "react-redux";
-import { actionSignOut } from "../../../store/ACTIONS";
+import { actionSignOut } from "../../../../store/ACTIONS";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import IconHeader from "react-native-vector-icons/AntDesign";
 
@@ -44,7 +44,7 @@ class Profile extends Component {
           <Image
             style={styles.image}
             resizeMode="cover"
-            source={require("../../../assets/images/Perfil.png")}
+            source={require("../../../../assets/images/Perfil.png")}
           />
           <Text style={{ textAlign: "center", color: "#555555" }}>
             Iniciado con Facebook

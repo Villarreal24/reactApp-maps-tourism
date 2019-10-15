@@ -11,9 +11,9 @@ import {
 } from "react-native";
 import AwesomeAlert from "react-native-awesome-alerts";
 import { connect } from "react-redux";
-import Cards from '../../components/Cards';
-import { db } from '../../../store/Services/Firebase';
-import { actionGetDataInterest } from '../../../store/ACTIONS';
+import Cards from '../../Cards';
+import { db } from '../../../../store/Services/Firebase';
+import { actionGetDataInterest } from '../../../../store/ACTIONS';
 
 const { width, height } = Dimensions.get('screen');
 const HeightBar = StatusBar.currentHeight;
@@ -66,7 +66,7 @@ class Activities extends Component {
         />
         <Image
           style={styles.image}
-          source={require('../../../assets/images/Interest.png')}
+          source={require('../../../../assets/images/Interest.png')}
         />
         <SafeAreaView style={styles.container}>
           <Text style={styles.title}>

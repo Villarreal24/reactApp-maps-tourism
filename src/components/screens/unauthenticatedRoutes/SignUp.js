@@ -11,10 +11,10 @@ import {
   KeyboardAvoidingView
 } from "react-native";
 // import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
-import Logo from '../../components/common/Logo';
+import Logo from '../../../components/common/Logo';
 import { connect } from 'react-redux';
 import SignUpForm from './Forms/SignUpForm';
-import { actionRegistry } from '../../../store/ACTIONS';
+import { actionRegistry } from '../../../../store/ACTIONS';
 
 const HeightBar = StatusBar.currentHeight;
 

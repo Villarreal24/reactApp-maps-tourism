@@ -5,16 +5,15 @@ import {
   StyleSheet,
   Text,
   StatusBar,
-  Button,
   Keyboard,
   TouchableOpacity,
   TouchableWithoutFeedback,
   KeyboardAvoidingView
 } from "react-native";
-import Logo from '../../components/common/Logo';
+import Logo from '../../../components/common/Logo';
 import { connect } from 'react-redux';
 import SignInForm from './Forms/SignInForm';
-import { actionLogin } from '../../../store/ACTIONS';
+import { actionLogin } from '../../../../store/ACTIONS';
 import { SocialIcon } from "react-native-elements";
 
 const HeightBar = StatusBar.currentHeight;
