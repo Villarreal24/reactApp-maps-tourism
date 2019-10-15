@@ -17,6 +17,10 @@ class Cards extends Component {
     selected_category: []
   };
 
+  // ---------------------------------------------------------------
+  //        Funcion para obtener en un arreglo y cambiar el
+  //      estado de las opciones que va presionando el usuario.
+  // ---------------------------------------------------------------
   _handleCategorySelect = index => {
     this.selectedArray = this.state.selected_category;
 

@@ -46,6 +46,10 @@ class ContentListDrawer extends Component {
     )
   };
 
+  // ----------------------------------------------------------
+  //       Habilitar la funcion del boton de retroceso en
+  //       la barra de navegacion del dispositivo Android.
+  // ----------------------------------------------------------
   async componentDidMount() {
     await this.getData();
     this.backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
@@ -58,6 +62,9 @@ class ContentListDrawer extends Component {
     this.backHandler.remove();
   }
 
+  // -------------------------------------------------------------
+  //     Request a la BD para obtener la informacion a mostrar
+  // -------------------------------------------------------------
   getData() {
     db.doc(
       `drawerBottom/subModules/listView/categories/content/${this.props.data}`
@@ -96,9 +103,6 @@ class ContentListDrawer extends Component {
             barStyle="light-content"
           />
           <Image
-    // -------------------------------------------------------
-    //        Imagen pendiente de ajustar correctamente
-    // -------------------------------------------------------
             // eslint-disable-next-line react-native/no-inline-styles
             style={{
               flex: 1,
@@ -134,6 +138,11 @@ class ContentListDrawer extends Component {
                 </Text>
               )}
               renderItem={({ item, section }) => {
+    // -------------------------------------------------------------
+    //      Conversion de objeto a arreglo + obtener la data
+    //       del siguiente arreglo dentro de la BD, para ser
+    //        mostrado correctamente dentro de la FlatList.
+    // -------------------------------------------------------------
                 console.log(item);
                 const temp = Object.values(item);
                 const data = Object.values(temp[0]);

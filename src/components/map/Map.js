@@ -38,6 +38,9 @@ class Map extends Component {
     await this.getData();
   }
 
+// ---------------------------------------------------------------
+//      Request a la BD para obtener la data de los Markers
+// ---------------------------------------------------------------
   async getData() {
     await db
       .doc("map/locations")
@@ -47,10 +50,10 @@ class Map extends Component {
       });
   }
 
-  // --------------------------------------------------------------
+  // ---------------------------------------------------------------
   //      Function para renderizar en la mapa los customMarkers
   //     recorriendo un arreglo .json obteniendo data + imagenes
-  // --------------------------------------------------------------
+  // ---------------------------------------------------------------
   renderMarkers = () => {
     const { locations } = this.state;
     const data = Object.values(locations);
@@ -133,7 +136,9 @@ class Map extends Component {
         return null;
     }
   };
-
+// ----------------------------------------------------
+//       Button para centrar el mapa en Sayulita
+// ----------------------------------------------------
   centerMapSayulita = () => {
     const {
       latitude,
@@ -152,6 +157,10 @@ class Map extends Component {
     this.setState({ Centerlocation: false });
   };
 
+// -----------------------------------------------
+//       Button para centrar el mapa en la
+//          posicion actual del usuario.
+// -----------------------------------------------
   centerMapUser = () => {
     const {
       latitude,

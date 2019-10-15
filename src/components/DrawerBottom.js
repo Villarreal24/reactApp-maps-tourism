@@ -25,30 +25,15 @@ const TAB_BAR_HEIGHT = -90;
 
 let height = Dimensions.get("screen").height;
 
-const PolyCoordinates = [
-  { latitude: 20.869904, longitude: -105.440426 },
-  { latitude: 20.869565, longitude: -105.44123 },
-  { latitude: 20.868465, longitude: -105.440704 },
-  { latitude: 20.868647, longitude: -105.440795 },
-  { latitude: 20.868717, longitude: -105.440618 },
-  { latitude: 20.869255, longitude: -105.439349 },
-  { latitude: 20.869314, longitude: -105.439379 },
-  { latitude: 20.869345, longitude: -105.43972 },
-  { latitude: 20.869384, longitude: -105.440755 },
-  { latitude: 20.869594, longitude: -105.440882 },
-  { latitude: 20.869687, longitude: -105.440944 },
-  { latitude: 20.869769, longitude: -105.440749 },
-  { latitude: 20.86969, longitude: -105.440938 },
-  { latitude: 20.869929, longitude: -105.44106 },
-  { latitude: 20.870535, longitude: -105.441349 }
-];
-
 class DrawerBottom extends Component {
   state = {
     documentData: null,
     loading: true
   };
 
+// --------------------------------------------------
+//     Coordenadas + tipo de ruta predefinida.
+// --------------------------------------------------
   handleGetDirections = () => {
     const data = {
       source: {
@@ -108,6 +93,9 @@ class DrawerBottom extends Component {
     this.getData();
   }
 
+// -------------------------------------------------------------
+//     Request a la BD para obtener la informacion a mostrar
+// -------------------------------------------------------------
   getData() {
     db.doc('drawerBottom/subModules')
       .get()
