@@ -17,10 +17,9 @@ export default function* SagaGetDataInterest(value) {
     const algo = arr.data();
     console.log(algo);
     if (arr) {
-      console.log("Entro en el if");
       // yield put(actionGetDataInterest(arr));
     } else {
-      console.log("pendejada");
+      console.log("No hay datos de interes.");
     }
   } catch (error) {
     console.log(error);
